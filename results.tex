@@ -1,0 +1,226 @@
+\section{Results}
+
+\subsection{Competition and climate effect on tree demography}
+
+We found that individual growth and mortality are weakly related to climate,
+and that individual tree size and competition are predominant drivers of their
+variation (Fig. \ref{fig::delta_aic} and Fig. \ref{fig::delta_waic}).
+
+We found that the best model for tree growth takes into account the plot random
+effect, and the year within plot, regardless of the species (Eq.
+\eqref{eq::selectedModel} and Supporting information \ref{app::glmm}). The
+conditional $ R_c^2 $ was much higher than the marginal $ R_m^2 $ (estimated
+with the package MuMIn \citep{MuMIn}), showing that the random structure, and
+more specifically that local conditions, dominates explanatory variables.
+The best explanatory climatic variables were the annual mean temperature and
+the annual precipitation (Eq \ref{eq::selectedModel}). However, according to
+the calculated ratio $ \varphi $ (equation \ref{eq::ratio}) and $ R^2 $, climate explain little variation
+of individual tree growth compared to tree dbh (\ref{fig::delta_aic} and Fig. Tab. \ref{tab::acsa_fixeff}).
+\begin{equation} \label{eq::selectedModel}
+\begin{split}
+	\text{gro} & \text{wth} = \beta_j^{(0)}+ \beta_{j}^{(0, x)} + \beta_{j}^{(0, t)} + \beta_{j}^{(0, xt)} + \beta_j^{(1)}  \text{canopy status} \, + \\
+	& \left(\beta_j^{(2)} + b_j^{(2, 1)} \text{canopy status} + b_j^{(2, 2)} \text{dbh} + b_j^{(2, 3)} \text{dbh}^2 \right) \text{annual}\_\text{mean}\_\text{temperature} \, + \\
+	& \left(\beta_j^{(3)} + b_j^{(3, 1)} \text{canopy status} + b_j^{(3, 2)} \text{dbh} + b_j^{(3, 3)} \text{dbh}^2 \right) \text{annual}\_\text{mean}\_\text{temperature}^2 \, + \\
+	& \left(\beta_j^{(4)} + b_j^{(4, 1)} \text{canopy status} + b_j^{(4, 2)} \text{dbh} + b_j^{(4, 3)} \text{dbh}^2 \right) \text{annual}\_\text{precipitation} \, + \\
+	& \left(\beta_j^{(5)} + b_j^{(5, 1)} \text{canopy status} + b_j^{(5, 2)} \text{dbh} + b_j^{(5, 3)} \text{dbh}^2 \right) \text{annual}\_\text{precipitation}^2 \, + \\
+	& \beta_j^{(6)} \text{dbh} \, + \beta_j^{(7)} \text{dbh}^2
+\end{split}
+\end{equation}
+where the three random effects (spatial, temporal at large spatial scale, and temporal at local scale respectively) are normally distributed:
+\begin{align*}
+	\beta_{j}^{(0, x)} &\sim \mathcal{N}(0, \bm{\sigma}_{x}^{\text{growth}}) \\
+	\beta_{j}^{(0, t)} &\sim \mathcal{N}(0, \bm{\sigma}_{t}^{\text{growth}}) \\
+	\beta_{j}^{(0, xt)} &\sim \mathcal{N}(0, \bm{\sigma}_{xt}^{\text{growth}})
+\end{align*}
+
+\begin{figure}
+	\centering
+	\input{figure_deltaAICc}
+	\caption{Values on the $ \log_{10} $ scale of $ \varphi $, which is the ratio of $ \Delta AIC_c $ for radial growth models satisfying the constraint $ \text{VIF} < 20 $ (equation \eqref{eq::ratio}). The black dots represent the 14 species, and the orange dots are the average for each model. The model climate has only climatic quadratic terms, the model competition has only the canopy status explanatory variable, and the dbh model has only dbh quadratic terms. The selected model corresponds to the best model under the constraint $ \text{VIF} < 20 $, and is described by equation \eqref{eq::selectedModel}. The equations of the three other models are in Supporting Information \ref{app::glmm}, equations \eqref{eq::model18}, \eqref{eq::model19}, and \eqref{eq::model22} respectively. The size variable (dbh) alone explains in average $ 3.84 $ times more than the climate variables alone. All the species have the same best model. \label{fig::delta_aic}}
+\end{figure}
+
+Our analysis revealed that for all the species, being in the overstorey has, as
+expected, a positive effect on growth (Fig. \ref{fig::over_under}). Moreover, we found differences of the
+estimated canopy status coefficient between species traditionally ranked as
+shade tolerant and intolerant respectively: individual growth of shade
+tolerant species is less responsive from being in the overstorey (Fig.
+\ref{fig::groups}, and Tab. \ref{tab::cs} in Supporting Information
+\ref{app::glmm}).
+
+\begin{figure}
+\begin{subfigure}[t]{.48\textwidth}
+	\centering
+	\input{G_over-under-storey_averaged}
+	\caption{Overstorey versus understorey growth (in mm) of the 14 parameterised species for an averaged individual (\ie all the explanatory variables of equation \eqref{eq::selectedModel} are set to the average). The line is the identity function}
+	\label{fig::over_under}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{.48\textwidth}
+	\centering
+	\input{groups}
+	\caption{Response of radial growth $ G $ to light, grouped by three levels of shade tolerance: Low (L), Medium (M), and High (H). Growth of individual reaching the canopy increases much more for shade-intolerant species than tolerant. See Tab. \ref{tab::cs} for the parameters in Supporting Information \ref{app::glmm}}
+	\label{fig::groups}
+\end{subfigure}
+\caption{Effect of competition on individual tree growth}
+\label{fig::growthResults}
+\end{figure}
+
+For mortality, the best model for all the species but \textit{Tsuga
+canadensis} accounted for the lowest annual temperature ($ T_m $) and the 3
+contiguous driest months ($ P_d $):
+\begin{equation} \label{eq::selectedModel_mu}
+	\begin{split}
+		\text{mort} & \text{ality} = \beta_j^{(0)} + \beta_j^{(1)} \text{canopy status} +
+			\text{offset}\big(\log(\Delta t) \big) \, + \\
+		& \left(\beta_j^{(2)} + b_j^{(2)} \text{canopy status} \right) \text{min}\_\text{temperature}\_\text{of}\_\text{coldest}\_\text{month} \, + \\
+		& \left(\beta_j^{(3)} + b_j^{(3)} \text{canopy status} \right) \text{min}\_\text{temperature}\_\text{of}\_\text{coldest}\_\text{month}^2 \, + \\
+		& \left(\beta_j^{(4)} + b_j^{(4)} \text{canopy status} \right) \text{precipitation}\_\text{of}\_\text{driest}\_\text{quarter} \, + \\
+		& \left(\beta_j^{(5)} + b_j^{(5)} \text{canopy status} \right) \text{precipitation}\_\text{of}\_\text{driest}\_\text{quarter}^2 \, + \\
+		& \beta_j^{(6)} \text{dbh} \, + \beta_j^{(7)} \text{dbh}^2
+	\end{split}
+\end{equation}
+
+\begin{figure}
+	\centering
+	\input{figure_deltaWAIC}
+	\caption{Values on the $ \log_{10} $ scale of $ \Delta \text{WAIC} $ for the mortality models. The black dots represent the 14 species, and the orange dots are the average for each model. The model climate has only climatic quadratic terms, the model competition has only the canopy status explanatory variable, and the dbh model has only dbh quadratic terms. The selected model corresponds to the best model, and is described by equation \eqref{eq::selectedModel_mu}. The equations of the three other models are in Supporting Information \ref{app::glmm}, equations \eqref{eq::model_mu9}, \eqref{eq::model_mu10}, and \eqref{eq::model_mu13} respectively. Note that the selected model is always the best, except for \textit{Tsuga canadensis}. \label{fig::delta_waic}}
+\end{figure}
+
+Except \textit{Tsuga canadensis}, species mortality responded negatively to
+competition (\ie mortality rates in the understorey are higher than in the
+canopy). Species considered low tolerant to shade responded more negatively to
+competition than highly tolerant species, that is to say, shade tolerant species
+have the propensity to be closer to the identity line (Fig.
+\ref{fig::over_under_mu} and \ref{fig::groups_mu}). As for the growth, the
+size variable ($ dbh $) had the most impact on the WAIC (Tab.
+\ref{tab::acsa_fixeff_mu} and Fig. \ref{fig::delta_waic}). For all the parameters and species, we had no problem of convergence (R-hat histogram in Fig. \ref{fig::rhat_conv}).
+
+\begin{figure}
+\begin{subfigure}[t]{.48\textwidth}
+	\centering
+	\input{M_over-under-storey_averaged}
+	\caption{Overstorey versus understorey mortality of the 14 parameterised species for an averaged individual (\ie all the explanatory variables of equation \eqref{eq::selectedModel_mu} are set to the average). The line is the identity function}
+	\label{fig::over_under_mu}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{.48\textwidth}
+	\centering
+	\input{groups_mortality}
+	\caption{Canopy status effect on mortality, grouped by three levels of shade tolerance: Low (L), Medium (M), and High (H). Mortality decreases much more for shade-intolerant species than tolerant. See Tab. \ref{tab::cs} in Supporting Information \ref{app::glmm}}
+	\label{fig::groups_mu}
+\end{subfigure}
+\caption{Effect of climate and competition on individual tree mortality}
+\label{fig::mortalityResults}
+\end{figure}
+
+Therefore, climate, size-structure, and competition all affect the individual
+growth and mortality rates. However, both rates carry variability engendered by the uncertainty in the parameters estimation (Fig. \ref{fig::acesac_G_M_dbh} for \textit{Acer saccharum}, and Figs. \ref{fig::12speciesG_dbh} and \ref{fig::12speciesM_dbh} for the other species). More specifically, the mortality rate of certain species might reverse from a bell-shaped to a U-shaped curve. The confidence intervals of the parameters can be found in the Supporting Information XYZxyz (csv file), and Figs. \ref{fig::confInt_g_1}--\ref{fig::confInt_m_3} in Supporting Information \ref{app::confInt}. In general, we found that competition affects negatively tree demography.
+
+\begin{figure}[htb]
+	\centering
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/28731-ACE-SAC_G_dbh}
+		\caption{\textit{Acer saccharum}, growth}
+		\label{fig::acesac_G_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/28731-ACE-SAC_M_dbh}
+		\caption{\textit{Acer saccharum}, mortality}
+		\label{fig::acesac_M_dbh}
+	\end{subfigure}
+	\caption{Growth and mortality of \textit{Acer saccharum} as a function of dbh, with the climate set to the species-specific average. The orange line is for individuals in the overstorey, and the blue lines for individuals in the understorey. The shaded areas delimited by the dotted lines are the $ 95 \% $ confidence intervals. The double sided arrow near the x-axis is the range of parameterisation of dbh for \textit{Acer saccharum}.}
+	\label{fig::acesac_G_M_dbh}
+\end{figure}
+
+\subsection{Relation of demography and competition to tree distribution} % tab::corr_R0_presAbsData
+The $ R_0 $ equation \eqref{eq::R0sol} relates population performance
+to the individual demography estimated in the previous section. Combining equations \eqref{eq::R0sol} and \eqref{eq::fecundity_fct}, we get:
+\begin{equation} \label{eq::rho0}
+	\rho_0(x, \s_c) = \exp \left[-\int_0^{\s_c}\frac{\mu(s, \s_c, x)}{G(s, \s_c, x)} \, ds \right] \times \int_{\s_c}^{\infty} \frac{\F \A(s, \s_c)}{G(s, \s_c, x)} \exp \left[-\int_{\s_c}^{s} \frac{\mu(\sigma, \s_c, x)}{G(\sigma, \s_c, x)} \, d\sigma \right] \, ds
+\end{equation}
+from which we can derive $ \tilde \rho_0 $. Equation \eqref{eq::rho0} implies
+that we extrapolate growth and mortality out of the parameterisation range of
+dbh (Fig. \ref{fig::acesac_G_M_dbh} for \textit{Acer saccharum}, and from Fig.
+\ref{fig::abibal_G_dbh} to Fig. \ref{fig::12speciesM_dbh} in appendix
+\ref{app::glmm} for the 13 other species).
+
+We take as an illustration \textit{Acer saccharum}, a dominant tree species
+across the region. We found that its population growth rate is the lowest at
+the eastern part of its distribution and increase towards its western range
+border (Fig. \ref{fig::R0map}). The highest values of $ \tilde \rho_0 $ in the
+eastern part of \textit{Acer saccharum}'s distribution are along the White
+Mountains. \textit{Abies balsamea} shows a decreasing $ \tilde \rho_0 $
+towards range limits (Tab \ref{tab::R0correlSDM} and Fig. \ref{fig::abibal} in Supporting Information
+\ref{app::maps}), while \textit{Tsuga canadensis'} $ \tilde \rho_0 $ increases
+with latitude, and \textit{Thuja occidentalis'} increases westward. The 11 remaining species have no clear correlation between $
+\tilde \rho_0 $ and the climate within their respective distribution defined by \citeauthor{Little1971} (Fig \ref{fig::3correls}, and Figs.
+\ref{fig::12speciesR0} in Supporting Information \ref{app::maps} for the maps).
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (acsa) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/28731-ACE-SAC_R0_h=10m_scaled.jpg}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of $ \tilde \rho_0 $ for \textit{Acer saccharum}, with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 82.3 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. \label{fig::R0map}}
+\end{figure}
+
+The SDMs based on random forests, from which we calculated probabilities of
+occurrence, described accurately occurrence probabilities of the different
+species ($ R_{\text{Tjur}}^2 $ ranging from $ 0.74 $ to $ 0.85 $). However,
+the correlation between $ \tilde \rho_0 $ and the probability of occurrence
+did not show any trend in absence of competition (varies from $ - 0.33 $ to $
+0.69 $), neither it did with a canopy height of $ 10 $ meters (ranges within
+$ - 0.34 $ to $ 0.59 $). For most species, we found that the correlation
+decreases with competition, although \textit{Pinus banksiana} and
+\textit{Populus tremuloides} had a noticeable increase in the correlation
+between $ \tilde \rho_0 $ and the predicted occurrence (Fig \ref{fig::3correls} and Tab.
+\ref{tab::R0correlSDM}). Similarly, the correlations between $ \tilde \rho_0 $ and the distance to the closest edge go in the same direction than the correlation between $ \tilde \rho_0 $ and the probability of occurrence (except for \textit{Picea mariana}).
+
+\begin{table}[ht]
+\centering
+\caption{Correlation between $ \tilde \rho_0 $ derived from our model, and the SDM (random forest). We trained the random forest with \num{61374} data, and evaluate its prediction accuracy using the $ R^2 $ from \citet{Tjur2009}. Correlations were calculated without competition (\ie $ \s = 0 $, correlation 0), and with a competition of 10 meters (\ie $ \s = 10 $, correlation 10). The last column is the correlation between $ \tilde \rho_0 $ and the distance to the closest edge of the distribution defined by \citet{Little1971}. \label{tab::R0correlSDM}}
+\begin{tabular}{@{}rcccc@{}}
+	\toprule
+	\textbf{Species} & \textbf{Correlation 0} & \textbf{Correlation 10} & $ \bm{R^2} $ \textbf{(Tjur)} & \textbf{Correlation $ \tilde \rho_0 $ distance} \\
+	\midrule
+		ABI-BAL & 0.69 & 0.59 & 0.85 & 0.53 \\
+		ACE-RUB & -0.33 & -0.31 & 0.78 & -0.31 \\
+		ACE-SAC & -0.04 & -0.03 & 0.78 & -0.09 \\
+		BET-ALL & -0.02 & -0.02 & 0.77 & -0.21 \\
+		BET-PAP & 0.61 & 0.43 & 0.78 & -0.13 \\
+		FAG-GRA & -0.04 & -0.04 & 0.74 & -0.20 \\
+		PIC-GLA & 0.37 & 0.05 & 0.76 & 0.19 \\
+		PIC-MAR & 0.44 & 0.09 & 0.82 & -0.26 \\
+		PIC-RUB & 0.13 & -0.34 & 0.83 & -0.20 \\
+		PIN-BAN & -0.13 & -0.04 & 0.77 & -0.04 \\
+		PIN-STR & 0.05 & -0.03 & 0.74 & -0.04 \\
+		POP-TRE & 0.25 & 0.43 & 0.79 & 0.05 \\
+		THU-OCC & 0.23 & 0.11 & 0.74 & 0.06 \\
+		TSU-CAN & 0.23 & 0.25 & 0.74 & 0.13 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+	\centering
+	\input{graphs/3correlations}
+	\caption{Species-specific correlations of $ \tilde \rho_0 $ and the SDM with no competition (\MoveUp), or with a canopy height $ \s = 10 $ m (\CircSteel). The last correlation is between $ \tilde \rho_0 $ and the distance to the closest edge of the species distribution defined by \citet[\SquareSteel]{Little1971} \label{fig::3correls}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{graphs/28731-ACE-SAC_sd_distrib.tex}
+	\caption{Standard deviation of $ R_0 $ \label{fig::uncertainty_map_acsa}}
+\end{figure}
