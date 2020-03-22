@@ -1,0 +1,222 @@
+
+% Deleted references: Canham2016, GRUBB1977, Valladares2002, BarkerPlotkin2017,
+
+
+%%%% Notes:
+% The two major differences between our model and DRMs are that uncertainties of our model lie only at the demographic level but we account for pop-struct
+% To compare with DRM, we have a two level hierarchical model
+% How about stochastics PDEs? Do we converge to an IPM?
+
+\section{Discussion}
+
+Overall, our results demonstrate the extreme variability in the demographic rates and the difficulties to relate demography to species distribution. We showed that our capacity to relate the occurrence of a species $ P_{occ} $ to its performance $ \tilde \rho_0 $ varies greatly among species, from negative to positive correlations. This result has also been found with a simpler measure of tree growth \citep{McGill2012}. However, our method allows us to reckon explicitly with competition and demography. For most species, we found no support to the hypothesis of a declining species performance towards species range limits.
+
+\subsection{Effect of climate on individual growth and mortality}
+We found little correlation between individual's rates and the 2 km\textsuperscript{2} resolution climate across eastern North America, although we controlled for both individual size and position into the canopy. Even though tree growth and mortality may respond to climate, as often documented in dendrochronological studies (e.g. \citet{Aussenac2017}), they are highly unpredictable at continental scale. Short-term events like frosts, gusts, fires, or pests and pathogens outbreaks, may impact these rates more than average conditions, as does the micro-topography \citep{Loehle1996}. For biogeography studies, scale can be a central issue: the relevant spatio-temporal scales for individuals often are meters and minutes rather than kilometres and months \citep{Urban2016}, but this is beyond the scope of most current datasets for studies at continental extent (although microclimatic datasets start to appear \citep{Lembrechts2019}). On the other side, in biogeography we want to erase individual variability in order to extract the global behaviour of individuals, as does the Hutchinsonian niche theory when delimiting a species-specific N-dimension volume within the environmental space where the demographic rates allow a species to remain `indefinitely'. What seems to happen here, is that either we did not take enough environmental variables to describe the demography, or that even on a large extent, the disturbances and the micro-environment matters more than average climate conditions.
+
+\subsection{Importance of competition}
+Our findings highlight that radial growth and mortality are strongly influenced by the asymmetrical competition for light, which is an important species interaction for trees. We have found a relationship between the shade tolerance and the effect of light competition for both growth $ G $ and mortality $ \mu $. It suggests that not only understorey tree survival, but also understorey tree growth could help to classify trees, although with caution \citep{Feng2018}. Notwithstanding that the response of growth to climate is mediated by the canopy status, we did not explore further into the climate--competition relationship. We think it would require a dedicated study, as counter-intuitive responses have already been observed for plants \citep{Holmgren2012}. \\
+
+We found no signal 
+
+\subsection{A demographic-based population performance index}
+
+\subsection{Limitation of the study and research agenda}
+
+\subsection{Recruitment niche}
+There is little evidence that sapling and canopy tree survival play an important role in the distribution of 13 of our 14 tree species \citep[\textit{Picea mariana} is missing]{Canham2017}. In our study, demographic rates were rather strongly dependent on size, highlighting the importance of a size-structured population model. A size-structured model makes the individual growth and mortality rates closer to long-term demographic data (such as forest inventories), and considers the possible stage-dependency of the niche. However, it is difficult to cover the full range of stages and study their specific relationships to climate. Our model does not account for spatial variability in seed production, seed survival and germination, for which very little is known and documented. Our study also overlooked seedling growth and survival because there are no available data for individual trees under a certain diameter. We had therefore to extrapolate the early stages of individual growth and mortality. This ensemble of processes, from seed to seedling survival, refers to the recruitment niche, which is defined by the requirements that allow a seed to germinate and establish \citep{Valdez2019}. Different studies that either focus on a single species \citep[\textit{Acer saccharum}]{Solarik2016}, along a longitudinal gradient \citep{CLARK2011}, or a latitudinal gradient \citep {Boisvert-Marsh2019}, provide good evidences of the role of climate in shaping the recruitment niche. More specifically, seed production, not tree growth and mortality, was found to be the most responsive to spring temperature and summer drought \citep[11 sites in the Appalachians, Piedmont, and North Carolina]{CLARK2011}. Seedling recruitment and survival are also expected to be strongly correlated to species distribution \citep{Vanderwel2013, Valdez2019, Solarik2019}. Soil properties and pathogens might constrain even more the regeneration of trees than climate \citep{Brown2014}, which corroborates the need for finer resolution data. Therefore, a major improvement of our study would be to better describe the spatial variation of the recruitment niche (\ie the dependence of effective fecundity to climate). We would need more data on the juvenile stage to avoid extrapolating demographic rates estimated mostly on adult trees ($ dbh \geqslant 100 $ mm) to saplings. \\
+
+
+The effect of dbh and size-induced competition on individual growth and mortality rates illustrate the potential of using structured-population models in population dynamics.
+
+
+If this variability where unimportant,
+
+variability in the demographic rates and their
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%			Old version bellow, untouched			%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{An unruled occurrence}
+
+In this article, we developed a model to investigate how climate and
+competition determine individual tree performance, and how this performance
+relates to species distribution. Individual tree performance was measured with
+three demographic rates, namely radial growth, mortality, and effective
+fecundity. We estimated the 2 former rates, and took a fecundity function independent of climate and species from the
+literature. Tree growth and mortality models accounted for climate using
+polynomials of order 2. Some tree species had counter-intuitive positive
+coefficients with respect to the squared temperature or precipitation,
+although near zero; it indicates that we were not able to detect an optimal
+climatic condition within our data for these species. In general, we found that climate
+variation is a poor predictor of growth and mortality, and that competition
+and forest structure dominate the climate effects on these demographic rates.
+The demographic estimates allow us to measure the population performance $
+\tilde \rho_0 $ as the sum of expected contributions of each individual. We
+found for most species, no support to the hypothesis of a declining species
+performance towards species range limits. There was also no rule relating $
+\tilde \rho_0 $ to the probability of occurrence.
+
+The measure $ \tilde \rho_0
+$ formally integrates three biological mechanisms in the modelling of
+biogeographical distributions, namely demography, environment, and species
+interactions. These three mechanisms commonly shape species responses to
+climate change, along with dispersal, evolution and physiology
+\citep{Urban2016}. Yet, adding demography, environment, and species
+interactions comes with trade-offs: more detailed models are data-intensive,
+might require specific data, and increase the parameters estimation
+complexity. Our approach was computationally challenging, as it combines
+\num{3816854} tree measurements to climate data and computed competition. \\
+
+The lack of a clear relationship between climate, growth and mortality was
+surprising given the geographical extent of the data. Although tree growth and
+mortality may respond to climate, as often documented in dendrochronological
+studies (e.g. \citet{Aussenac2017}), they are highly unpredictable at
+continental scale. Short-term events like frosts, gusts, fires, or pests and
+pathogens outbreaks, may impact these rates more than average conditions, as
+does the micro-topography \citep{Loehle1996}. Hence, coarse-scale data are in
+general not sufficient to disentangle climate effect on the demography from
+the turmoil engendered by disturbances and the micro-environment, as supported
+by \citet[and references therein]{Lembrechts2019}. For individuals, the
+relevant spatio-temporal scales often are meters and minutes rather than
+kilometres and months \citep{Urban2016}, but this is beyond the scope of most
+current datasets for studies at continental extent (although microclimatic
+datasets start to appear \citep{Lembrechts2019}). The absence of climatic
+signal in the demographic data has also been found in \citet{Subedi2013},
+while it was found stronger on the Tibetan plateau \citep{Liang2010}. For
+instance, even though \citeauthor{Subedi2013}'s climate variables are significant, their root mean
+square error of radial growth decreases at most about \num{1.6}\%. One way to
+overcome hazy species-specific demographic responses to climate has been to
+group species into plant functional types \citep{Vanderwel2013}, at the cost
+of loosing the species specificness. \\
+
+There is little evidence that sapling and canopy tree survival play an
+important role in the distribution of 13 of our 14 tree species
+\citep[\textit{Picea mariana} is missing]{Canham2017}. In our study,
+demographic rates were rather strongly dependent on size, highlighting the
+importance of a size-structured population model. A size-structured model
+makes the individual growth and mortality rates closer to long-term
+demographic data (such as forest inventories), and considers the possible
+stage-dependency of the niche. However, it is difficult to cover the full
+range of stages and study their specific relationships to climate. Our model
+does not account for spatial variability in seed production, seed survival and
+germination, for which very little is known and documented. Our study also
+overlooked seedling growth and survival because there are no available
+data for individual trees under a certain diameter. We had therefore to
+extrapolate the early stages of individual growth and mortality. This ensemble
+of processes, from seed to seedling survival, refers to the recruitment niche,
+which is defined by the requirements that allow a seed to germinate and
+establish \citep{Valdez2019}. Different studies that either focus on a single
+species \citep[\textit{Acer saccharum}]{Solarik2016}, along a longitudinal
+gradient \citep{CLARK2011}, or a latitudinal gradient \citep {Boisvert-Marsh2019}, provide good evidences of the role of climate in shaping the
+recruitment niche. More specifically, seed production, not tree growth and
+mortality, was found to be the most responsive to spring temperature and
+summer drought \citep[11 sites in the Appalachians, Piedmont, and North Carolina]{CLARK2011}. Seedling recruitment and survival are also expected to
+be strongly correlated to species distribution \citep{Vanderwel2013, Valdez2019, Solarik2019}. Soil properties and pathogens might constrain even
+more the regeneration of trees than climate \citep{Brown2014}, which
+corroborates the need for finer resolution data. Therefore, a major
+improvement of our study would be to better describe the spatial variation of
+the recruitment niche (\ie the dependence of effective fecundity to climate).
+We would need more data on the juvenile stage to avoid extrapolating
+demographic rates estimated mostly on adult trees ($ dbh \geqslant 100 $ mm)
+to saplings. \\
+
+We also found that radial growth and mortality are determined by the
+asymmetrical competition for light, which is an important species interaction
+for trees. We have found a relationship between the shade tolerance and the
+effect of light competition for both growth $ G $ and mortality $ \mu $. It
+suggests that not only understorey tree survival, but also understorey tree
+growth could help to classify trees, although with caution \citep{Feng2018}.
+Notwithstanding that the response of growth to climate is mediated by the
+canopy status, we did not explore further into the climate--competition
+relationship. We think it would require a dedicated study, as counter-intuitive responses have already been observed for plants
+\citep{Holmgren2012}. \\
+
+The net reproduction rate $ R_0 $ is a heuristic tool to summarise how
+individual growth, mortality, and seed production together define species
+persistence. We showed with equation \eqref{eq::R0sol} that individual growth
+and mortality might contribute non-linearly to species range limits. More
+specifically, a sensitivity analysis of $ R_0 $ and species shifts with
+respect to the demography should emphasise which demographic parameter is the
+most important in a context of climate change, and thus provide a future research agenda on these demographic rates.
+It is however too early to use our $ R_0 $ in assisted migration debates and forest management.
+Currently, we found 4 levers on which we can act to change $ R_0 $: the
+competition, the average understorey growth, the average mortality rate, and
+the fecundity function. We could not prove the role of the overstorey growth rate, however it increases $ R_0 $ when the overstorey survival $ \exp \left[ -\int_{\s}^{s} \sfrac{\mu}{G} \, d \sigma \right] $ is more beneficial than the decrease in the number of recruit per unit of dbh $ \sfrac{F}{G} $. \\
+
+% Depending on the desired effect, such as reducing the
+% population growth rate of an invasive species, or increasing $ R_0 $ for
+% commercial or endangered species, different actions affecting the demography
+% at different life stages can be taken. It is the aforementioned sensitivity
+% analysis that will provide on which demographic rate, and at what life stage
+% we should act. \\
+
+Our analysis was focused on local dynamics and we have put aside the impact of
+spatial dependence of species populations, which can be maintained by nearby
+sources or that are more vulnerable when isolated \citep{Pulliam2000}. We made
+the hypothesis of a local dispersion, using a Dirac distribution (\ie the
+dispersion does not appear in our equation) for the sake of tractability,
+albeit we developed the model for any dispersal kernel $ \K $. Thus, $ R_0 $ is a quantity derived only from demographic processes. For short-term projections (\ie as long as dispersal is negligible), we expect $ R_0 $ to be close to any measure also accounting for dispersal, as most of the seed dispersion is local \citep{Nathan2000}.
+
+% Our first
+% approximation shall not be a problem when working at short temporal scale with
+% slow-growing species like trees. Indeed, tree population expansion rates range
+% from $ 150 \, m/yr $ to $ 500 \, m/yr $ in the early Holocene, which was a
+% fast migration period \citep{Clark1998a}. Moreover, most of the seed
+% dispersion is local, long-distance dispersal being rather a rare event
+% \citep{Nathan2000}. Thus, our results should be interpreted as short-term
+% projections. \\
+
+We exclusively considered individual variation that has no effect on
+evolution. Evolution would be difficult to implement explicitly, but could
+implicitly be introduced via local adaptation in the parameterisation of
+demography. Nevertheless, it would requires additional data to separately
+estimate vital rate responses to climate drivers within multiple populations
+\citep{Peterson2019}. We assumed the species are genetically homogeneous, but
+local adaptations affect fitness components of germination and establishment
+\citep{Alberto2013}, and by extension the population growth rate. For
+instance, it has been shown that \textit{Acer saccharum}'s seeds demonstrate
+local adaptation along a latitudinal gradient \citep{Solarik2016} or that tree
+growth and dormancy cycles synchronise with local seasonal temperature
+\citep{Aitken2008}. Hence, some underlying variation in demography may be
+hidden in the spatial random effect of our demographic models and are not
+explicitly considered in $ R_0 $. Similarly, our study does not include
+physiology. We do not think adding physiological processes would add precision
+in the niche theory, although it would shed light on the mechanisms governing
+the demography. Indeed, physiology is very important to understand the
+demographic rates in extreme environments \citep{Chaves2009} and would be
+insightful to better understand range limits. Local adaptation and phenotypic
+plasticity could also be the reason of the weak individual--climate
+interactions \citep[and references therein]{Miner2005}, as populations would
+locally define their optimal climate conditions.
+
+\subsection{Implications for modelling species distribution}
+Integrated models
+such as ours, are particularly well designed to understand the role of each demographic component in tree
+species distributions and migration rates, and to understand errors propagation. We showed that our capacity to
+relate the occurrence of a species $ P_{occ} $ to its performance $ \tilde
+\rho_0 $ varies greatly among species, from negative to positive correlations.
+This result has also been found with a simpler measure of tree growth
+\citep{McGill2012}. However, our method allows us to reckon explicitly with
+competition and demography. With competition, the correlation between $
+P_{occ} $ and $ \tilde \rho_0 $ seems even weaker. This suggests that climate
+modelling distribution of trees should be interpreted carefully when species
+interactions are ignored. \\
+
+Demographic approaches have been proved to be more biologically realistic than
+abundance-based analysis to study species--habitat relations \citep{Bin2016}.
+However, our study stresses that local demography is not enough to explain
+distribution. Therefore, climatic niche should be used circumspectly as the
+underlying processes of species occurrence remain unclear. Regional scale
+processes such as major disturbances, intervene with and might prevail stand
+processes in the control of trees population growth. The study of
+\citet{Talluto2017a} is for instance very successful at predicting species
+distributions using metapopulation theory. The fact that important mechanisms
+operate on individuals does not mean that only individual-level data provide
+insight \citep{Clark2011}. We proved that actually, individual processes in
+the way we estimated them, play a minor role. Hence, a good way to infer how
+species distributions emerge from individuals and spatial structures could be
+a structured-population model combined with the metapopulation framework. In this way, the demographic rates would not rely exclusively on
+‘the shoulders’ of local spatial processes, but also on certain phenomena that can be perceived mostly at the metapopulation scale, such as fire dynamics.
