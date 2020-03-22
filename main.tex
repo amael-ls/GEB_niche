@@ -1,0 +1,331 @@
+\documentclass[letterpaper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%    PACKAGES    %%%%%%%%%%%%%%%%%%%
+%% Package version
+\listfiles % Then check the .log file
+
+%% font
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% \usepackage[normalem]{ulem} % Barrer text, command = \sout{text}
+% In Latex, ulem normally replaces italics with underlining in text emphasized by \emph , and to some extent by \em.  A declaration of \normalem or the \usepackage option [normalem] disables this feature.
+
+\usepackage{marvosym}
+
+%% languages
+\usepackage[british]{babel}
+% Notice that I used the babel package with three modules: ngerman, french, and english (since english is the last declared language, this is the main language for the document) and then used \selectlanguage to change to the corresponding option for each abstract.
+
+%% marges, space...
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{setspace} % [nodisplayskipstretch] pour option space in equation
+
+\usepackage{indentfirst}
+
+\usepackage[bottom]{footmisc}
+\usepackage{footnote}
+
+% https://tex.stackexchange.com/questions/279/how-do-i-ensure-that-figures-appear-in-the-section-theyre-associated-with
+% \usepackage[section]{placeins} % To place figures in the section it is declared
+
+\usepackage[nolists,tablesfirst,nomarkers]{endfloat} % To place fig & tables at the end
+
+%% Numbering figures in sections rather than continuously http://tex.stackexchange.com/questions/28333/continuous-v-per-chapter-section-numbering-of-figures-tables-and-other-docume
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+
+%% Graphics
+\usepackage[pdftex]{graphicx}
+	\graphicspath{{graphs/}}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage[dvipsnames, svgnames]{xcolor}
+
+\usepackage{tikz}
+	\usetikzlibrary{arrows, plotmarks, decorations.markings}
+	\tikzstyle{arrow} = [->,>=stealth,thick,rounded corners=4pt,line width=1pt]
+	\usetikzlibrary{shadows}
+	\usetikzlibrary{shadings}
+	\usetikzlibrary{positioning} % relative coodinate
+	\usetikzlibrary{tikzmark, calc} % calc, to calculate coordinate
+	\usetikzlibrary{decorations.pathmorphing} % to snake an arrow
+	\usetikzlibrary{shapes.arrows}
+	\usetikzlibrary{patterns}
+	\tikzset{
+		invisible/.style={opacity=0},
+		visible on/.style={alt={#1{}{invisible}}},
+		alt/.code args={<#1>#2#3}{%
+		\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+		},
+	} % end tikzset. Code from http://tex.stackexchange.com/questions/136143/tikz-animated-figure-in-beamer
+% Gradient shadings command
+\makeatletter
+\def\createshadingfromlist#1#2#3{%
+	\pgfutil@tempcnta=0\relax
+	\pgfutil@for\pgf@tmp:={#3}\do{\advance\pgfutil@tempcnta by1}%
+	\ifnum\pgfutil@tempcnta=1\relax%
+		\edef\pgf@spec{color(0)=(#3);color(100)=(#3)}%
+	\else%
+		\pgfmathparse{50/(\pgfutil@tempcnta-1)}\let\pgf@step=\pgfmathresult%
+		\pgfutil@tempcntb=1\relax%
+		\pgfutil@for\pgf@tmp:={#3}\do{%
+			\ifnum\pgfutil@tempcntb=1\relax%
+				\edef\pgf@spec{color(0)=(\pgf@tmp);color(25)=(\pgf@tmp)}%
+			\else%
+	        \ifnum\pgfutil@tempcntb<\pgfutil@tempcnta\relax%
+				\pgfmathparse{25+\pgf@step/4+(\pgfutil@tempcntb-1)*\pgf@step}%
+				\edef\pgf@spec{\pgf@spec;color(\pgfmathresult)=(\pgf@tmp)}%
+	        \else%
+	        	\edef\pgf@spec{\pgf@spec;color(75)=(\pgf@tmp);color(100)=(\pgf@tmp)}%
+	        \fi%
+	    \fi%
+	    \advance\pgfutil@tempcntb by1\relax%
+	    }%
+	\fi%
+	\csname pgfdeclare#2shading\endcsname{#1}{100}\pgf@spec%
+}
+
+% --- Define colours
+\definecolor{Rblack}{RGB}{0,0,0}
+\definecolor{Rgrey}{RGB}{42,51,68}
+\definecolor{RdeepBlue}{RGB}{17,34,170}
+\definecolor{RmidBlue}{RGB}{32,88,220}
+\definecolor{RlightBlue}{RGB}{90,130,234}
+\definecolor{RuglyGreen}{RGB}{253,236,190}
+\definecolor{RyellowPea}{RGB}{253,219,91}
+\definecolor{RdeepYellow}{RGB}{250,185,53}
+\definecolor{Rsalmon}{RGB}{253,152,89}
+\definecolor{Rred}{RGB}{182,52,58}
+
+\definecolor{lightAvailability_grey}{RGB}{20,20,20}
+
+\createshadingfromlist{RmapShading}{vertical}{Rblack,Rgrey,RdeepBlue,RmidBlue,RlightBlue,RuglyGreen,RyellowPea,RdeepYellow,Rsalmon,Rred}
+\createshadingfromlist{lightAvailability}{vertical}{lightAvailability_grey,white}
+\createshadingfromlist{RmapShading_h}{horizontal}{Rblack,Rgrey,RdeepBlue,RmidBlue,RlightBlue,RuglyGreen,RyellowPea,RdeepYellow,Rsalmon,Rred}
+
+%% Tab, list...
+\usepackage{booktabs}
+\usepackage{longtable}
+	\LTcapwidth=\textwidth
+
+\usepackage[export]{adjustbox} % To use valign in tabular environment
+
+\usepackage{listings}
+
+\usepackage{multirow}
+
+\usepackage{enumerate}
+
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+%% Table of content
+\setcounter{tocdepth}{-2} % To avoid printing the sections from the main body in ToC
+\addto\captionsbritish{ % Replace "british" with the language used in babel
+	\renewcommand{\contentsname}{Supporting Information contents}
+}
+
+%% Links
+\usepackage{url}
+\usepackage[pdftex, colorlinks=true, linkcolor=NavyBlue, urlcolor=MidnightBlue, citecolor=PineGreen]{hyperref}
+
+%% bibliography
+\usepackage{csquotes}
+\usepackage[style=apa, natbib=true, sorting=ynt]{biblatex}
+\addbibresource{article.bib}
+
+%% Algorithms, R language
+\usepackage{listings}
+\lstset{ %
+	language=R,                     % the language of the code
+	basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+	numbers=left,                   % where to put the line-numbers
+	numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+	stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+	                                % will be numbered
+	numbersep=5pt,                  % how far the line-numbers are from the code
+	backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+	showspaces=false,               % show spaces adding particular underscores
+	showstringspaces=false,         % underline spaces within strings
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	frame=single,                   % adds a frame around the code
+	rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+	tabsize=2,                      % sets default tabsize to 2 spaces
+	captionpos=b,                   % sets the caption-position to bottom
+	breaklines=true,                % sets automatic line breaking
+	breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+	title=\lstname,                 % show the filename of files included with \lstinputlisting;
+	                                % also try caption instead of title
+	keywordstyle=\color{blue},      % keyword style
+	commentstyle=\color{dkgreen},   % comment style
+	stringstyle=\color{mauve},      % string literal style
+	escapeinside={\%*}{*)},         % if you want to add a comment within your code
+	morekeywords={*,...}            % if you want to add more keywords to the set
+}
+
+%% mathematics
+\usepackage{amsthm}
+\usepackage{amsmath}
+	\allowdisplaybreaks % Autoriser découpe formules entres pages
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xfrac}
+\usepackage{etoolbox} % For renumbering (cf below, counter for model)
+
+\usepackage{thmbox} % cf after for "theorem" definitions
+
+\usepackage{gensymb}
+
+\usepackage{siunitx}
+
+% Creation of a new counter for the models, from:
+% https://tex.stackexchange.com/questions/84254/how-to-create-new-counter-of-equation
+\newcounter{growthCounter}
+\renewcommand*{\thegrowthCounter}{G\arabic{growthCounter}}
+
+\makeatletter
+\def\@equationname{equation}
+\newenvironment{g}[1]{%
+    \def\mymathenvironmenttouse{#1}%
+    \ifx\mymathenvironmenttouse\@equationname%
+        \refstepcounter{growthCounter}%
+    \else
+        \patchcmd{\@arrayparboxrestore}{equation}{growthCounter}{}{}%          doesn't change output?
+        \patchcmd{\print@eqnum}{equation}{growthCounter}{}{}%
+        \patchcmd{\incr@eqnum}{equation}{growthCounter}{}{}%
+    \fi
+    \csname\mymathenvironmenttouse\endcsname%
+}{%
+    \ifx\mymathenvironmenttouse\@equationname%
+        \tag{\thegrowthCounter}%
+    \fi
+    \csname end\mymathenvironmenttouse\endcsname%
+}
+\makeatother
+
+
+\newcounter{mortalityCounter}
+\renewcommand*{\themortalityCounter}{M\arabic{mortalityCounter}}
+
+\makeatletter
+\def\@equationname{equation}
+\newenvironment{m}[1]{%
+    \def\mymathenvironmenttouse{#1}%
+    \ifx\mymathenvironmenttouse\@equationname%
+        \refstepcounter{mortalityCounter}%
+    \else
+        \patchcmd{\@arrayparboxrestore}{equation}{mortalityCounter}{}{}%          doesn't change output?
+        \patchcmd{\print@eqnum}{equation}{mortalityCounter}{}{}%
+        \patchcmd{\incr@eqnum}{equation}{mortalityCounter}{}{}%
+    \fi
+    \csname\mymathenvironmenttouse\endcsname%
+}{%
+    \ifx\mymathenvironmenttouse\@equationname%
+        \tag{\themortalityCounter}%
+    \fi
+    \csname end\mymathenvironmenttouse\endcsname%
+}
+\makeatother
+
+%% Line numbers --conflict with amsthm-- pdf http://texblog.org/2012/02/08/adding-line-numbers-to-documents/
+\usepackage{lineno}
+\linenumbers
+
+%%%%%%%%%%%%%%%%%   NEW COMMANDES    %%%%%%%%%%%%%%%%%
+%% Text
+\newcommand {\ie}{\textit{i.e., }}
+\newcommand {\eg}{\textit{e.g., }}
+\newcommand {\cf}{\textit{cf} }
+\newcommand\bsc[1]{\textsc{\MakeLowercase{#1}}} % Only if there is no french babel
+\newcommand {\thup}[1]{{#1}\textsuperscript{th}}
+
+%% Math
+\newcommand {\s}{{s}^{*}}
+\newcommand {\sst}{\tilde{s}^{*}} % s* stable d'où le st
+\newcommand {\N}{\tilde{N}}
+\newcommand {\A}{\mathscr{A}}
+\newcommand {\K}{\mathcal{K}}
+\renewcommand{\S}{\mathscr{S}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\F}{\mathcal{F}}
+
+\DeclareMathOperator{\logit}{logit}
+
+%% Plus or minus sign
+%\makeatletter
+%\newcommand{\mypm}{\mathbin{\mathpalette\@mypm\relax}}
+%\newcommand{\@mypm}[2]{\ooalign{%
+%  \raisebox{.1\height}{$#1+$}\cr
+%  \smash{\raisebox{-.6\height}{$#1-$}}\cr}}
+%\makeatother
+
+%%%%%%%%%%%%%%%%%%   HYPHENATION    %%%%%%%%%%%%%%%%%%
+% \hyphenation{cal-cu-lus}
+
+%%%%%%%%%%%%%%%%%   THEOREM STYLE    %%%%%%%%%%%%%%%%%
+\newtheoremstyle{theo}{\topsep}{\topsep}{\itshape}{}{\bfseries}{.}{\newline}{\thmname{#1} \thmnumber{#2} \thmnote{~: \textit{#3}}}
+\theoremstyle{theo}
+\newtheorem{rem}{Remark}[section]
+\newtheorem{defi}{Definition}[section]
+\newtheorem{assum}{Assumption}[section]
+\newtheorem{nota}{Notation}[section]
+
+%%%%%%%%%%%%%%%%%%%%%   OTHERS   %%%%%%%%%%%%%%%%%%%%%
+% http://tex.stackexchange.com/questions/13304/which-package-version-am-i-using
+\listfiles % Add \listfiles to your preamble and then look at the .log file. This will tell you the current version of all the packages loaded
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Niche theory and tree distribution mismatch when accounting for stand structure, climate, and competition}
+\author{}
+
+\begin{document}
+\maketitle
+
+\begin{onehalfspace}
+
+\input{abstract}
+\input{introduction}
+\input{methods}
+\input{results}
+% \input{discussion}
+% \input{conclusions}
+% \input{acknowledgement}
+
+\end{onehalfspace}
+
+\begin{refcontext}[sorting=nyt]
+\printbibliography
+\end{refcontext}
+
+\input{dataStatement}
+
+\newpage
+
+\clearpage % ensure all floats are processed
+\counterwithout{figure}{section}
+\processdelayedfloats
+\clearpage
+
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\appendix
+\addtocontents{toc}{\setcounter{tocdepth}{3}}
+\tableofcontents
+
+\input{appendices/app_calc_R0}
+\input{appendices/app_purves2009}
+\input{appendices/app_database}
+% \input{appendices/app_glmm}
+% \input{appendices/app_maps}
+% \input{appendices/app_randomForest}
+% \input{appendices/app_confInt}
+
+\end{document}
