@@ -1,122 +1,34 @@
 
-% Deleted references: Monsi2004, Pacala1994, Breiman2001, \citep[p. 121-122]{Zuur2009}
+% [ALS] Deleted references: Monsi2004, Pacala1994, Breiman2001, \citep[p. 121-122]{Zuur2009}, \citep{Vehtari2019}
 
 \section{The Model}
-
 \subsection{Model structure}
-
-We model forest dynamics using a physiologically-structured population model
-(PSPM) based on \citet{Strigul2008}, which we have made spatially explicit. We first
-provide general definitions related to PSPMs and then describe ours.
-A physiological structured model distinguishes individuals who are at
-different stages of development. PSPMs are based on
-individual states (hereafter, \textit{i}-states), namely, a collection
-of variables that have two properties \citep[for a good overview of PSPMs]{DeRoos1997}:
-
+We model forest dynamics using a physiologically-structured population model (PSPM) based on \citet{Strigul2008}, which we have made spatially explicit. We first provide general definitions related to PSPMs and then describe ours. A physiological structured model distinguishes individuals who are at different stages of development. PSPMs are based on individual states (hereafter, \textit{i}-states), namely, a collection of variables that have two properties \citep[for a good overview of PSPMs]{DeRoos1997}:
 \begin{enumerate}[label=(\roman*)]
 	\item \textit{i}-states completely determine at any time (possibly together with the present environmental state) the individual's growth rate, death rate and birth rate, and its influence on the environment,
 	\item \textit{i}-states future values are completely determined by their present values, together with the intervening environmental history as encountered by the individual of concern.
 \end{enumerate}
+The environment is accounted by the environmental state (hereafter, \textit{e}-state), including both biotic and abiotic factors affecting the dynamics. Formally, an \textit{e}-state is a collection of biotic and abiotic factors that characterise the environment in which an individual lives and that affect individual performance. In this article, we consider two kinds of \textit{e}-states: (\textit{i}) feedback loops, that both influence and are influenced by individuals from all species, and (\textit{ii}) external forcing factors, that are imposed to the population. By definition, the former requires a dynamic description. We ignore random variation between individuals of the same \textit{i}-state and which experience the same \textit{e}-state. As a result, the model represents cohorts of trees rather than individuals.
 
-The environment is described through the environmental state (hereafter,
-\textit{e}-state), including both biotic and abiotic factors affecting the
-dynamics. Formally, an \textit{e}-state is a collection of biotic and abiotic
-factors that characterise the environment in which an individual lives and
-that affect individual performance. In this article, we consider two kinds of
-\textit{e}-state: (\textit{i}) feedback loops, that both influence and are
-influenced by individuals, and (\textit{ii}) external forcing factors, that
-are imposed to the population. By definition, the former requires
-a dynamic description. We ignore random variation between individuals of the
-same \textit{i}-state and which experience the same \textit{e}-state. As a
-result, the model represents cohorts of trees rather than individuals.
-
-Cohort dynamics of species $ j $, diameter $ s $ and located in $ x $ are
-modelled by a spatially-explicit version of the von Foerster--PPA model
-\citep{Strigul2008}:
-
+Cohort dynamics of species $ j $, diameter $ s $ and located in $ x $ are modelled by a spatially-explicit version of the von Foerster--PPA model \citep{Strigul2008}:
 \begin{align}
 	\frac{\partial N_j(s, x, t)}{\partial t} &= - \frac{\partial G_j \big(s, x; \s(x, t) \big) N_j(s, x, t)}{\partial s} - \mu_j\big(s, x; \s(x, t) \big) N_j(s, x, t) \label{eq::dynamics_x} \\
 	N_j(0, x, t) &= \frac{1}{G_j(0, x; \s(x, t))} \int_0^{\infty} N_j(s, x, t) F_j\big(s; \s(x, t) \big) \, ds \label{eq::recruitment_x}
 \end{align}
+where $ N_j $ is the number of trees of species $ j $ per unit size per unit space (see it as a density, only $ \int \int N \, ds dx $ can be considered as a number of individuals), $ G $ is the growth rate of individuals, $ \mu $ is the mortality rate, and $ F $ is the effective fecundity function (\cf Tab. \ref{tab::notations} for list of notations, definitions and units for each variable and parameter). Although we developed the model with a dispersal kernel, we decided to use a $ \delta $-Dirac distribution in this article in order to keep the model tractable. Therefore, the dispersion is local to the patch $ x $, and does not appear in Equation \eqref{eq::recruitment_x}. The three demographic rates are affected by $ \s $, a feedback loop defined formally below, while external factors (at a location $ x $) only influence $ G $ and $ \mu $. Equation \eqref{eq::dynamics_x} describes cohort demography, while equation \eqref{eq::recruitment_x} describes recruitment. Together, \eqref{eq::dynamics_x}--\eqref{eq::recruitment_x} represent the structured-population dynamics of trees. We use the diameter at breast height (\textit{dbh}) as a single \textit{i}-state and then use allometric functions from \citet{Purves2007} to compute tree height and crown diameter.
 
-\noindent where $ N_j $ is the number of trees of species $ j $ per unit size
-per unit space (see it as a density, only $ \int \int N \, ds dx $ can be
-considered as a number of individuals), $ G $ is the growth rate of
-individuals, $ \mu $ is the mortality rate, and $ F $ is the effective
-fecundity function (\cf Tab. \ref{tab::notations} for list of notations,
-definitions and units for each variable and parameter). Although we developed
-the model with a dispersal kernel, we decided to use a $ \delta $-Dirac
-distribution in this article in order to keep the model tractable. Therefore,
-the dispersion is local to the patch $ x $, and does not appear in Equation
-\eqref{eq::recruitment_x}. The 3 demographic rates are affected by $ \s $, a
-feedback loop defined formally below, while external
-factors (at a location $ x $) only influence $ G $ and $ \mu $. Equation
-\eqref{eq::dynamics_x} is dedicated to cohort demography, while equation
-\eqref{eq::recruitment_x} depicts recruitment. Together,
-\eqref{eq::dynamics_x}--\eqref{eq::recruitment_x} represent the structured-
-population dynamics of trees (Fig. \ref{fig::pspm}). We use the diameter at
-breast height (\textit{dbh}) as a single \textit{i}-state and then use
-allometric functions from \citet{Purves2007} to compute tree height and crown
-diameter.
+Competition for light is the major driver of forest dynamics in north eastern North American forests, especially for saplings \citep{Pacala1996, Purves2007}. Nitrogen should have little influence in closed-canopy forests or in understorey conditions, and would be difficult to simulate \citep{Kobe2006}. We thus limit the feedback loop solely to light availability. Competition for water has a non-negligible effect on such forest dynamics at all light levels \citep{Kobe2006}. We also know that temperature impacts metabolic rates \citep{Brown2004}, therefore, we base the external factors on temperature and precipitation variables.
 
-Competition for light is the major driver of forest dynamics in north eastern
-North American forests, especially for saplings \citep{Pacala1996, Purves2007}. Nitrogen should have little influence in closed-
-canopy forests or in understorey conditions, and would be difficult to
-simulate \citep{Kobe2006}. We thus limit the feedback loop solely to light
-availability. Competition for water has a non-negligible effect on such forest
-dynamics at all light levels \citep{Kobe2006}. We also know that temperature
-impacts metabolic rates \citep{Brown2004}, therefore, we base the external factors on
-temperature and precipitation variables.
-
-Competition for light is represented by defining a critical height splitting
-the forest into the understorey and the overstorey (Fig. \ref{fig::ppa}). The
-vertical position of trees then after determines growth and mortality. The
-equation describing the feedback loop between cohort dynamics and light
-availability is:
-
+Competition for light is represented by a critical height splitting the forest into the understorey and the overstorey (Fig. \ref{fig::ppa}). The vertical position of trees then after determines growth and mortality. The equation describing the feedback loop between cohort dynamics and light availability is:
 \begin{equation}
 	1 = \sum_{j = 1}^{n} \int_{\s(x)}^{\infty} N_j(s, x, t) \A_j \big(s; \s(x, t)\big) \, ds \label{eq::ppa_x}
 \end{equation}
-
-\noindent where $ \A $ denotes the cross-section of the crown section of an individual of size $ s $ (Fig \ref{fig::ppa}). This
-last equation \eqref{eq::ppa_x} defines a size threshold $ \s $ which
-differentiates the behaviour of individuals that are above $ \s $ to those who
-are below. Hence, $ \s $ is defined such that the sum of the area of
-individual crowns equals the area of the considered plot. Trees with a height
-below $ \s $ are fully shaded whereas trees above $ \s $ are in the overstorey
-and receive direct sunlight. When the canopy is open, such an $ \s $ cannot be found, and therefore $ \s $ is set to $ 0 $. It is important to note that when the size variable is the height of trees, then $ \s $ is independent of the species. However, when the dbh is the size variable, then $ \s $ becomes species specific (due to the species-specificness of the allometric functions relating height to dbh). Equation \eqref{eq::ppa_x} is adapted from \citet{Strigul2008}, hence, obeys to the
-\textit{perfect-plasticity assumption} (PPA): the canopy is a collection of
-small crowns that can be reorganised such that the occupied area is maximised.
-Despite this optimal spatial arrangement is theoretical, the combination of
-PPA with the von-Foerster equations accurately reproduce forest dynamics at
-stand scale, within a relatively homogeneous physical environment
-\citep{Strigul2008, Purves2008}. This set of three equations
-(\ref{eq::dynamics_x}--\ref{eq::ppa_x}) is a tractable PSPM, which allows us to derive analytically $ R_0 $.
+where $ \A $ denotes the cross-section of the crown section of an individual of size $ s $ (Fig \ref{fig::ppa}). This last equation \eqref{eq::ppa_x} defines a size threshold $ \s $ which differentiates the behaviour of individuals that are above $ \s $ to those who are below. Hence, $ \s $ is defined such that the sum of the area of individual crowns equals the area of the considered plot. Trees with a height below $ \s $ are fully shaded whereas trees above $ \s $ are in the overstorey and receive direct sunlight. When the canopy is open, such an $ \s $ cannot be found, and therefore $ \s $ is set to $ 0 $. It is important to note that when the size variable is the height of trees, then $ \s $ is independent of the species. However, when the dbh is the size variable, then $ \s $ becomes species specific (due to the species-specificness of the allometric functions relating height to dbh). Equation \eqref{eq::ppa_x} is adapted from \citet{Strigul2008}, hence, obeys to the \textit{perfect-plasticity assumption} (PPA): the canopy is a collection of small crowns that can be reorganised such that the occupied area is maximised. Despite this optimal spatial arrangement is theoretical, the combination of PPA with the von-Foerster equations accurately reproduce forest dynamics at stand scale, within a relatively homogeneous physical environment \citep{Strigul2008, Purves2008}. This set of three equations (\ref{eq::dynamics_x}--\ref{eq::ppa_x}) is a tractable PSPM, which allows us to derive analytically $ R_0 $.
 
 \begin{figure}
-\centering
-\begin{subfigure}[b]{0.95\textwidth}
-   \includegraphics[width=1\linewidth]{illustrations/pspm2}
-   \caption{Representation of our physiologically structured-population model}
-   \label{fig::pspm}
-\end{subfigure}
-\par\bigskip
-\begin{subfigure}[b]{0.95\textwidth}
-   \centering
-   \input{graphs/ppaStrigul}
-   \caption{Perfect plasticity assumption}
-   \label{fig::ppa}
-\end{subfigure}
-\caption{(\subref{fig::pspm}) Size is the individual state, and light availability defines the
-environmental state. During development, individuals grow, die and reproduce
-(production of seeds and dispersal). They impact the environment through a
-feedback loop, which impact their demography. (\subref{fig::ppa}) Traditionally, it is assumed
-that light availability decreases progressively from the canopy to the forest
-floor, obeying a Beer's law (left arrow). Here we assume there is a threshold $ \s $ that
-splits the forest into two parts, and defines therefore two light levels (right arrow): $
-L_u $ and $ L_o $ for understorey and overstorey light respectively. Hence the
-light is a stepwise function of canopy height. The threshold $ \s $ is the maximum
-height at which the canopy is closed and with the sum of all the cross section equals the plot area. $ \A(s, \sigma) $ is the area of the cross section of the crown at height $ \sigma $ of an individual of height $ s $. \label{fig::pspm_ppa}}
+	\centering
+	\input{graphs/ppaStrigul}
+	\caption{Traditionally, it is assumed that light availability decreases progressively from the canopy to the forest floor, obeying a Beer's law (left arrow). Here we assume there is a threshold $ \s $ that splits the forest into two parts, and defines therefore two light levels (right arrow): $ L_u $ and $ L_o $ for understorey and overstorey light respectively. Hence the light is a stepwise function of canopy height. The threshold $ \s $ is the maximum height at which the canopy is closed; at this particular height, the sum of all the cross section equals the plot area. $ \A(s, \sigma) $ is the area of the cross section of the crown at height $ \sigma $ of an individual of height $ s $. \label{fig::ppa}}
 \end{figure}
 
 \begin{table}[h]
@@ -126,40 +38,32 @@ height at which the canopy is closed and with the sum of all the cross section e
 		\toprule
 		\textbf{Symbol} & \multicolumn{1}{c}{\textbf{Definition}} & \multicolumn{1}{c}{\textbf{Unit}} \\
 		$ \A $ & area of the cross-section of the crown &  $ a $ \\
-		$ \text{age}_{\max} $ & Maximum age from \citet{Burns1990, Burns1990a} & $ T $\\
-		$ \text{dbh}_{\max} $ & Maximum dbh from \citet{Burns1990, Burns1990a} & $ \ell $\\
+		$ \text{age}_{\max} $ & Maximum age from \citet{Burns1990, Burns1990a} & $ T $ \\
+		$ \text{dbh}_{\max} $ & Maximum dbh from \citet{Burns1990, Burns1990a} & $ \ell $ \\
 		$ \F $ & number of seeds per tree's crown area per time & $ a^{-1} T^{-1} $ \\
 		$ F $ & effective fecundity function, \ie number of germinating seeds & $ T^{-1} $ \\
 		$ F_{\text{Purves}} $ & effective fecundity function (D. Purves, 2008) & $ T^{-1} $ \\
 		$ G $ & growth of individuals & $ \ell T^{-1} $ \\
 		$ \mu $ & mortality rate & $ T^{-1} $ \\
 		$ N $ & `density' of trees & $ \ell^{-1} a^{-1} $ \\
-		$ \Omega $ & landscape, $ \Omega \subseteq \mathds{R}^2 $ & $ a $ \\
-		$ \varphi $ & Ratio of $ \Delta AIC_c $ for models with $ \text{VIF} < 20 $ & - \\
+		$ \Omega $ & landscape or expert map, $ \Omega \subseteq \mathds{R}^2 $ & $ a $ \\
+		$ \varphi $ & Ratio of $ \Delta \text{AIC}_c $ for models with $ \text{VIF} < 20 $ & - \\
 		$ R_0 $ & net population growth rate & - \\
-		$ \rho_0 $ & net population growth rate using $ F_{\text{Purves}} $ & - \\
-		$ \tilde \rho_0 $ & - \\
+		$ \rho_0 $ & net population growth rate using $ F_{\text{Purves}} $ and $ s_{\infty}^{x} $ & - \\
+		$ \tilde \rho_0 $ & standardised $ \rho_0 $ & - \\
 		$ s $ & size of individuals (either dbh or height) & $ \ell $ \\
 		$ \s $ & size threshold which split the forest into two parts & $ \ell $ \\
-		$ \s_c $ & size threshold at equilibrium. Value set to 0 m or 10 m for the maps & $ \ell $ \\
-		$ s_{\infty}^{x} $ & upper bound of integration in $ R_0 $ formula & \\
+		$ \s_c $ & constant size threshold, value set to 0 m or 10 m for the maps & $ \ell $ \\
+		$ s_{\max}^{x} $ & maximal dbh a tree would have at location $ x $ without competition & $ \ell $ \\
+		$ s_{\infty}^{x} $ & upper bound of integration in $ \rho_0 $ formula & $ \ell $ \\
 		$ t $ & time & $ T $ \\
-		$ x $ & space variable, $ x \in \Omega $ & $ [1] $ \\
+		$ x $ & space variable, $ x \in \Omega $ & - \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
 \subsection{Net reproduction rate $ R_0 $}
-
-We used the method of characteristics to calculate the net reproduction rate at
-a location $ x \in \Omega $ in function of a constant competition $ \s_c $. This method is commonly used in transport equations, like equation \eqref{eq::dynamics_x} describing the advection of trees at a non-constant speed $ G $ along the size axis. Characteristics allow us to follow individuals throughout their life, \ie they represent the trajectories of individuals in the time-size plan (fig. \ref{fig::chara} for an example).
-The derivation of $ R_0 $ is detailed in Supporting Information
-\ref{app::calc_R0::sec::R0}; it is important to remember three assumptions made for this
-calculation: (\textit{i}) $ \s $ is considered fixed and known at a value $ \s_c
-$, (\textit{ii}) only trees larger than $ \s_c $ can reproduce
-\citep{Strigul2008}, and (\textit{iii}) dispersal is limited to the patch, as
-stated by equation \eqref{eq::recruitment_x}. The net reproduction rate in a
-patch $ x $ is consequently:
+We used the method of characteristics to calculate the net reproduction rate at a location $ x $ within a landscape $ \Omega $ in function of a constant competition $ \s_c $. This method is commonly used in transport equations, like equation \eqref{eq::dynamics_x} describing the advection of trees at a non-constant speed $ G $ along the size axis. Characteristics allow us to follow individuals throughout their life, \ie they represent the trajectories of individuals in the time-size plan (fig. \ref{fig::chara} for an example). The derivation of $ R_0 $ is detailed in Supporting Information \ref{app::calc_R0::sec::R0}; it is important to remember three assumptions made for this calculation: (\textit{i}) $ \s $ is considered fixed and known at a value $ \s_c $, (\textit{ii}) only trees larger than $ \s_c $ can reproduce \citep{Strigul2008}, and (\textit{iii}) dispersal is limited to the patch, as stated by equation \eqref{eq::recruitment_x}. The net reproduction rate in a patch $ x $ is consequently:
 \begin{equation} \label{eq::R0sol}
 	R_0 (x, \s_c) = \exp \left[-\int_0^{\s_c}\frac{\mu(s, \s_c, x)}{G(s, \s_c, x)} \, ds \right] \times \int_{\s_c}^{\infty} \frac{F(s, \s_c)}{G(s, \s_c, x)} \exp \left[-\int_{\s_c}^{s} \frac{\mu(\sigma, \s_c, x)}{G(\sigma, \s_c, x)} \, d\sigma \right] \, ds
 \end{equation}
@@ -173,64 +77,19 @@ Equation \eqref{eq::R0sol} can be split into two biological processes:
 	\end{itemize}
 \end{itemize}
 
-From equation \eqref{eq::R0sol}, we understand that the reproduction rate $
-R_0 $ can be strengthened by reducing the competition $ \s_c $, by fastening
-the average understorey growth $ G(s < \s_c) $ or diminishing the average
-mortality rate $ \mu $, or by enhancing the fecundity $ F $. The mathematical
-proof of these three mechanisms is found in the Supporting Information
-\ref{app::calc_R0::sec::3asser}. The formula \eqref{eq::R0sol} is a generalisation of the $ R_0 $ of \citet{Purves2009} as proved in Supporting Information \ref{app::purves2009}, and the same assertions can be drawn from his article. However, due to the complexity of the computation we cannot assert that an averagely faster overstorey growth rate leads to an increase in $ R_0 $, except in the particular case of a constant overstorey growth rate \citep{Purves2009}. For the same reason, we cannot calculate the value of $ \s_c $ for a population at equilibrium, except when we are in the case of \citet[Supporting Information \ref{app::purves2009} for the proof]{Purves2009}.
-
-The net reproductive rate $ R_0 $ derived here, is a heuristic tool to relate
-the individual tree performance under a competition constraint $ \s_c $ to the population performance and is the key of our second sub-objective.
+From equation \eqref{eq::R0sol}, we understand that the reproduction rate $ R_0 $ can be strengthened by reducing the competition $ \s_c $, by fastening the average understorey growth $ G(s < \s_c) $ or diminishing the average mortality rate $ \mu $, or by enhancing the fecundity $ F $. The mathematical proof of these three mechanisms is found in the Supporting Information \ref{app::calc_R0::sec::3asser}. The formula \eqref{eq::R0sol} is a generalisation of the $ R_0 $ of \citet{Purves2009} and is now valid for any individual growth, mortality, or fecundity function. The same assertions can be drawn from this study (Supporting Information \ref{app::purves2009}), however, due to the complexity of the computation we cannot assert that an averagely faster overstorey growth rate leads to an increase in $ R_0 $. For the same reason, we cannot calculate the value of $ \s_c $ for a population at equilibrium (\ie when $ R_0 = 1 $), except when the demographic rates are easier to compute, such as step functions \citet[Supporting Information \ref{app::purves2009} for the proof]{Purves2009}. The net reproductive rate $ R_0 $ derived here is a heuristic tool to relate the individual tree performance under a competition constraint $ \s_c $ to the population performance and is the key to address our second objective.
 
 \subsection{Data}
+We parameterised the demographic parameters $ G $ (individual growth) and $ \mu $ (mortality) using permanent sample plots from the Forest Inventory and Analysis (FIA, USA), Ministère des Forêts, de la Faune et des Parcs du Québec, the Ministry of Natural Resources and Forestry of Ontario, Ministry of Natural Resources of New Brunswick, and the forest company Domtar (Fig. \ref{fig::mapDatabase} for a map of the data). After removing plots that undergone fire or logging, there were \num{7704442} individual measurements (106 species distributed among \num{132240} plots). A record consists of the tree identity, the species, the year at which the individual has been measured, the \textit{dbh}, the latitude and longitude of the plot, and its living state (alive or dead). Measurements occurred between 1963 and 2010, and frequencies of measurement range from $ \sfrac{1}{1} \text{ yr}^{-1} $ to $ \sfrac{1}{40} \text{ yr}^{-1} $ (with $ 96 \, \% $ of the data between $ \sfrac{1}{3} \text{ yr}^{-1} $ to $ \sfrac{1}{15} \text{ yr}^{-1} $). Both radial growth and mortality are highly variable along the distribution of the individuals (Supporting Information \ref{app::database}).
 
-We parameterised the demographic parameters $ G $ (individual growth) and $ \mu $ (mortality) using permanent
-sample plots from the Forest Inventory and Analysis (FIA, USA),
-Ministère des Forêts, de la Faune et des Parcs du Québec, the Ministry of
-Natural Resources and Forestry of Ontario, Ministry of Natural Resources of
-New Brunswick, and the forest company Domtar (Fig. \ref{fig::mapDatabase}
-for a map of the data). After removing plots that
-undergone fire or logging, there were \num{7704442} individual measurements (106 species distributed
-among \num{132240} plots). A record consists of the
-tree identity, the species, the year at which the individual has been
-measured, the \textit{dbh}, the latitude and longitude of the plot, and its
-living state (alive or dead). Measurements occurred between 1963 and 2010, and frequencies of measurement range from
-$ \sfrac{1}{1} \text{ yr}^{-1} $ to $ \sfrac{1}{40} \text{ yr}^{-1} $ (with $ 96 \, \% $ of the data between $ \sfrac{1}{3} \text{ yr}^{-1} $ to
-$ \sfrac{1}{15} \text{ yr}^{-1} $).
+Climate data were extracted for each plot using \textsc{anusplin} software \citep{McKenney2011} based on the latitude and longitude coordinates of the permanent plots. Note that for privacy reasons, the FIA offset plot locations up to $ 1.6 $ km \citep{Gray2012} which might therefore imply mismatches between the real climate of the plot and the climate we assigned. We selected 19 climatic variables (Supporting Information \ref{app::database}, table \ref{tab::bioclim}) covering the period 1958-2010 with a spatial resolution of 60 arc seconds ($ \approx 2 \, \text{km}^2 $). To account for climate variability before each tree measurement, we averaged each temperature and precipitation variable over a period of 5 years using a moving average (5 years is the most represented interval between measurements in the database with $ 38.8 \, \% $ of observations).
 
-Climate data were extracted for each plot and measurement using
-\textsc{anusplin} software \citep{McKenney2011} based on the latitude and longitude
-coordinates of the permanent plots. Note that for privacy reasons, the FIA does not provide the exact coordinates which might therefore imply mismatches between the real climate of the plot and the climate we assigned. The climate data cover the period 1959-2010. We selected 19 climatic variables (Supporting Information
-\ref{app::database}, table \ref{tab::bioclim}) with a spatial resolution of
-60 arc seconds ($ \approx 2 \, \text{km}^2 $). To account for climate variability before each tree measurement, we averaged each temperature and precipitation variable over a period of 5 years using a moving mean (5 years seems a reasonable period of influence and is the most represented frequency of the database---$ 38.8 \, \% $).
-
-We calculated individual tree height and crown area from allometric functions
-and parameters provided in \citet{Purves2007}. We considered all trees dbh,
-although most of Canadian inventories start with individuals larger than $ 100 $ mm, and USA inventories at $ 127 $ mm (5 inches). Some trees have been
-recorded dead and then alive, we considered the last living state as true and
-ignored `resurrection' events in the mortality estimation.
-By definition, growth and mortality rates require at least two measures for an
-individual tree. Hence, after calculating the threshold $ \s $ in each plot,
-single-measured trees were removed from the dataset. For the growth analysis,
-we also took out dead trees and individuals that have either a non-positive
-dbh increment or a radial growth bigger than 25mm per year. We parameterised
-the model for the 14 most abundant species in north-eastern North America
-(Tab. \ref{tab::species}), but we considered all of the 106 species in the
-data for the computation of $ \s $. The 14-species dataset used in this
-article contains \num{69954} plots, for a total of \num{3816854} individual
-measurements. \textit{Abies balsamea} is the most measured species with \num{822265} individual measurements, whereas \textit{Tsuga canadensis} is the least measured with \num{66008} individual measurements. The climatic and geographical ranges of each species can be found in Tab. \ref{tab::spaceRange} and Fig. \ref{fig::speciesClimRange} in Supporting Information \ref{app::database}.
+We calculated individual tree height and crown area from allometric functions and parameters provided in \citet{Purves2007}. We considered all trees dbh, although most of Canadian inventories start with individuals larger than $ 100 $ mm, and USA inventories at $ 127 $ mm (5 inches). Some trees have been recorded dead and then alive, we considered the last living state as true and ignored `resurrection' events in the mortality estimation. By definition, growth and mortality rates require at least two measures for an individual tree. Hence, after calculating the threshold $ \s $ in each plot, single-measured trees were removed from the dataset. For the growth analysis, we also took out dead trees and individuals that have either a non-positive dbh increment or a radial growth bigger than 25mm per year. We parameterised the model for the 14 most abundant species in north-eastern North America (Tab. \ref{tab::species}), but we considered all of the 106 species in the data for the computation of $ \s $. The 14-species dataset used in this article contains \num{69954} plots (75 \% in the USA, and 25 \% in Canada), for a total of \num{3816854} individual measurements. \textit{Abies balsamea} is the most measured species with \num{822265} individual measurements, whereas \textit{Tsuga canadensis} is the least measured with \num{66008} individual measurements. The climatic and geographical ranges of each species can be found in Tab. \ref{tab::spaceRange} and Fig. \ref{fig::speciesClimRange} in Supporting Information \ref{app::database}.
 
 \subsection{Parameterisation}
-
-We used linear mixed models to parameterise the individual growth $ G $ and mortality $
-\mu $ rates as a function of climate, canopy status (understorey if below $ \s $, overstorey otherwise),
-and size (dbh). For the fecundity, we used the functions and values from
-\citet{Purves2008}. For each model, species-specific demographic parameters set was
-estimated separately. We tested linear and quadratic functional forms for the temperature, precipitation, and dbh effects, which were all normalised using the standard score. To get an optimal climate in the quadratic case, it is necessary to have a negative (positive) slope in front of the squared climate variables for the growth (mortality). However, to constrain would force the optimal climate to be within the data used for parameterisation, thus we did not set any constraint. The 19 climatic variables allow us to try different combinations, however we preselected certain climatic assemblages based on the biological interpretability of the models (Supporting Information \ref{app::glmm}). We based the model comparison on information criteria and $ R^2 $. We ranked the models for each species, and selected the model that in average fits the best. Then, this model was imposed on the 14 species. The R scripts used to format the data and to estimate demographic parameters are available on github (Github link, blinded review).
+We used linear mixed models to parameterise the individual growth $ G $ and mortality $ \mu $ rates as a function of climate, canopy status (understorey if below $ \s $, overstorey otherwise), and size (dbh). For the fecundity, we used the functions and values from \citet{Purves2008}. For each model, species-specific demographic parameters set was estimated separately. We tested linear and quadratic functional forms for the temperature, precipitation, and dbh effects, which were all normalised using the standard score. To get an optimal climate in the quadratic case, it is necessary to have a negative (positive) slope in front of the squared climate variables for the growth (mortality). However, constraining the parameters would force the optimal climate to be within the data used for parameterisation, thus we did not set any constraint. The 19 climatic variables allow us to try different combinations, however we preselected certain climatic assemblages based on the interpretability of the models and the literature (Supporting Information \ref{app::glmm}). We based the model comparison on information criteria and $ R^2 $. We ranked the models for each species, and selected the model that in average fits the best according to information criteria. Then, this model was imposed on the 14 species. The R scripts used to format the data and to estimate demographic parameters are available on github (see Data Availability Statement). 
 
 \subsubsection{Growth}
-
 For the individual growth rate, we assumed a lognormal distribution, hence $ \log(G) $ is normally distributed. We normalised the logarithm of growth
 \[
 	Y_{G} = \frac{\log(G) - \mathrm{E}[\log(G)]}{\mathrm{sd}[\log(G)]},
@@ -238,7 +97,7 @@ For the individual growth rate, we assumed a lognormal distribution, hence $ \lo
 and used the following model:
 \begin{equation} \label{eq::glmm_growth}
 \begin{split}
-	E[Y_G^{i, j}] = & \beta_{j, (x, t)[i]}^{(0)}  + \beta_j^{(1)}  \text{canopy status} \, + \\
+	E[Y_G^{i, j}] = & \beta_{j, (x, t)[i]}^{(0)} + \beta_j^{(1)}  \text{canopy status} \, + \\
 	& \left(\beta_j^{(2)} + b_j^{(2)} \text{canopy status} \right) T \, +
 	\left(\beta_j^{(3)} + b_j^{(3)} \text{canopy status} \right) T^2 \, + \\
 	& \left(\beta_j^{(4)} + b_j^{(4)} \text{canopy status} \right) P \, +
@@ -249,41 +108,26 @@ and used the following model:
 		b_j^{(7, 3)} P + b_j^{(7, 4)} P^2 \right) \text{dbh}^2
 \end{split}
 \end{equation}
-where $ E[Y_G] $ is the expected value of the normalised logarithm of growth, and $ T $ and $ P $ are the associated explanatory
-temperature and precipitation, respectively. The canopy status is a boolean (true for the canopy
-trees, and false otherwise). The indices $ i $ and $ j $ stand for individual and species respectively, and
-$ (x, t)[i] $ index denotes the group effects (plot $ x $ and year $ t $ of
-the $ i^{\text{th}} $ individual). Mixed models allow us to group individuals by plots and years of the second
-measurement to consider spatial and temporal structures. The plot effect comprehend the variation
-driven by local factors such as soil condition and disturbance history, while
-the year (within plot identity) represents the temporal variation that is not
-included in climate. The $ \beta $s are the slopes, and the $ b
-$s correspond to different variable interactions. Climate interacts with the
-crowding effect (canopy status) to account for climate response variation to
-the individual's neighbourhood. Lastly, as bigger trees may be favoured or
-disadvantaged by climate, dbh interacts with climatic variables $ T $ and $ P $. \\
+where $ E[Y_G] $ is the expected value of the normalised logarithm of growth, and $ T $ and $ P $ are the associated explanatory temperature and precipitation, respectively. The canopy status is a boolean (true for the canopy trees, and false otherwise). The indices $ i $ and $ j $ stand for individual and species respectively, and $ (x, t)[i] $ index denotes the group effects (plot $ x $ and year $ t $ of the $ i^{\text{th}} $ individual). The random effects (with a maximum of three effects: spatial, temporal at large spatial scale, and temporal at local scale respectively) are normally distributed:
+\begin{align*}
+	\beta_{j}^{(0, x)} &\sim \mathcal{N}(0, \bm{\sigma}_{x}^{\text{growth}}) \\
+	\beta_{j}^{(0, t)} &\sim \mathcal{N}(0, \bm{\sigma}_{t}^{\text{growth}}) \\
+	\beta_{j}^{(0, xt)} &\sim \mathcal{N}(0, \bm{\sigma}_{xt}^{\text{growth}})
+\end{align*}
+Mixed models allow us to group individuals by plots and years of the second measurement to consider spatial and temporal structures. The plot effect comprehend the variation driven by local factors such as soil condition and disturbance history, while the year (within plot identity) represents the temporal variation that is not included in climate. The $ \beta $s are the regression coefficients, and the $ b $s correspond to different variable interactions. Climate interacts with the crowding effect (canopy status) to account for climate response variation to the individual's neighbourhood. Lastly, as bigger trees may be favoured or disadvantaged by climate, dbh interacts with climatic variables $ T $ and $ P $. \\
 
-We used the package \textit{lme4} \citep{lme4} to estimate parameters ($ \beta
-$s and $ b $s). We tested sub-models of equation \eqref{eq::glmm_growth} to evaluate the
-impact of competition and climate on $ G $. We
-used a top-down strategy to select first the
-random effect structure, and secondly the fixed structure. We compared models
-with the Akaike Information Criteria (AICc), but kept models with a maximum
-Variance Inflation Factor (VIF) lower than $ 20 $ to avoid correlations between variables \citep{Zuur2010}. We chose $ 20 $ because of one model for growth that have reasonable maximum VIFs (below 6) for 11 species over 14, and a VIF of 19 for \textit{Fagus grandifolia}. We judged that a VIF beyond $ 20 $ implies too much collinearity (F. Guillaume Blanchet, \textit{discussion}). AICc are only made to be compared; we denote by $ \Delta AIC_c $ the difference between two models:
+We used the package \textit{lme4} \citep{lme4} to estimate the parameters ($ \beta $s and $ b $s). We tested sub-models of equation \eqref{eq::glmm_growth} to evaluate the impact of competition and climate on $ G $. We used a top-down strategy to select first the random effect structure, and secondly the fixed structure. We compared models with the Akaike Information Criteria ($ \text{AIC}_c $), but kept models with a maximum Variance Inflation Factor (VIF) lower than $ 20 $ to avoid correlations between variables \citep{Zuur2010}. We chose $ 20 $ because of one model for growth that have reasonable maximum VIFs (below 6) for 11 species over 14, and a VIF of 19 for \textit{Fagus grandifolia}. We judged that a VIF beyond $ 20 $ implies too much collinearity (F. Guillaume Blanchet, \textit{discussion}). $ \text{AIC}_c $ are only made to be compared, we denote by $ \Delta \text{AIC}_c $ the difference between a model $ i $ and the model that have the smallest $ \text{AIC}_c $:
 \[
-	\Delta AIC_c = AIC_c^{(1)} - AIC_c^{(2)}
+	\Delta \text{AIC}_c = \text{AIC}_c^{(i)} - \text{AIC}_c^{(\min)}
 \]
-The best model has the lowest $ AIC_c $, or equivalently $ \Delta AIC_c = 0 $. The $ \Delta AIC_c $ are calculated unconstrainedly with respect to the best model but, due to the VIF constraint, the selected model is not the model with $ \Delta AIC_c = 0 $. Therefore, using exclusively the models satisfying the constraint $ \text{VIF} < 20 $, we computed the decimal logarithm of the ratio between each model's $ \Delta AIC_c $ and the minimum $ \Delta AIC_c $:
+The best model has the lowest $ \text{AIC}_c $, or equivalently $ \Delta \text{AIC}_c = 0 $. The $ \Delta \text{AIC}_c $ are calculated unconstrainedly with respect to the best model, but, due to the VIF constraint, the selected model is not the model with $ \Delta \text{AIC}_c = 0 $. Therefore, using exclusively the models satisfying the constraint $ \text{VIF} < 20 $, we computed the common logarithm of the ratio between each model's $ \Delta \text{AIC}_c $ and the minimum $ \Delta \text{AIC}_c $:
 \begin{equation} \label{eq::ratio}
-	\varphi = \log_{10}\left[ \frac{\Delta AIC_c}{\min \left( \Delta AIC_c \right)} \right]
+	\varphi = \log_{10}\left[ \frac{\Delta \text{AIC}_c}{\min \left( \Delta \text{AIC}_c \right)} \right]
 \end{equation}
-This ratio represents, within the subset of models satisfying the constraint $ \text{VIF} < 20 $, how many times (in power of 10) is the best model compared to the other models. The decimal logarithm provides a convenient scale to compare the models, and the best constrained model has $ \varphi = \log_{10}(1) = 0 $.
+This ratio represents, within the subset of models satisfying the constraint $ \text{VIF} < 20 $, how many times (in power of 10) is the best model compared to the other models. The common logarithm provides a convenient scale to compare the models, and the best constrained model has $ \varphi = \log_{10}(1) = 0 $.
 
 \subsubsection{Mortality}
-
-For the mortality rate, the response variable $ Y $ is a boolean describing the transition state between two records
-(true if there is a transition from alive to dead, and false if the
-individual stays alive). The observation of a mortality event depends of the survey interval $ \Delta t $ \citep{Lines2010}. To survive from $ t_0 $ to $ t_1 = t_0 + \Delta t $, an individual $ i $ must survive each year:
+For the mortality rate, the response variable $ Y $ is a boolean describing the transition state between two records (true if there is a transition from alive to dead, and false if the individual stays alive). The observation of a mortality event depends of the survey interval $ \Delta t $ \citep{Lines2010}. To survive from $ t_0 $ to $ t_1 = t_0 + \Delta t $, an individual $ i $ must survive each year:
 \[
 	\Prob[\text{survival } i: \, t_0 \to t_1] = \big(1 - \Prob[\text{annual mortality } i]\big)^{\Delta t}
 \]
@@ -308,84 +152,53 @@ We worked with the following model:
 	& \beta_j^{(6)} \text{dbh} \, + \beta_j^{(7)} \text{dbh}^2
 \end{split}
 \end{equation}
-with the same notations than the growth model. We did not include any group effect, as some plots have only one record for certain years and species, while other plots have no dead recorded (problem also faced in \citet{Kunstler2019}). To minimise the uncertainty of death events and to have enough measures per species per time interval, we limited the dataset to measurements with $ \Delta t \in [5, 11] $ ($ 74.9 \% $ of the mortality database). Since the probability of transition from dead to dead is 1, we kept records up to the first death event only (or all the measurements if there were no death event). \\
+with the same notations to the growth model. We did not include any group effect, as some plots have only one record for certain years and species, while other plots have no dead recorded (problem also faced in \citet{Kunstler2019}). To minimise the uncertainty of death events and to have enough measures per species per time interval, we limited the dataset to measurements with $ \Delta t \in [5, 11] $ ($ 74.9 \% $ of the mortality database). Since the probability of transition from dead to dead is 1, we kept records up to the first death event only (or all the measurements if there were no death event). \\
 
-For the mortality, none of the GLMMs from the package \textit{lme4} converged. We suspect that despite the amount of data, there is little information due to the rarity of tree mortality. We therefore used the package \textit{rstanarm}
-\citep{rstanarm} which provides GLMMs in a Bayesian framework, and removed the climate-dbh interactions. We used 4 chains and 3000 iterations for each chain. We kept the
-default priors of \textit{rstanarm}, that are Gaussian distributions for both
-the intercept and slopes, and exponential distribution for the standard deviation. Parameter values used later in the analysis are the medians of the
-posterior distributions. We used the Widely Applicable
-Information Criteria, WAIC \citep[and reference therein]{Hooten2015} to help
-us choosing the best model. WAIC is based on the posterior predictive distribution (the distribution to predict new data) and is valid for hierarchical models. However, it assumes that the data are independent given a set of parameters, which could be a problem for our spatial data. Although there are $ R^2 $ for Bayesian regression models, they cannot
-be compared: the explained variance can only be interpreted in the context of
-a single model \citep{Gelman2018}. Hence, we exclusively based our choice on
-WAIC. We checked the convergence of the selected model for all the parameters and species with the Gelman-Rubin statistic \citep[R-hat diagnostic]{Gelman1992}. Usually a chain with a R-hat larger than 1.05 is considered non-convergent; at convergence, R-hat should be 1.
-% \citep{Vehtari2019}
+For the mortality, none of the GLMMs from the package \textit{lme4} converged. We suspect that despite the amount of data, there is little information due to the rarity of tree mortality. We therefore used the package \textit{rstanarm} \citep{rstanarm} which provides GLMMs in a Bayesian framework, and removed the climate-dbh interactions. We used 4 chains and 3000 iterations for each chain. We kept the default priors of \textit{rstanarm}, that are Gaussian distributions for the regression coefficients $ \beta $s, and exponential distribution for the standard deviation. Parameter values used later in the analysis are the medians of the posterior distributions. We used the Widely Applicable Information Criteria, WAIC \citep[and reference therein]{Hooten2015} to chose the best model. WAIC is based on the posterior predictive distribution (the distribution to predict new data) and is valid for hierarchical models. However, it assumes that the data are independent given a set of parameters, which could be a problem for our spatial data. Similarly to radial growth, we compared the WAICs on the common logarithm scale:
+\begin{equation} \label{eq::psi}
+	\psi = \log_{10}(\Delta \text{WAIC} + 1)
+\end{equation}
+The best model has $ \Delta \text{WAIC} = 0 $, which implies $ \psi $ is also null for the best model. Although there are $ R^2 $ for Bayesian regression models, they cannot be compared: the explained variance can only be interpreted in the context of a single model \citep{Gelman2018}. Hence, we exclusively based our choice on WAIC. We checked the convergence of the selected model for all the parameters and species with the Gelman-Rubin statistic \citep[R-hat diagnostic]{Gelman1992}. Usually a chain with a R-hat larger than 1.05 is considered non-convergent; at convergence, R-hat should be 1.
 
 \subsubsection{Fecundity}
-
 The forest inventory data have few records of trees with a dbh smaller than 10 cm, thus we could not parameterise the fecundity function $ F(s, \s) $. Instead, we used the fecundity function defined and parameterised in \citet{Purves2008}:
 \begin{align} \label{eq::fecundity_fct}
 	F_{\text{Purves}}(s, \s) = \F \times \A(s, \s) && \F = 0.0071
 \end{align}
-where $ \F $ is the number of seeds produced per sun-exposed tree crown area per unit time
-(Tab. \ref{tab::notations}). In this particular case, we defined a new quantity
-$ \rho_0 $ as the net reproduction rate $ R_0 $ with the reproduction function
-$ F_{\text{Purves}} $. The notation $ R_0 $ is strictly reserved to the
-general case, where the fecundity function is not restricted to the function
-of \citeauthor{Purves2008}.
+where $ \F $ is the number of seeds produced per sun-exposed tree crown area per unit time (Tab. \ref{tab::notations}). In this particular case, we defined a new quantity $ \rho_0 $ as the net reproduction rate $ R_0 $ with the reproduction function $ F_{\text{Purves}} $. The notation $ R_0 $ is strictly reserved to the general case, where the fecundity function is not restricted to the function of \citeauthor{Purves2008}.
 
-By definition, $ \rho_0 $ corresponds to the net reproduction rate when the
-fecundity function is independent of climate (\ie spatially constant). Once $
-\rho_0 $ is calculated over the landscape $ \Omega $, we associate a
-convenient dimensionless quantity:
-
+By definition, $ \rho_0 $ corresponds to the net reproduction rate when the fecundity function is independent of climate (\ie spatially constant). Once $ \rho_0 $ is calculated over the landscape $ \Omega $, we associate a convenient normalised quantity:
 \begin{equation} \label{eq::rho0_scaled}
 	\tilde \rho_0(x, \s) = \frac{\rho_0(x, \s) - \min_{x \in \Omega} \big(\rho_0(x, \s) \big)}{\max_{x \in \Omega} \big(\rho_0(x, \s) \big) - \min_{x \in \Omega} \big(\rho_0(x, \s) \big)}
 \end{equation}
 This cancels the value of $ \F $, which was a difficult parameter to estimate in \citet{Purves2008}, and bounds $ \tilde \rho_0 $ between $ 0 $ and $ 1 $.
 
-\subsection{Random forest}
+\subsection{Occurrence probability}
+We evaluated for each species the correlation between $ \tilde \rho_0 $ and the probability of occurrence $ P_{occ} $ derived from a random forest \citep[R package]{randomForest}. This is a way to transform discrete presence and absence data into probabilities which are continuous data. It has been shown that random forests perform well in predicting tree species distributions \citep{Prasad2006}. Using a continuous probability rather than the presence and absence data can be useful in the case where climatic conditions are favourable but the species absent because of stochasticity, and alternatively where the species is present but should not occur.
 
-It has been shown that random forests perform well in predicting tree species
-distributions \citep{Prasad2006}. Hence, for each species we evaluated our model by
-investigating correlations between $ \tilde \rho_0 $ and the probability of
-occurrence $ P_{occ} $ derived from a random forest \citep[R package]{randomForest}.
-This is a way to transform discrete
-presence and absence data into probabilities which are continuous data. Using a continuous probability rather than the presence and absence data can be useful in the case of extinction debt, where the probability of occurrence of a species decreases, but is still present. This could explain then why there is a low $ R_0 $ for such places. \\
-
-We trained the algorithm with coordinates of sample plots data set where there is
-at least one species recorded. We associated a 0 to each couple of
-coordinates--species if there were no record for that species in $ (x, y) $
-after 1996, and 1 otherwise. We set the random forest with $ 2000 $ trees, and
-$ 12 $ predictors (over 19) to be chosen at each tree node. More trees add
-precision and bound the generalisation error (that is, the true error of the
-population as opposed to the training error only), without overfitting the
-data \citep{Prasad2006}. The explanatory variables set contained
-19 bioclimatic variables (Supporting Information \ref{app::database} for the
-variables and \ref{app::randomForest} for the equation). The performance of
-the random forest was evaluated with the $ R^2 $ from \citet{Tjur2009}, later
-denoted by $ R_{\text{Tjur}}^2 $.
+We trained the algorithm with coordinates of sample plots data set where there is at least one species recorded. We associated a 0 to each couple of coordinates--species if there were no record for that species in $ (x, y) $ after 1996, and 1 otherwise. We set the random forest with $ 2000 $ trees, and $ 12 $ predictors (over 19) to be chosen at each tree node. More trees add precision and bound the generalisation error (that is, the true error of the population as opposed to the training error only), without overfitting the data \citep{Prasad2006}. The explanatory variables set contained 19 bioclimatic variables (Supporting Information \ref{app::database} for the variables and \ref{app::randomForest} for the equation). The performance of the random forest was evaluated with the $ R^2 $ from \citet{Tjur2009}, later denoted by $ R_{\text{Tjur}}^2 $.
 
 \subsection{Species distribution maps}
+We downloaded an expert range map $ \Omega_j $ \citep{Prasad2003, Little1971} for each species $ j $, and calculated $ \tilde \rho_0 $ for each location within $ \Omega_j $ for an averaged climate over 5 years (from 2006 to 2010) and a canopy height $ \s $ of either $ 0 $ m (no competition) or $ 10 $ m (the average of the distribution of $ \s $ of the database is $ 9.6 $ m). Hereafter, we drop the index $ j $ and only use $ \Omega $, although the expert range map is species-specific.
 
-For each of the 14 species, we downloaded their distribution range $ \Omega $
-\citep{Prasad2003, Little1971}, and calculated $ \tilde \rho_0 $ for each
-location within $ \Omega $ for an averaged climate over 5 years (from 2006 to
-2010) and a canopy height $ \s $ of either $ 0 $ m (no competition) or $ 10 $ m (the average value of $ \s $ of the database is $ 9.6 $ m). A canopy height of $ 10 $ m corresponds to a young stand for broadleaves, a mature stand for a boreal forest, and can be almost impossible to reach in the north such as Bay James (Mark Vellend, \textit{discussion}). \\
+We investigated within the bounding box of our data (orange rectangle in Fig. \ref{fig::mapDatabase}), how $ \tilde \rho_0 $ relates to the orthodromic distance from the closest edge of the distribution defined by \citet{Little1971}, and mapped the variations of $ \tilde \rho_0 $. In order to avoid spatial extrapolations of the demographic rates, we decided to limit our study to the region of parameterisation (for instance \textit{Betula papyrifera} goes up to Alaska). To evaluate in which direction $ \tilde \rho_0 $ increases, we computed its gradient for each pixel of $ \Omega $ using the algorithm of \citet{Ritter1987}. Then, we separated $ \Omega $ into two regions---northern and southern to the centroid of $ \Omega $---and we averaged the gradients for each region. If $ \tilde \rho_0 $ decreases towards range limits, then both gradients should point toward the centre of the distribution. That is to say, the gradient of the northern region should point southward, and the gradient of the southern region should point northward. \\
 
-We investigated within the bounding box of our data (orange rectangle in Fig. \ref{fig::mapDatabase}), how $ \tilde \rho_0 $ relates to the distance from the closest edge of the distribution defined by \citet{Little1971}, and mapped the variations of $ \tilde \rho_0 $. In order to avoid spatial extrapolations of the demographic rates, we decided to limit our study to the region of parameterisation (for instance \textit{Betula papyrifera} goes up to Alaska). To evaluate in which direction $ \tilde \rho_0 $ increases, we computed its gradient for each pixel of $ \Omega $ using the algorithm of \citet{Ritter1987}. Then, we separated $ \Omega $ into two regions---northern and southern to the centroid of $ \Omega $---and we averaged the gradients for each region. \\
-
-To compute $ \tilde \rho_0 $ we must integrate up to infinite (see equations \eqref{eq::R0sol} and \eqref{eq::rho0_scaled}), but we found numerically that the integral beyond a height of 45 meters is negligible (because $ \lim_{\text{s} \to \infty} G(s) = 0 $ and $ \mu > 0 $). To be closer to real maximum dbh and height of trees for a given location $ x \in \Omega $, we determined the upper boundary $ s_{\infty}^{x} $ of the integral of $ \tilde \rho_0 $ in three steps:
+We must integrate up to infinite to compute $ \tilde \rho_0 $ (see equations \eqref{eq::R0sol} and \eqref{eq::rho0_scaled}), but we found numerically that the integral beyond a height of 45 meters is negligible (because $ \lim_{\text{s} \to \infty} G(s) = 0 $ and $ \mu > 0 $). To be closer to real maximum dbh and height of trees for a given location $ x \in \Omega $ (rather than arbitrarily setting a maximum height of 45 m), we determined the upper boundary $ s_{\infty}^{x} $ of the integral of $ \tilde \rho_0 $ in three steps:
 \begin{enumerate}
 	\item Get species-specific maximal age ($ \text{age}_{\max} $) and maximal dbh ($ \text{dbh}_{\max} $) from \citet{Burns1990, Burns1990a}. The data are in Tab. \ref{tab::database}, Supporting Information \ref{app::database}
-	\item Compute which dbh a tree would have at the location $ x $ with the associated climate $ \text{clim}_x $ if it were spending all its life in the overstorey up to the maximal age:
+	\item Compute which dbh a tree would have at the location $ x $ with the associated climate $ \text{clim}_x $ if it were spending all its life in the overstorey up to the maximal age (using ODE45 from Matlab):
 	\[
-		\text{local max dbh} = \int_0^{\text{age}_{\max}} G^{\text{(overstorey)}}(s, \text{clim}_x) \, ds
+		s_{\max}^{x} = \int_0^{\text{age}_{\max}} G^{\text{(overstorey)}}\big(s(t), \text{clim}_x \big) \, dt
 	\]
 	\item Set the local `infinite dbh':
 	\begin{equation} \label{eq::s_inf}
-		s_{\infty}^{x} = \min(\text{dbh}_{\max}, \text{local max dbh})
+		s_{\infty}^{x} = \min(\text{dbh}_{\max}, \text{s}_{\max}^{x})
 	\end{equation}
-	and replace $ \infty $ in equation \eqref{eq::R0sol} by $ s_{\infty} $. If $ s_{\infty} < \s_c $, which happen when trees cannot reach the canopy before reaching their maximal age, we set the integral to 0.
+	and replace $ \infty $ in equation \eqref{eq::R0sol} by $ s_{\infty}^{x} $. If $ s_{\infty} < \s_c $, which happen when trees cannot reach the canopy before reaching their maximal age, we set $ R_0 $ to 0.
 \end{enumerate}
+
+Therefore, equation \eqref{eq::rho0} combines the equations \eqref{eq::R0sol}, \eqref{eq::fecundity_fct}, and \eqref{eq::s_inf} to measure species performance:
+\begin{equation} \label{eq::rho0}
+	\rho_0(x, \s_c) = \exp \left[-\int_0^{\s_c}\frac{\mu(s, \s_c, x)}{G(s, \s_c, x)} \, ds \right] \times \int_{\s_c}^{s_{\infty}^{x}} \frac{\F \A(s, \s_c)}{G(s, \s_c, x)} \exp \left[-\int_{\s_c}^{s} \frac{\mu(\sigma, \s_c, x)}{G(\sigma, \s_c, x)} \, d\sigma \right] \, ds
+\end{equation}
+from which we can derive $ \tilde \rho_0 $ (using equation \eqref{eq::rho0_scaled}). Equation \eqref{eq::rho0} accounts for spatial differences in the maximum dbh that are not included in the radial growth model. Its major difference with \eqref{eq::R0sol} is the upper bound of the expected production of offsprings, which makes equation \eqref{eq::rho0} specific to this paper, while equation \eqref{eq::R0sol} is a generalisation of \citet{Purves2009}.
