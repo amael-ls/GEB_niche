@@ -1,0 +1,136 @@
+\section{Random forest and correlations} \label{app::randomForest}
+\begin{refsection}
+\subsection{Random forest equation}
+The equation used in the random forest is:
+\begin{equation}
+	\begin{split}
+	\text{presence species} \sim T_a +{} & r_T + I + T_s + T_M + T_m + T_r + T_w + T_d + T_h + T_c \\
+		& P_a + P_M + P_m + P_s + P_w + P_d + P_h + P_c
+	\end{split}
+\end{equation}
+Where the $ T $s denote temperatures, and the $ P $s the precipitations (all defined in Tab \ref{tab::bioclim}). We set the number of trees to 2000 and the number of variables to select at each node to 12.
+
+\subsection{Correlations between the random forest or presence/absence data versus $ \tilde \rho_0 $}
+\begin{table}[ht]
+\centering
+\caption{Correlation between $ \tilde \rho_0 $ derived from our model, and the SDM (random forest). We trained the random forest with \num{61374} data, and evaluate its prediction accuracy using the $ R^2 $ from \citet{Tjur2009}. Correlations were calculated without competition (\ie $ \s = 0 $, correlation 0), and with a competition of 10 meters (\ie $ \s = 10 $, correlation 10). The last column is the correlation between $ \tilde \rho_0 $ and the distance to the closest edge of the distribution defined by \citet{Little1971}. \label{tab::R0correlSDM}}
+\begin{tabular}{@{}rccc@{}}
+	\toprule
+	\textbf{Species} & \textbf{Correlation 0} & \textbf{Correlation 10} & $ \bm{R^2} $ \textbf{(Tjur)} \\
+	\midrule
+		ABI-BAL & -0.09 & 0.48 & 0.85 \\
+		ACE-RUB & -0.49 & -0.50 & 0.78 \\
+		ACE-SAC & -0.07 & -0.18 & 0.78 \\
+		BET-ALL & -0.30 & -0.25 & 0.77 \\
+		BET-PAP & 0.61 & 0.48 & 0.78 \\
+		FAG-GRA & -0.37 & -0.37 & 0.74 \\
+		PIC-GLA & 0.41 & 0.08 & 0.76 \\
+		PIC-MAR & 0.52 & 0.27 & 0.82 \\
+		PIC-RUB & 0.18 & -0.26 & 0.83 \\
+		PIN-BAN & 0.15 & -0.10 & 0.77 \\
+		PIN-STR & 0.09 & 0.02 & 0.74 \\
+		POP-TRE & 0.31 & 0.45 & 0.79 \\
+		THU-OCC & 0.33 & 0.24 & 0.74 \\
+		TSU-CAN & 0.14 & 0.17 & 0.74 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Species-specific correlations between $ \tilde \rho_0 $ and the data of presence and absence. \label{tab::corr_R0_presAbsData}}
+\begin{tabular}{rcc}
+	\toprule
+	\textbf{Species} & \textbf{Correlation 0} & \textbf{Correlation 10} \\
+	\midrule
+		ABI-BAL & -0.08 & 0.42 \\
+		ACE-RUB & -0.40 & -0.41 \\
+		ACE-SAC & -0.06 & -0.15 \\
+		BET-ALL & -0.24 & -0.20 \\
+		BET-PAP & 0.49 & 0.39 \\
+		FAG-GRA & -0.28 & -0.28 \\
+		PIC-GLA & 0.32 & 0.06 \\
+		PIC-MAR & 0.44 & 0.23 \\
+		PIC-RUB & 0.15 & -0.22 \\
+		PIN-BAN & 0.12 & -0.08 \\
+		PIN-STR & 0.07 & 0.01 \\
+		POP-TRE & 0.25 & 0.37 \\
+		THU-OCC & 0.25 & 0.18 \\
+		TSU-CAN & 0.11 & 0.13 \\
+ 	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+	\centering
+	\input{appendices/correl_rf_vs_pa}
+	\caption{Correlations without competition (\MoveUp), or with competition (canopy height $ \s = 10 $ m, \CircSteel). The values are from Tabs. \ref{tab::R0correlSDM} and \ref{tab::corr_R0_presAbsData}. \label{fig::correl_rf_vs_presAbs}}
+\end{figure}
+
+\subsection{Correlation between $ \tilde \rho_0 $ and distance to closest edge}
+\begin{table}[ht]
+\centering
+\caption{Species-specific correlations between $ \tilde \rho_0 $ and the distance to the closest edge of $ \Omega $, with competition (canopy height $ \s = 10 $ m) and without (canopy height $ \s = 0 $ m). The correlations are computed over the whole species distribution $ \Omega $, over the points closer to a border belonging to the northern region, or closer to a border belonging to the southern region. The data are used in Fig. \ref{fig::3correls_dist}. \label{tab::R0correl_dist}}
+\begin{tabular}{lcccccc}
+	\toprule
+	~ & \multicolumn{2}{c}{\textbf{Over} $ \bm \Omega $} & \multicolumn{2}{c}{\textbf{Northern region}} & \multicolumn{2}{c}{\textbf{Southern region}} \\
+		\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+		\textbf{species} & \textbf{Cor 0} & \textbf{Cor 10} & \textbf{Cor 0} & \textbf{Cor 10} & \textbf{Cor 0} & \textbf{Cor 10} \\
+	\midrule
+		ABI-BAL & -0.18 & -0.33 & 0.16 & -0.01 & -0.29 & -0.42 \\
+		ACE-RUB & -0.33 & -0.36 & -0.23 & -0.16 & 0.21 & 0.13 \\
+		ACE-SAC & -0.21 & -0.11 & 0.12 & 0.15 & -0.04 & -0.06 \\
+		BET-ALL & -0.16 & -0.11 & -0.10 & -0.12 & -0.34 & -0.22 \\
+		BET-PAP & 0.26 & -0.09 & 0.22 & 0.27 & 0.37 & -0.06 \\
+		FAG-GRA & -0.12 & -0.14 & -0.21 & -0.20 & -0.55 & -0.57 \\
+		PIC-GLA & 0.33 & 0.29 & -0.08 & -0.08 & 0.47 & 0.45 \\
+		PIC-MAR & 0.29 & -0.31 & 0.16 & -0.04 & 0.43 & -0.26 \\
+		PIC-RUB & -0.32 & -0.44 & -0.10 & -0.37 & -0.51 & -0.51 \\
+		PIN-BAN & -0.31 & -0.27 & 0.24 & -0.00 & -0.48 & -0.34 \\
+		PIN-STR & 0.16 & 0.06 & 0.06 & 0.05 & 0.32 & 0.08 \\
+		POP-TRE & 0.06 & 0.08 & 0.10 & 0.28 & -0.03 & 0.10 \\
+		THU-OCC & 0.21 & 0.29 & -0.21 & 0.13 & 0.40 & 0.27 \\
+		TSU-CAN & 0.13 & 0.09 & 0.16 & 0.11 & 0.43 & 0.43 \\
+ 	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+	\centering
+	\input{appendices/3correlations_proj10}
+	\caption{Species-specific correlations between $ \tilde \rho_0 $ and the distance to the closest edge of $ \Omega $, with competition (canopy height $ \s = 10 $ m). The correlations are computed over the whole species distribution (\CircSteel), over the points closer to a border within the northern region (\MoveUp) or closer to a border within the southern region (\MoveDown). A negative correlation indicates that $ \rho_0 $ increases toward north (\MoveUp) or south (\MoveDown). The three colours correspond to the shade tolerance level (the darker, the more shade-tolerant). The values can be found in Tab \ref{tab::R0correl_dist}. \label{fig::3correls_dist}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/3correlations_proj0}
+	\caption{Species-specific correlations between $ \tilde \rho_0 $ and the distance to the closest edge of $ \Omega $, without competition (canopy height $ \s = 0 $ m). The correlations are computed over the whole species distribution (\CircSteel), over the points closer to a border within the northern region (\MoveUp) or closer to a border within the southern region (\MoveDown). A negative correlation indicates that $ \rho_0 $ increases toward north (\MoveUp) or south (\MoveDown). The three colours correspond to the shade tolerance level (the darker, the more shade-tolerant). The values can be found in Tab \ref{tab::R0correl_dist}. \label{fig::3correls_dist_0}}
+\end{figure}
+
+\subsection{Correlation between demography and probabilities of occurrence}
+\begin{figure}
+	\centering
+	\input{appendices/demog_Pocc1-4}
+	\caption{Species-specific correlations between probabilities of occurrence and the vital rates (growth: \CircSteel, and mortality: $ \times $). We added the data of Fig. \ref{fig::3correls} (\MoveUp) which represent the correlation between $ P_{\text{occ}} $ and $ \tilde \rho_0 $. For both demographic rates, we set the dbh at either $ 15 $ cm or $ 60 $ cm (to represent saplings and adults, we expect the saplings to have stronger correlations \citep{Kunstler2019}), while $ \tilde \rho_0 $ integrates all the possible sizes. We used an averaged climate from 2006 to 2010 at the permanent plots (which were the training dataset of the random forest). Dark blue colour is for the rates with competition, and light blue for those without competition). \label{fig::demog_Pocc1-4}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/demog_Pocc5-8}
+	\caption{Species-specific correlations between probabilities of occurrence and the vital rates (growth: \CircSteel, and mortality: $ \times $). We added the data of Fig. \ref{fig::3correls} (\MoveUp) which represent the correlation between $ P_{\text{occ}} $ and $ \tilde \rho_0 $. For both demographic rates, we set the dbh at either $ 15 $ cm or $ 60 $ cm (to represent saplings and adults, we expect the saplings to have stronger correlations \citep{Kunstler2019}), while $ \tilde \rho_0 $ integrates all the possible sizes. We used an averaged climate from 2006 to 2010 at the permanent plots (which were the training dataset of the random forest). Dark blue colour is for the rates with competition, and light blue for those without competition). \label{fig::demog_Pocc5-8}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/demog_Pocc9-12}
+	\caption{Species-specific correlations between probabilities of occurrence and the vital rates (growth: \CircSteel, and mortality: $ \times $). We added the data of Fig. \ref{fig::3correls} (\MoveUp) which represent the correlation between $ P_{\text{occ}} $ and $ \tilde \rho_0 $. For both demographic rates, we set the dbh at either $ 15 $ cm or $ 60 $ cm (to represent saplings and adults, we expect the saplings to have stronger correlations \citep{Kunstler2019}), while $ \tilde \rho_0 $ integrates all the possible sizes. We used an averaged climate from 2006 to 2010 at the permanent plots (which were the training dataset of the random forest). Dark blue colour is for the rates with competition, and light blue for those without competition). \label{fig::demog_Pocc9-12}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/demog_Pocc13-14}
+	\caption{Species-specific correlations between probabilities of occurrence and the vital rates (growth: \CircSteel, and mortality: $ \times $). We added the data of Fig. \ref{fig::3correls} (\MoveUp) which represent the correlation between $ P_{\text{occ}} $ and $ \tilde \rho_0 $. For both demographic rates, we set the dbh at either $ 15 $ cm or $ 60 $ cm (to represent saplings and adults, we expect the saplings to have stronger correlations \citep{Kunstler2019}), while $ \tilde \rho_0 $ integrates all the possible sizes. We used an averaged climate from 2006 to 2010 at the permanent plots (which were the training dataset of the random forest). Dark blue colour is for the rates with competition, and light blue for those without competition). \label{fig::demog_Pocc13-14}}
+\end{figure}
+
+\printbibliography[heading=subbibliography]
+\end{refsection}

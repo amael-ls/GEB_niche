@@ -1,0 +1,659 @@
+\section{Supplementary information of growth ($ G $), and mortality ($ \mu $) parameterisation} \label{app::glmm}
+\begin{refsection}
+\subsection{Selection of the individual tree growth model}
+For the growth model selection, we applied a top-down four-step strategy \citep[Chapter 5]{Zuur2009}:
+\begin{enumerate}
+	\item Create a list of models with different random effect structures, but same fixed-effect structure
+	\item Select the best model, which we call the beyond optimal model, via Restricted Maximum Likelihood (ReML)
+	\item Once the optimal random structure is determined, we then run nested fixed-effect models (nested within the optimal beyond model), and compare them using Maximum Likelihood (and not ReML)
+	\item The final model is then run with ReML
+\end{enumerate}
+
+We created four models, all containing the same fixed-structure (equation \eqref{eq::fixedStructureBeyond_OM} written in a `R-style', temp stands for temperature, and precip for precipitation), and differ only on the random structure. Each model corresponds to a hypothesis on the correlation structure within individuals (Tab. \ref{tab::randomStructure}). The model 1 assumes individuals from the same plot to be correlated (whatever the year of measurement), while model 2 add a temporal correlation within the plot. In model 3, we hypothesised trees to be spatially correlated (the plot), temporally correlated at large spatial scale (the year of measurement), and lastly, time-related at local spatial scale (the year within the plot). Eventually, model 4 tests whether or not the correlation structure is temporal, locally spatial dependent.
+
+\begin{equation} \label{eq::fixedStructureBeyond_OM}
+\begin{split}
+\big\{cano & py\_status +{} dbh + dbh^2) \big\} \times{} \\
+	\big\{ & annual\_mean\_temp + annual\_mean\_temp^2 +{} \\
+	& temp\_annual\_range + temp\_annual\_range^2 +{} \\
+	& mean\_temp\_of\_wettest\_quarter + mean\_temp\_of\_wettest\_quarter^2 +{} \\
+	& mean\_temp\_of\_driest\_quarter + mean\_temp\_of\_driest\_quarter^2 +{} \\
+	& mean\_temp\_of\_warmest\_quarter + mean\_temp\_of\_warmest\_quarter^2 +{} \\
+	& mean\_temp\_of\_coldest\_quarter + mean\_temp\_of\_coldest\_quarter^2 +{} \\
+	& annual\_precip + annual\_precip^2 +{} \\
+	& precip\_of\_wettest\_quarter + precip\_of\_wettest\_quarter^2 +{} \\
+	& precip\_of\_driest\_quarter + precip\_of\_driest\_quarter^2 +{} \\
+	& precip\_of\_warmest\_quarter + precip\_of\_warmest\_quarter^2 +{} \\
+	& precip\_of\_coldest\_quarter + precip\_of\_coldest\_quarter^2
+			\big\}
+\end{split}
+\end{equation}
+
+\begin{table}[h!]
+\centering
+\caption{Notations: $ x $ designates the plot effect, and $ t $ the year grouping effect. The spatial correlation groups individual by plots. The time correlation is divided into two parts: one that is spatially dependent, that is to say only individuals belonging to the same plot are time-related, and one that is spatially independent to represent a temporal correlation at large spatial scale.}
+\label{tab::randomStructure}
+\begin{tabular}{@{}rlp{8cm}@{}}
+	\toprule
+	\textbf{Model} & \textbf{hypothesis} & \textbf{Random structure} \\
+	\midrule
+	Model 1 & $ x $ & Spatial correlations \\
+	Model 2 & $ x + x:t $ & Spatial correlations and temporal spatially-dependent correlations \\
+	Model 3 & $ x + t + x:t = x + x \backslash t $ & As model 2, with a time correlation independent of space \\
+	Model 4 & $ x:t $ & Spatially dependent time correlation \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+We ran these models for each species, we found the third model to be best for all. This ends the first and second steps of our strategy. For the third part, we first compared 16 models that have similar size effect (dbh and canopy status), and differ only by the climatic variables (see below, from equation \eqref{eq::model1} to equation \eqref{eq::model16}). We controlled for the maximum variance inflation factor (VIF, we set a limit of 20), and calculated for each model, their relative average rank (equation \eqref{eq::relMean}, and Tab \ref{tab::climSelection}).
+\begin{equation} \label{eq::relMean}
+	\text{rank}_{\text{rel}}^{(i)} = \dfrac{\sum_{j = 1}^{n_i} p_j^{(i)}}{n_i}
+\end{equation}
+Where $ i $ designates the $ i^{\text{th}} $ model, $ n_i $ the number of time this model appears (up to the number of species, or less if the VIF was above 20 for some species), and $ p_j^{(i)} $ the position of the $ i^{\text{th}} $ model, for species $ j $.
+
+We found that in average, the annual mean temperature and annual precipitations, were the best climatic explanatory variables under the constraint of keeping a VIF lower than 20 (Tab. \ref{tab::climSelection}). Finally, for all the species, removing climatic or size variables downgrades the model. Hence, our choice to keep size and climate effects (same outcome than \textit{Acer saccharum} Tab. \ref{tab::acsa_fixeff}).
+
+\begin{table}[h!]
+\centering
+\caption{Selection of the climate variables. The models are sorted by increasing rank of $ R^2 $, \ie from the best to the worst. Models' equation are written below. \textsuperscript{*} Selected model in bold. \dag models with a maximum VIF below 20. For the VIF, the mean and max are taken among the 14 species for each model.}
+\label{tab::climSelection}
+\begin{tabular}{@{}rcccc@{}}
+	\toprule
+	\textbf{Equation} & \multicolumn{2}{c}{\textbf{Average rank}} & \multicolumn{2}{c}{\textbf{Max VIF}} \\
+		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+		& $ R^2 $ & $ AIC_c $ & mean & max \\
+	\midrule
+	\ref{eq::model7} & 1.00 & 1.00 & 877.66 & 4526.05 \\
+	\ref{eq::model10} & 3.43 & 3.79 & 17.09 & 82.86 \\
+	\ref{eq::model3} & 4.64 & 4.64 & 17.33 & 28.95 \\
+	\ref{eq::model1} & 4.71 & 4.00 & 11.01 & 24.54 \\
+	\ref{eq::model4} & 5.00 & 4.57 & 24.82 & 42.31 \\
+	\ref{eq::model14} & 7.14 & 6.29 & 7.00 & 20.25 \\
+	\ref{eq::model16} & 8.36 & 9.29 & 56.42 & 278.20 \\
+	\ref{eq::model2}\textsuperscript{*} \dag \ref{eq::model2} & \textbf{9.79} & \textbf{9.57} & \textbf{6.47} & \textbf{19.48} \\
+	\ref{eq::model8} \dag & 10.00 & 9.07 & 6.15 & 19.76 \\
+	\ref{eq::model11} \dag & 10.21 & 10.57 & 6.00 & 19.81 \\
+	\ref{eq::model6} & 10.21 & 9.71 & 27.12 & 37.33 \\
+	\ref{eq::model5} \dag & 10.36 & 10.07 & 11.02 & 19.41 \\
+	\ref{eq::model9} \dag & 10.43 & 12.79 & 5.94 & 16.60 \\
+	\ref{eq::model13} & 11.21 & 12.14 & 6.13 & 21.94 \\
+	\ref{eq::model15} & 13.86 & 13.36 & 38.30 & 223.09 \\
+	\ref{eq::model12} \dag & 15.64 & 15.14 & 4.41 & 5.72 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Summary of the different growth models for \textit{Acer saccharum} to select the fixed effect structure of growth. We used Maximum Likelihood (ML) method to be able to compare the AICc \citep{AICcmodavg}; the selected model was then fit using Restricted Maximum Likelihood (ReML). $ T_a $, $ P_a $, and $ cs $ denote the annual temperature and precipitation, and the canopy status respectively (more details in table \ref{tab::bioclim}). \dag climatic and dbh variables have quadratic terms. $ \flat $ canopy status and climate interact. $ \sharp $ climate and dbh interact. The ratio $ \varphi $ is defined by equation \eqref{eq::ratio}. \label{tab::acsa_fixeff}}
+	\begin{tabular}{@{}rclll@{}}
+	\toprule
+	\multicolumn{1}{c}{\textbf{Model}} & \multicolumn{1}{c}{\textbf{Equation}} & \multicolumn{1}{c}{$ \bm{\varphi} $} & \multicolumn{1}{c}{$ \bm{R^2_m} $} & \multicolumn{1}{c}{$ \bm{R^2_c} $} \\
+	\midrule
+		Selected model & Eq. \ref{eq::model2} & 0.00 & 0.15 & 0.44 \\
+		$ T_a, P_a, cs, dbh $ \dag $ \flat \sharp $ & Eq. \ref{eq::model25} & 379.63 & 0.15 & 0.44 \\
+		$ T_a, P_a, cs, dbh $ \dag $ \flat $ & Eq. \ref{eq::model24} & 478.58 & 0.14 & 0.43 \\
+		$ T_a, P_a, cs, dbh $ \dag & Eq. \ref{eq::model23} & 545.07 & 0.14 & 0.43 \\
+		$ dbh $ \dag & Eq. \ref{eq::model22} & 1695.19 & 0.14 & 0.45 \\
+		$ dbh $ & Eq. \ref{eq::model21} & 6902.63 & 0.09 & 0.39 \\
+		$ T_a, P_a, cs $ \dag $ \flat $ & Eq. \ref{eq::model20} & 7230.74 & 0.09 & 0.36 \\
+		$ cs $ & Eq. \ref{eq::model19} & 7705.75 & 0.08 & 0.37 \\
+		$ T_a, P_a $ \dag & Eq. \ref{eq::model18} & 16821.08 & 0.01 & 0.30 \\
+		$ T_a, P_a $ & Eq. \ref{eq::model17} & 16889.54 & 0.01 & 0.30 \\
+   \bottomrule
+	\end{tabular}
+\end{table}
+
+We provide here the 16 models used to select the best climatic explanatory variables. They are written in a `R-style', and can be ran from the file glmm\_ReML=FALSE.R:
+
+\begin{g}{align}
+	\begin{split} \label{eq::model1}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_a + T_a^2 + T_w + T_w^2 + P_a + P_a^2 + P_h + P_h^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model2}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_a + T_a^2 + P_a + P_a^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model3}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_a + T_a^2 + T_w + T_w^2 + P_a + P_a^2 + P_c + P_c^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model4}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_a + T_a^2 + T_d + T_d^2 + P_a + P_a^2 + P_c + P_c^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model5}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_d + T_d^2 + T_w + T_w^2 + P_w + P_w^2 + P_c + P_c^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model6}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_d + T_d^2 + P_a + P_a^2 + P_h + P_h^2 + P_c + P_c^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model7}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_a + T_a^2 + r_T + r_T^2 + T_w + T_w^2 +T_d + T_d^2 +{} \\
+			& T_h + T_h^2 + T_c + T_c^2 + P_a + P_a^2 + P_w + P_w^2 + P_d + P_d^2 + P_h + P_h^2 +{} \\
+			& P_c + P_c^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model8}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_h + T_h^2 + P_d + P_d^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model9}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_c + T_c^2 + P_w + P_w^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model10}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_h + T_h^2 + T_c + T_c^2 + P_w + P_w^2 + P_d + P_d^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model11}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_h + T_h^2 + P_h + P_h^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model12}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_w + T_w^2 + P_h + P_h^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model13}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_h + T_h^2 + P_w + P_w^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model14}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_h + T_h^2 + r_T + r_T^2 + P_h + P_h^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model15}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_w + T_w^2 + P_h + P_h^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model16}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& (cs + dbh + dbh^2) * (T_w + T_w^2 + P_w + P_w^2)
+	\end{split}
+\end{g}
+where $ cs $ is the canopy status (boolean, true if the individual is in the understorey, false otherwise), and $ dbh $ the diameter at breast height.
+
+The following list of equations is to evaluate the impact of climate and size on growth (which is our second objective).
+\begin{g}{align}
+	\begin{split} \label{eq::model17}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& T_a + P_a
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model18}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& T_a + T_a^2 + P_a + P_a^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model19}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& cs
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model20}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& cs * (T_a + T_a^2 + P_a + P_a^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model21}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& dbh
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model22}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model23}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& cs + T_a + T_a^2 + P_a + P_a^2 + dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model24}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& cs * (T_a + T_a^2 + P_a + P_a^2) + dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model25}
+		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
+			& cs * (T_a + T_a^2 + P_a + P_a^2) + (P_a + P_a^2) * (dbh + dbh^2)
+	\end{split}
+\end{g}
+
+\subsection{Selection of the individual tree mortality model}
+For the mortality model, we first select the climatic variables, and then compare sub-models to assess the impact of climate and competition.
+
+\begin{table}[h!]
+\centering
+\caption{Selection of the climate variables for mortality. The models are sorted by increasing positions, \ie from the best to the worst. Models' equation are written below. \textsuperscript{*}Selected model in bold.}
+\label{tab::climSelection_mu}
+\begin{tabular}{@{}rc@{}}
+	\toprule
+	\textbf{Equation} & \textbf{Average position} \\
+	\midrule
+		\ref{eq::model_mu7}\textsuperscript{*} & \textbf{2.50} \\
+		\ref{eq::model_mu1} & 2.71 \\
+		\ref{eq::model_mu6} & 3.57 \\
+		\ref{eq::model_mu2} & 4.43 \\
+		\ref{eq::model_mu5} & 4.71 \\
+		\ref{eq::model_mu3} & 5.00 \\
+		\ref{eq::model_mu4} & 5.07 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Summary of the different mortality models for \textit{Acer saccharum} to select the fixed effect structure of mortality. \dag climatic and dbh variables have quadratic terms. $ \flat $ canopy status and climate interact}
+	\label{tab::acsa_fixeff_mu}
+	\begin{tabular}{@{}rcl@{}}
+	\toprule
+	\multicolumn{1}{c}{\textbf{Model}} & \multicolumn{1}{c}{\textbf{Equation}} & \multicolumn{1}{c}{$ \bm{\Delta \text{WAIC}} $} \\
+	\midrule
+		Selected model & \ref{eq::model_mu7} & 0.00 \\
+		$ dbh $, $ T_m $, $ P_d $, $ cs $ \dag & \ref{eq::model_mu14} & 124.38 \\
+		$ T_m $, $ P_d $, $ cs $ \dag $ \flat $ & \ref{eq::model_mu11} & 261.97 \\
+		$ dbh $ \dag & \ref{eq::model_mu13} & 436.52 \\
+		$ cs $ & \ref{eq::model_mu10} & 532.21 \\
+		$ dbh $ & \ref{eq::model_mu12} & 709.34 \\
+		$ T_m $, $ P_d $ \dag & \ref{eq::model_mu9} & 911.00 \\
+		$ T_m $, $ P_d $ & \ref{eq::model_mu8} & 931.57 \\
+   \bottomrule
+	\end{tabular}
+\end{table}
+
+We provide here the 7 models used to select the best climatic explanatory variables. They are written in a `R-style', and can be ran from the file rstanarm.R (use the file selectClimaticVariables.R):
+\begin{m}{align}
+	\begin{split} \label{eq::model_mu1}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs*(T_a + T_a^2 + P_a + P_a^2) + dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu2}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs*(T_d + T_d^2 + P_d + P_d^2) + dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu3}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs*(T_w + T_w^2 + P_w + P_w^2) + dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu4}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs*(T_d + T_d^2 + P_m + P_m^2) + dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu5}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs*(T_d + T_d^2 + P_a + P_a^2) + dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu6}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs*(T_m + T_m^2 + P_m + P_m^2) + dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu7}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs*(T_m + T_m^2 + P_d + P_d^2) + dbh + dbh^2
+	\end{split}
+\end{m}
+
+The following list of equations is to evaluate the impact of climate and size on mortality (which is our second objective). They are in the file submodels.R, and are run from rstanarm.R with the option `submodels':
+\begin{m}{align}
+	\begin{split} \label{eq::model_mu8}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& T_m + P_d
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu9}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& T_m + T_m^2 + P_d + P_d^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu10}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu11}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs*(T_m + T_m^2 + P_d + P_d^2)
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu12}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& dbh
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu13}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& dbh + dbh^2
+	\end{split}
+	\\[2ex]
+	\begin{split} \label{eq::model_mu14}
+		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
+			& cs + T_m + T_m^2 + P_d + P_d^2 + dbh + dbh^2
+	\end{split}
+\end{m}
+
+\subsection{Complementary log-log function}
+\subsubsection{How to account for $ \Delta t $?}
+Here we show that the complementary log-log function $ g $ can take into account the time interval between to surveys. Let $ \mu $ be a probability, and $ \eta $ a linear predictor:
+\begin{align*}
+	g(\mu) &= \eta \\
+		&= \beta_0 + \sum_{i = 1}^{n} \beta_i x_i
+\end{align*}
+By definition of the complementary log-log function, we have:
+\[
+	g(\mu) = \log \big( -log(1 - \mu) \big)
+\]
+and its reciprocal:
+\begin{align*}
+	g^{-1} \big( g(\mu) \big) &= g^{-1}(\eta) \\
+		&= \mu \\
+	g^{-1}(\eta) &= 1 - \exp \big[ -\exp(\eta) \big]
+\end{align*}
+Using the properties of the exponential, we get for any $ \Delta t > 0 $:
+\begin{align*}
+	g^{-1} \big( \eta + \log(\Delta t) \big) &= 1 - \exp \Big[ -\exp \big(\eta + \log(\Delta t)\big) \Big] \\
+		&= 1 - \exp \big[ - \Delta t \exp (\eta) \big] \\
+		&= 1 - \Big( \exp \big[ -\exp (\eta) \big] \Big)^{\Delta t}
+\end{align*}
+On the other side, we can prove that:
+\[
+	\exp \big[ -\exp (\eta) \big] = 1 - \mu
+\]
+Therefore we get:
+\begin{equation}
+	1 - \Big( \exp \big[ -\exp (\eta) \big] \Big)^{\Delta t} = 1 - (1 - \mu)^{\Delta t}
+\end{equation}
+which is the property we were looking for to consider time intervals between surveys. If $ \mu $ is the annual probability of death, then, $ (1 - \mu)^{\Delta t} $ is the probability of surviving $ \Delta t $ years and $ 1 - (1 - \mu)^{\Delta t} $ is the probability of dying.
+
+\subsubsection{Why a positive slope in front of a squared term provides an optimal condition?}
+To get an optimal climatic or size (dbh) condition, we need the mortality to first decrease, and then increase, that is to say, its derivative must first be negative and then positive. Let $ x $ be a variable (dbh, temperature, or precipitation), and $ \eta(x) = \beta_0 + \beta_1 x + \beta_2 x^2 $ the linear predictor:
+\[
+	\mu(x) = 1 - \exp \Big[ -\exp \big(\eta(x) \big) \Big]
+\]
+Therefore:
+\[
+	\mu'(x) = \eta'(x) \exp \Big[ \eta(x) -\exp \big(\eta(x) \big) \Big]
+\]
+The sign of $ \mu' $ depends exclusively on the sign of $ \eta' $, which is in our case:
+\begin{equation}\label{eq::sign_eta}
+	\eta'(x) = \beta_1 x + \beta_2 x^2
+\end{equation}
+It is easy to see from equation \eqref{eq::sign_eta} that for $ \beta_2 > 0 $, we have:
+\[
+	\begin{cases}
+		\eta'(x) \leqslant 0 & x \leqslant -\frac{\beta_1}{2\beta_2} \\
+		\eta'(x) \geqslant 0 & x \geqslant -\frac{\beta_1}{2\beta_2}
+	\end{cases}
+\]
+which is what we want (incidentally, the optimal condition is reached for $ x = -\sfrac{\beta_1}{2\beta_2}$).
+
+\subsection{Shade tolerance information}
+The 14 parameterised species are listed in table \ref{tab::species}, with their vernacular name, scientific name and species code. We report the estimated canopy status effect from growth and mortality estimations (Tab. \ref{tab::cs}), and the shade tolerance informations \citet{Burns1990, Burns1990a} used to make Fig. \ref{fig::groups} and \ref{fig::groups_mu}.
+
+\begin{table}[h!]
+\centering
+\caption{Estimated values of canopy status (cs) effect for growth ($ G $), and mortality ($ \mu $). These values are used in the Figs \ref{fig::groups} and \ref{fig::groups_mu}. A shade tolerance level---High(H), Medium (M) or Low (L)---is associated to each species according to \citet{Burns1990, Burns1990a}, and the page column specifies where the information has been found. \label{tab::cs}}
+\begin{tabular}{@{}rcccc@{}}
+	\toprule
+	\bfseries{species} & \bfseries{cs} ($ G $) & \bfseries{cs} ($ \mu $) & \bfseries{Tolerance level} & \bfseries{Page} \\
+	\midrule
+	ABI-BAL & 0.24 & -0.56 & H & 37 \\
+	ACE-RUB & 0.24 & -0.42 & M & 72 \\
+	ACE-SAC & 0.23 & -0.53 & H & 204 \\
+	BET-ALL & 0.28 & -0.38 & M & 302 \\
+	BET-PAP & 0.41 & -0.95 & L & 349 \\
+	FAG-GRA & -0.01 & 0.24 & H & 661 \\
+	PIC-GLA & 0.46 & -1.09 & M & 415 \\
+	PIC-MAR & 0.26 & -0.77 & M & 454 \\
+	PIC-RUB & 0.33 & -0.79 & H & 504 \\
+	PIN-BAN & 0.27 & -1.81 & L & 569 \\
+	PIN-STR & 0.41 & -0.54 & M & 987-988 \\
+	POP-TRE & 0.40 & -1.05 & L & 1095 \\
+	THU-OCC & 0.13 & -0.26 & H & 1199 \\
+	TSU-CAN & 0.12 & 0.26 & H & 1247 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Growth function and uncertainties}
+We plot here the growth of the 14 species in function of dbh.
+\begin{figure}[htb] %% -- first part
+	\centering
+	%% First row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/18032-ABI-BAL_G_dbh}
+		\caption{\textit{Abies balsamea}}
+		\label{fig::abibal_G_dbh}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/28731-ACE-SAC_G_dbh}
+		\caption{\textit{Acer saccharum}}
+		\label{fig::acesac_G_dbh}
+	\end{subfigure}
+	\medskip
+	%% Second row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/28728-ACE-RUB_G_dbh}
+		\caption{\textit{Acer rubrum}}
+		\label{fig::acerub_G_dbh}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/19481-BET-ALL_G_dbh}
+		\caption{\textit{Betula alleghaniensis}}
+		\label{fig::betal_G_dbh}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[htb] \ContinuedFloat %% -- Second part
+	\centering
+	%% First row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/19489-BET-PAP_G_dbh}
+		\caption{\textit{Betula papyrifera}}
+		\label{fig::betap_G_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/19462-FAG-GRA_G_dbh}
+		\caption{\textit{Fagus grandifolia}}
+		\label{fig::faggran_G_dbh}
+	\end{subfigure}
+	\medskip
+	%% Second row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183295-PIC-GLA_G_dbh}
+		\caption{\textit{Picea glauca}}
+		\label{fig::picgla_G_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183302-PIC-MAR_G_dbh}
+		\caption{\textit{Picea mariana}}
+		\label{fig::picmar_G_dbh}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[htb] \ContinuedFloat %% -- Third part
+	\centering
+	%% First row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/18034-PIC-RUB_G_dbh}
+		\caption{\textit{Picea rubens}}
+		\label{fig::picrub_G_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183319-PIN-BAN_G_dbh}
+		\caption{\textit{Pinus banksiana}}
+		\label{fig::pinban_G_dbh}
+	\end{subfigure}
+	\medskip
+	%% Second row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183385-PIN-STR_G_dbh}
+		\caption{\textit{Pinus strobus}}
+		\label{fig::pinstr_G_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/195773-POP-TRE_G_dbh}
+		\caption{\textit{Populus tremuloides}}
+		\label{fig::poptre_G_dbh}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[htb] \ContinuedFloat %% -- Fourth part
+	\centering
+	%% First row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/505490-THU-OCC_G_dbh}
+		\caption{\textit{Thuja occidentalis}}
+		\label{fig::thuocc_G_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183397-TSU-CAN_G_dbh}
+		\caption{\textit{Tsuga canadensis}}
+		\label{fig::tsucan_G_dbh}
+	\end{subfigure}
+	\caption{Species-specific growth as a function of dbh, with the climate set to the species-specific average. The orange line is for individuals in the overstorey, and the blue lines for individuals in the understorey. The shaded areas delimited by the dotted lines are the $ 95 \% $ confidence intervals. The double sided arrow near the x-axis is the species-specific range of parameterisation of dbh.}
+	\label{fig::12speciesG_dbh}
+\end{figure}
+
+\subsection{Extrapolations of mortality function}
+We plot here the mortality of the 13 remaining species in function of dbh. Note that not all the species have the expected u-shape, that is commonly seen in mortality functions \citep{Lines2010}. The u-shape can only be obtained with a negative dbh coefficient, while the hump shape is associated to a positive coefficient.
+
+\begin{figure}[htb] %% -- first part
+	\centering
+	%% First row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/18032-ABI-BAL_M_dbh}
+		\caption{\textit{Abies balsamea}}
+		\label{fig::abibal_M_dbh}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/28731-ACE-SAC_M_dbh}
+		\caption{\textit{Acer saccharum}}
+		\label{fig::acesac_M_dbh}
+	\end{subfigure}
+	\medskip
+	%% Second row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/28728-ACE-RUB_M_dbh}
+		\caption{\textit{Acer rubrum}}
+		\label{fig::acerub_M_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/19481-BET-ALL_M_dbh}
+		\caption{\textit{Betula alleghaniensis}}
+		\label{fig::betal_M_dbh}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[htb] \ContinuedFloat %% -- Second part
+	\centering
+	%% First row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/19489-BET-PAP_M_dbh}
+		\caption{\textit{Betula papyrifera}}
+		\label{fig::betap_M_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/19462-FAG-GRA_M_dbh}
+		\caption{\textit{Fagus grandifolia}}
+		\label{fig::faggran_M_dbh}
+	\end{subfigure}
+	\medskip
+	%% Second row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183295-PIC-GLA_M_dbh}
+		\caption{\textit{Picea glauca}}
+		\label{fig::picgla_M_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183302-PIC-MAR_M_dbh}
+		\caption{\textit{Picea mariana}}
+		\label{fig::picmar_M_dbh}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[htb] \ContinuedFloat %% -- Third part
+	\centering
+	%% First row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/18034-PIC-RUB_M_dbh}
+		\caption{\textit{Picea rubens}}
+		\label{fig::picrub_M_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183319-PIN-BAN_M_dbh}
+		\caption{\textit{Pinus banksiana}}
+		\label{fig::pinban_M_dbh}
+	\end{subfigure}
+	\medskip
+	%% Second row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183385-PIN-STR_M_dbh}
+		\caption{\textit{Pinus strobus}}
+		\label{fig::pinstr_M_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/195773-POP-TRE_M_dbh}
+		\caption{\textit{Populus tremuloides}}
+		\label{fig::poptre_M_dbh}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[htb] \ContinuedFloat %% -- Third part
+	\centering
+	%% First row
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/505490-THU-OCC_M_dbh}
+		\caption{\textit{Thuja occidentalis}}
+		\label{fig::thuocc_M_dbh}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.48\textwidth}
+		\input{graphs/183397-TSU-CAN_M_dbh}
+		\caption{\textit{Tsuga canadensis}}
+		\label{fig::tsucan_M_dbh}
+	\end{subfigure}
+	\caption{Species-specific mortality as a function of dbh, with the climate set to the species-specific average. The orange line is for individuals in the overstorey, and the blue lines for individuals in the understorey. The shaded areas delimited by the dotted lines are the $ 95 \% $ confidence intervals. The double sided arrow near the x-axis is the species-specific range of parameterisation of dbh.}
+	\label{fig::12speciesM_dbh}
+\end{figure}
+
+\printbibliography[heading=subbibliography]
+\end{refsection}

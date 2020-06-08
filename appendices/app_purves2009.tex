@@ -1,0 +1,132 @@
+\section{Proofs of the relations between \citet{Purves2009} and our study} \label{app::purves2009}
+\begin{refsection}
+In this section, we first provide the assumptions concerning the demography in \citet{Purves2009}, and match our notations with \citeauthor{Purves2009}'s article in the table \ref{tab::notations_purves2009}. Finally, we derive \citet{Purves2009}'s formul\ae{} from our $ R_0 $ equation \eqref{eq::R0sol}.
+\begin{table}
+	\centering
+	\caption{Link between our notations and \citet{Purves2009}'s notations. Note that \citeauthor{Purves2009} uses the flat-top version of the perfect-plasticity approximation, which implies the fecundity function to be proportional to the trunk area.}
+	\label{tab::notations_purves2009}
+	\begin{tabular}{@{}rll@{}}
+	\toprule
+	\textbf{Meaning} & \textbf{Our notation} & \textbf{\citet{Purves2009}} \\
+	Species index & $ j $, but mostly dropped & $ j $ \\
+	Space & $ x $ & $ R $ (not to be confound with $ R_0 $) \\
+	Time & $ t $ & $ \tau $ \\
+	Threshold diameter & $ \s, \, \s_c $ & $ D^{*} $ \\
+	Net reprod. rate & $ R_0 (x, \s_c) $ & $ R_{0, j, R} $ \\
+	Indiv. growth rate overstorey & $ G(s, \s, x), \, s \geqslant \s $ & $ G_{L, j, R} $ \\
+	Indiv. growth rate understorey & $ G(s, \s, x), \, s < \s $ & $ G_{D, j, R} $ \\
+	Mortality rate overstorey & $ \mu(s, \s, x), \, s \geqslant \s $ & $ \mu_{L, j, R} = \sfrac{1}{\rho_{L, j, R}} $ \\
+	Mortality rate understorey & $ \mu(s, \s, x), \, s < \s $ & $ \mu_{D, j, R} = \sfrac{1}{\rho_{D, j, R}} $ \\
+	Fecundity function & $ \F \A(s, \s) $ & $ F_{j, R}^{\text{capita}} \pi \sfrac{s^2}{4} $ \\
+   \bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Additional assumptions to our model from \citet{Purves2009}}
+We sum-up here some useful assumptions from \citet{Purves2009}. The assumptions are better described in \citet[and yes, it is in the paper of 2008]{Purves2008}
+\begin{assum}[Flat-top crown] \label{assum::flat-top}
+	The crown is a flat-top disc expressed at the top of the tree, which implies that the area of the crown $ \A(s, \s) $ is independent of its second argument.
+\end{assum}
+
+\begin{assum}[Demographic rates]
+	The individual growth and mortality rates are step functions with the discontinuity at $ \s $:
+	\[
+		G_{j, R}(s, \s) =
+		\begin{cases}
+			G_{L, j, R} & \text{if } s \geqslant \s \\
+			G_{D, j, R} & \text{otherwise}
+		\end{cases}
+	\]
+	\[
+	\mu_{j, R}(s, \s) =
+		\begin{cases}
+			\mu_{L, j, R} & \text{if } s \geqslant \s \\
+			\mu_{D, j, R} & \text{otherwise}
+		\end{cases}
+	\]
+	where $ G_{L, j, R}, \, G_{D, j, R}, \, \mu_{L, j, R}, \, \mu_{D, j, R} $ are estimated constants.
+\end{assum}
+
+\begin{assum}[Fecundity function]
+	Due to the flat-top assumption \ref{assum::flat-top}, the fecundity is simply proportional to the cross-section of the trunk area at breast height:
+	\[
+		F_{j, R} (s, \s) =
+		\begin{cases}
+			\frac{1}{10^4} F_{j, R}^{\text{capita}} \pi s^2 & \text{if } s \geqslant \s \\
+			0 & \text{otherwise}
+		\end{cases}
+	\]
+	The factor $ \frac{1}{10^4} $ corrects for the units of $ F_{j, R}^{\text{capita}} $ (basal area per year, dividing by $ 10^4 $ makes the basal area dimensionless).
+\end{assum}
+
+\begin{assum}[Mortality versus individual growth] \label{assum::negligible}
+	The mortality rate is negligible compare to both 1 and the individual growth rate:
+	\begin{align}
+		\mu_{L, j, R} &\ll 1 \\
+		\mu_{L, j, R} &\ll G_{L, j, R}
+	\end{align}
+\end{assum}
+
+Note that in his supporting information, \citet{Purves2009} integrates with respect to time rather than size. In the case trees are always in the overstorey, it is strictly equivalent:
+\[
+	\begin{cases}
+		\frac{ds}{d \tau} = G_{L, j, R} \\
+		s(0) = D^{*}
+	\end{cases}
+\]
+which has the solution:
+\[
+	s(\tau) = \tau G_{L, j, R} + D^{*}
+\]
+This solution is for instance found in equation S11 \citep{Purves2009}.
+
+\subsection{$ R_0 $ equation \citep[p. 1479]{Purves2009}}
+Equation \eqref{eq::R0sol} is equivalent to equation S10.2 \citep[also p. 1479 in his article]{Purves2009} when $ \s_c = 0 $.
+\begin{proof}
+	Let $ \s_c = 0 $.
+	\begin{align*}
+		R_0 (x, 0) &= \overbrace{e^{-\int_0^{0}\frac{\mu(s, \s_c, x)}{G(s, \s_c, x)} \, ds}}^{= 1} \int_{0}^{\infty} \frac{1}{10^4} \frac{F_{j, R}^{\text{capita}} \pi (\sfrac{s}{2})^2}{G_{L, j, R}} e^{-\int_{0}^{s} \frac{\mu_{L, j, R}}{G_{L, j, R}} \, d\sigma} \, ds \\
+			&= \frac{1}{10^4} \frac{\pi}{4} \frac{F_{j, R}^{\text{capita}}}{G_{L, j, R}} \int_{0}^{\infty} s^2 e^{-\frac{\mu_{L, j, R}}{G_{L, j, R}} s} \, ds \\
+			&= \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} \frac{G_{L, j, R}^2}{\mu_{L, j, R}^3} \\
+			&= \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} G_{L, j, R}^2 \rho_{L, j, R}^3
+	\end{align*}
+\end{proof}
+
+\subsection{Proportion of the trees that make up to the canopy}
+Let $ P^{\text{canop}} $ be the proportion of individuals that survive up to the canopy. The quantity $ P^{\text{canop}} $ is derived in \citet{Purves2009}'s supporting information, a little before equation S11; we can obtain the same result with the first part of equation \eqref{eq::R0sol}.
+\begin{proof}
+	\begin{align*}
+		P^{\text{canop}} &= e^{-\int_{0}^{D^{*}} \frac{\mu}{G} \, ds} \\
+			&= e^{-\frac{\mu_{D, j, R}}{G_{D, j, R}} D^{*}} \\
+			&= e^{-\frac{D^{*}}{G_{D, j, R}\rho_{D, j, R}}}
+	\end{align*}
+\end{proof}
+
+\subsection{$ D^{*} $ at equilibrium \citep[equation S13.2]{Purves2009}}
+Let $ \hat D^{*} $ be the threshold diameter when the (monospecific) population is at equilibrium. We derive equation S13.2 \citep{Purves2009} from our equation \eqref{eq::R0sol} using \citeauthor{Purves2009}'s notations:
+\begin{align*}
+	R^{\text{canop}} &= e^{-\int_{0}^{D^{*}} \frac{\mu_{D, j, R}}{G_{D, j, R}} \, ds} \int_{D^{*}}^{\infty} \frac{1}{10^4} \frac{F_{j, R}^{\text{capita}} \pi (\sfrac{s}{2})^2}{G_{L, j, R}} e^{-\int_{D^{*}}^{s} \frac{\mu_{L, j, R}}{G_{L, j, R}} \, d\sigma} \, ds \\
+		&= e^{\left(\frac{\mu_{L, j, R}}{G_{L, j, R}} - \frac{\mu_{D, j, R}}{G_{D, j, R}} \right) D^{*}} \frac{1}{10^4} \frac{\pi}{4 G_{L, j, R}} F_{j, R}^{\text{capita}} \int_{D^{*}}^{\infty} s^2 e^{-\frac{\mu_{L, j, R}}{G_{L, j, R}} s} \\
+		&= \frac{1}{10^4} \frac{\pi}{4} F_{j, R}^{\text{capita}} e^{- \frac{\mu_{D, j, R}}{G_{D, j, R}} D^{*}} \frac{1}{\mu_{L, j, R}^3} (2 G_{L, j, R}^2 + 2 G_{L, j, R} \mu_{L, j, R} D^{*} + \mu_{L, j, R}^2 {D^{*}}^2)
+\end{align*}
+Using assumption \ref{assum::negligible}, we get a simplified version of $ R^{\text{canop}} $:
+\begin{equation} \label{eq::RcanopApprox}
+	R^{\text{canop}} \approx \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} e^{- \frac{\mu_{D, j, R}}{G_{D, j, R}} D^{*}} \frac{1}{\mu_{D, j, R}^3} G_{L, j, R}^2
+\end{equation}
+At equilibrium, each individual replace itself once in average. Therefore, $ R^{\text{canop}} = 1 $. Solving equation \eqref{eq::RcanopApprox} at equilibrium for $ \hat D^{*} $, we get:
+\[
+	\hat D^{*} = G_{D, j, R} \rho_{D, j, R} \ln \left( \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} G_{L, j, R}^2 \rho_{L, j, R}^3 \right) \text{, where } \frac{1}{\mu_{L, j, R}^3} = \rho_{L, j, R}^3,
+\]
+which is equation S13.2 \citep{Purves2009}.
+
+% \subsection{Does assumptions \ref{assum::negligible} holds in our case?}
+% In this subsection, we set the species $ j $ to \textit{Acer rubrum} (as in \citet[page 15 supporting information]{Purves2009}), and set arbitrarily the associated demographic rates:
+% \begin{align*}
+% 	G_{D, j, R} &= \int_{0}^{} G(s, \s_c, x) \, ds \\
+% 	G_{L, j, R} &= \int_{}^{\infty} G(s, \s_c, x) \, ds \\
+% 	\mu_{D, j, R} &= \int_{0}^{} \mu(s, \s_c, x) \, ds \\
+% 	\mu_{L, j, R} &= \int_{}^{\infty} \mu(s, \s_c, x) \, ds
+% \end{align*}
+% where $ x = (77.93 \, W, 39.07 \, N) $, the closest point to the centroid of \textit{Acer rubrum}'s data where I have data. The value $ xxx $ is the diameter of a $ 12.5 \, m $ height \textit{Acer rubrum}.
+\printbibliography[heading=subbibliography]
+\end{refsection}

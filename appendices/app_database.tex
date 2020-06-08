@@ -1,0 +1,187 @@
+\section{Database} \label{app::database}
+\subsection{Description of the data}
+\begin{refsection}
+We used an abbreviation for each species, that we list in Tab. \ref{tab::species}. For each species, we list their spatial range in Tab. \ref{tab::spaceRange}, and we plot the ranges of temperature and precipitation used in the individual growth and mortality functions (Fig. \ref{fig::speciesClimRange}).  We also join the 19 bioclimatic variables used in the random forest and the demography models selection (Tab. \ref{tab::bioclim}). Finally, we mapped all the data we used, from 1963 to 2010 (Fig \ref{fig::mapDatabase}).
+
+\begin{table}[h!]
+\centering
+\caption{Species list, and the abbreviation used in the other tables \label{tab::species}. The last three columns are the maximal dbh, the maximal age, and the page of \citet{Burns1990, Burns1990a} at which we found the informations.}
+\label{tab::database}
+\begin{tabular}{rlllll}
+	\toprule
+	\textbf{Species} & \textbf{Scientific name} & \textbf{Vernacular name} & $ \text{\textbf{dbh}}_{\bm{\max}} $ & $ \text{\textbf{age}}_{\bm{\max}} $ & \textbf{page} \\
+	\midrule
+	ABI-BAL & Abies balsamea & Balsam fir & 460 & 200 & 33 \\
+	ACE-RUB & Acer rubrum & Red maple & 760 & 125 & 170 \\
+	ACE-SAC & Acer saccharum & Sugar maple & 910 & 350 & 202 \\
+	BET-ALL & Betula alleghaniensis & Yellow birch & 760 & 300 & 302 \\
+	BET-PAP & Betula papyrifera & White birch & 300 & 150 & 348 \\
+	FAG-GRA & Fagus grandifolia & American beech & 510 & 366 & 660 \\
+	PIC-GLA & Picea glauca & White spruce & 900 & 275 & 410 \\
+	PIC-MAR & picea mariana & Black spruce & 230 & 250 & 451 \\
+	PIC-RUB & picea rubens & Red spruce & 610 & 400 & 499 \\
+	PIN-BAN & Pinus banksiana & Jack pine & 250 &  80 & 566 \\
+	PIN-STR & Pinus strobus & Eastern white pine & 1020 & 200 & 982 \\
+	POP-TRE & Populus tremuloides & Quaking aspen & 300 & 200 & 1093 \\
+	THU-OCC & Thuja occidentalis & Northern white cedar & 600 & 400 & 1197 \\
+	TSU-CAN & Tsuga canadensis & Eastern hemlock & 1020 & 400 & 1246 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Number of individual measurements in the database, and geographical extent for each species (before cropping, see Fig. \ref{fig::mapDatabase} for the crop extent). There are \num{3816854} individual measurements in total. We used the projection system WGS 84 (EPSG:4326) for this table.}
+\label{tab::spaceRange}
+\begin{tabular}{lrrrrr}
+	\toprule
+	~ & ~ & \multicolumn{2}{c}{\textbf{Longitude}} & \multicolumn{2}{c}{\textbf{latitude}} \\
+	\cmidrule(lr){3-4} \cmidrule(lr){5-6}
+	\bfseries{Species} & \bfseries{$ \# $ measures} & \bfseries{min} & \bfseries{max} & \bfseries{min} & \bfseries{max} \\
+	\midrule
+		ABI-BAL & \num{822265} & -96.07 & -57.31 & 39.04 & 52.90 \\
+		ACE-RUB & \num{469195} & -96.47 & -63.86 & 25.91 & 49.49 \\
+		ACE-SAC & \num{321776} & -97.65 & -63.96 & 30.66 & 49.44 \\
+		BET-ALL & \num{104249} & -95.52 & -63.87 & 31.48 & 49.38 \\
+		BET-PAP & \num{291701} & -154.01 & -57.99 & 37.92 & 61.42 \\
+		FAG-GRA & \num{96990} & -95.04 & -64.59 & 30.36 & 51.29 \\
+		PIC-GLA & \num{104342} & -151.78 & -58.19 & 37.70 & 61.44 \\
+		PIC-MAR & \num{656273} & -151.40 & -57.31 & 41.70 & 61.13 \\
+		PIC-RUB & \num{126063} & -84.35 & -62.61 & 35.31 & 51.43 \\
+		PIN-BAN & \num{204463} & -99.09 & -64.49 & 38.95 & 52.57 \\
+		PIN-STR & \num{90002} & -96.94 & -61.95 & 31.49 & 51.50 \\
+		POP-TRE & \num{310514} & -151.15 & -59.58 & 32.43 & 61.42 \\
+		THU-OCC & \num{153013} & -95.79 & -64.22 & 35.20 & 50.82 \\
+		TSU-CAN & \num{66008} & -91.93 & -64.70 & 31.60 & 49.57 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htb]
+    \centering
+	%% First row
+	\begin{subfigure}{0.98\textwidth}
+		\input{graphs/annual_mean_temperature-min_temperature_of_coldest_month_sp_range}
+		\caption{Annual mean temperature $ T_a $ (left), and minimal temperature $ T_m $(right) range for each species. The vertical line is the average among species, and the dark circles are the species-specific mean.}
+		\label{fig::annual_mean_temperature}
+	\end{subfigure}
+	\medskip
+	%% Second row
+	\begin{subfigure}{0.98\textwidth}
+		\input{graphs/annual_precipitation-precipitation_of_driest_quarter_sp_range}
+		\caption{Annual precipitation $ P_a $ (left), and minimal precipitation $ P_m $(right) range for each species. The vertical line is the average among species, and the dark circles are the species-specific mean.}
+		\label{fig::annual_precipitation}
+	\end{subfigure}
+\caption{Species-specific (\subref{fig::annual_mean_temperature}) temperature ranges and (\subref{fig::annual_precipitation}) precipitation ranges. The definitions of $ T_a, \, T_m, \, P_a, \, P_m $ are in table \ref{tab::bioclim}.}
+\label{fig::speciesClimRange}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\caption{Bioclimatic variables list \citep{McKenney2011}. The symbols used in the Supporting information \ref{app::glmm} to describe the formulae are defined here. \label{tab::bioclim}}
+\begin{tabular}{p{6.75cm}p{9cm}}
+	\toprule
+	\textbf{Name} & \textbf{Description} \\
+	\midrule
+	annual mean temperature $ T_a $ & avg of mean monthly temperatures \\
+	mean diurnal range $ r_T $ & avg of monthly temperature ranges \\
+	isothermality $ I $ & variable 2 divided by variable 7 \\
+	temperature seasonality $ T_s $ & standard deviation of monthly-mean temperature estimates expressed as a percent of their mean \\
+	max temperature of warmest month $ T_M $ & highest monthly maximum temperature \\
+	min temperature of coldest month $ T_m $ & lowest monthly minimum temperature \\
+	temperature annual range $ T_r $ & Variable 5 minus variable 6 \\
+	mean temperature of wettest quarter $ T_w $ & avg temperature during 3 wettest months \\
+	mean temperature of driest quarter $ T_d $ & avg temperature during 3 driest months \\
+	mean temperature of warmest quarter $ T_h $ & avg temperature during 3 warmest months \\
+	mean temperature of coldest quarter $ T_c $ & avg temperature during 3 coldest months \\
+	annual precipitation $ P_a $ & sum of monthly precipitation values \\
+	precipitation of wettest month $ P_M $ & precipitation of the wettest month \\
+	precipitation of driest month $ P_m $ & precipitation of the driest month \\
+	precipitation seasonality $ P_s $ & standard deviation of the monthly precipitation estimates expressed as a percent of their mean \\
+	precipitation of wettest quarter$ P_w $  & total precipitation of 3 wettest months \\
+	precipitation of driest quarter $ P_d $ & total precipitation of 3 driest months \\
+	precipitation of warmest quarter $ P_h $ & total precipitation of 3 warmest months \\
+	precipitation of coldest quarter $ P_c $ & total precipitation of 3 coldest months \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htb]
+    \centering
+	\includegraphics[scale=0.5]{graphs/mapDatabase}
+	\caption{Map of the data we used, ranging from 1963 to 2010. Each point represents a location where there is at least one record. The orange rectangle is the bounding box of the data. We used it to crop all the maps concerning $ R_0 $. For aesthetic reasons and familiarity, the projection for this map is EPSG:4269. For all the other maps, the projection is EPSG:2163}
+\label{fig::mapDatabase}
+\end{figure}
+
+\subsection{Variability in radial growth and mortality}
+For each species, we separated the latitudes within three regions (Fig. \ref{fig::defineRegion}). The radial growth is described by three box plots per species with the following quantiles: $ 2.5 \% $, $ 25 \% $, the median (, $ 50 \% $), $ 75 \% $, and $ 97.5 \% $ (Figs. \ref{fig::growthVar1-3}--\ref{fig::growthVar13-14}). For the mortality, we computed species-specific proportions of death events within each region (Figs. \ref{fig::mortalityVar1-3}--\ref{fig::mortalityVar13-14}).
+
+\begin{figure}
+	\centering
+	\input{appendices/selectRegion}
+	\caption{We defined the three regions for the Figs. \ref{fig::growthVar1-3}--\ref{fig::mortalityVar13-14} as follow: for species-specific data, (\textit{i}) compute the centroid of the data, (\textit{ii}) find the middle point between the maximum latitude of the data and the centroid to define the northern region, and (\textit{iii}) same with the minimum latitude of the data to define the southern region. Everything else is the middle region. \label{fig::defineRegion}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/growthVar1-3}
+	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar1-3}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/growthVar4-6}
+	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar4-6}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/growthVar7-9}
+	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar7-9}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/growthVar10-12}
+	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar10-12}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/growthVar13-14}
+	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar13-14}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/mortalityVar1-3}
+	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar1-3}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/mortalityVar4-6}
+	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVa4-6}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/mortalityVar7-9}
+	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVa7-9}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/mortalityVar10-12}
+	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar10-12}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{appendices/mortalityVar13-14}
+	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar13-14}}
+\end{figure}
+
+
+\printbibliography[heading=subbibliography]
+\end{refsection}

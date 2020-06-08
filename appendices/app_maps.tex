@@ -1,0 +1,770 @@
+\section{Maps} \label{app::maps}
+\begin{refsection}
+\subsection{With competition (canopy height $ \s = 10 $ m)}
+\begin{table}[ht]
+\centering
+\caption{Azimuth (truncated) of the averaged gradients of $ \tilde \rho_0 $ for the northern and southern regions with competition (canopy height $ \s = 10 $ m). These values generated the Figs. \ref{fig::grad_north} and \ref{fig::grad_south} \label{tab::azimuth}}
+\begin{tabular}{rcccc}
+	\toprule
+		~ & \multicolumn{2}{c}{\textbf{Northern region}} & \multicolumn{2}{c}{\textbf{Southern region}} \\
+		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+		\textbf{Species} & \textbf{Direction} & \textbf{Azimuth} & \textbf{Direction} & \textbf{Azimuth} \\
+	\midrule
+		ABI-BAL & South-East & 139 & South-East & 150 \\
+		ACE-RUB & North-West & 313 & North-West & 340 \\
+		ACE-SAC & North-West & 325 & North-West & 302 \\
+		BET-ALL & North-West & 338 & South-East & 144 \\
+		BET-PAP & South-West & 192 & South-West & 233 \\
+		FAG-GRA & North-West & 312 & South-East & 159 \\
+		PIC-GLA & North-West & 325 & North-West & 331 \\
+		PIC-MAR & South-East & 159 & South-West & 206 \\
+		PIC-RUB & South-East & 144 & South-East & 137 \\
+		PIN-BAN & South-East & 93 & South-East & 150 \\
+		PIN-STR & North-West & 333 & North-West & 332 \\
+		POP-TRE & South-East & 164 & South-West & 243 \\
+		THU-OCC & North-West & 309 & North-West & 319 \\
+		TSU-CAN & North-West & 322 & North-West & 327 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+	\centering
+	\input{graphs/azimuth_north}
+	\caption{Species-specific averaged direction of the gradient for the northern region, with a canopy height $ \s = 10 $ m. The azimuths can be found in Tab. \ref{tab::azimuth} \label{fig::grad_north}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{graphs/azimuth_south}
+	\caption{Species-specific averaged direction of the gradient for the southern region, with a canopy height $ \s = 10 $ m. The azimuths can be found in Tab. \ref{tab::azimuth} \label{fig::grad_south}}
+\end{figure}
+
+%%%% Abies balsamea
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (abibal) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/18032-ABI-BAL_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Abies balsamea}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 133 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::abibal}}
+\end{figure}
+
+%%%% Acer rubrum
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (acerub) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/28728-ACE-RUB_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Acer rubrum}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 85 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::acerub}}
+\end{figure}
+
+%%%% Acer saccharum
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (acsa) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/28731-ACE-SAC_R0_h=10m_scaled.jpg}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Acer saccharum}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 83 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::acesac}}
+\end{figure}
+
+%%%% Betula alleghaniensis
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (betal) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/19481-BET-ALL_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Betula alleghaniensis}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 100 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::betal}}
+\end{figure}
+
+%%%% Betula papyrifera
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (betap) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/19489-BET-PAP_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Betula papyrifera}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 98 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::betap}}
+\end{figure}
+
+%%%% Fagus grandifolia
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (faggran) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/19462-FAG-GRA_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Fagus grandifolia}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 103 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::faggran}}
+\end{figure}
+
+%%%% Picea glauca
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (picgla) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183295-PIC-GLA_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Picea glauca}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 148 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::picgla}}
+\end{figure}
+
+%%%% Picea mariana
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (picmar) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183302-PIC-MAR_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Picea mariana}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 127 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::picmar}}
+\end{figure}
+
+%%%% Picea rubens
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (picrub) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/18034-PIC-RUB_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Picea rubens}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 142 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::picrub}}
+\end{figure}
+
+%%%% Pinus banksiana
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (pinban) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183319-PIN-BAN_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Pinus banksiana}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 138 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::pinban}}
+\end{figure}
+
+%%%% Pinus strobus
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (pinstr) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183385-PIN-STR_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Pinus strobus}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 139 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::pinstr}}
+\end{figure}
+
+%%%% Populus tremuloides
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (poptre) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/195773-POP-TRE_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Populus tremuloides}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 117 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::poptre}}
+\end{figure}
+
+%%%% Thuja occidentalis
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (thuocc) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/505490-THU-OCC_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Thuja occidentalis}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 175 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::thuocc}}
+\end{figure}
+
+%%%% Tsuga canadensis
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (tsucan) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183397-TSU-CAN_R0_h=10m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Tsuga canadensis}'s performance ($ \tilde \rho_0 $) with a canopy height of $ 10 $ m (which correspond to a species-specific diameter $ \s = 149 $ mm), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::tsucan}}
+\end{figure}
+
+\subsection{Without competition (canopy height $ \s = 0 $ m)}
+\begin{table}[ht]
+\centering
+\caption{Azimuth (truncated) of the averaged gradients of $ \tilde \rho_0 $ for the northern and southern regions without competition (canopy height $ \s = 0 $ m). These values generated the Figs. \ref{fig::grad_north_0} and \ref{fig::grad_south_0} \label{tab::azimuth_0}}
+\begin{tabular}{rcccc}
+	\toprule
+	~ & \multicolumn{2}{c}{\textbf{Northern region}} & \multicolumn{2}{c}{\textbf{Southern region}} \\
+	\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+	\textbf{Species} & \textbf{Direction} & \textbf{Azimuth} & \textbf{Direction} & \textbf{Azimuth} \\
+	\midrule
+		ABI-BAL & South-East & 124 & South-East & 137 \\
+		ACE-RUB & North-West & 324 & North-West & 342 \\
+		ACE-SAC & North-West & 332 & North-West & 323 \\
+		BET-ALL & North-West & 338 & South-East & 144 \\
+		BET-PAP & South-West & 181 & North-West & 334 \\
+		FAG-GRA & North-West & 324 & South-East & 157 \\
+		PIC-GLA & North-West & 316 & North-West & 331 \\
+		PIC-MAR & South-East & 172 & North-West & 347 \\
+		PIC-RUB & South-East & 177 & South-East & 146 \\
+		PIN-BAN & South-East & 176 & South-East & 163 \\
+		PIN-STR & North-West & 331 & North-West & 331 \\
+		POP-TRE & North-West & 308 & North-West & 354 \\
+		THU-OCC & South-West & 197 & North-West & 326 \\
+		TSU-CAN & North-West & 324 & North-West & 325 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+	\centering
+	\input{graphs/azimuth_north_0}
+	\caption{Species-specific averaged direction of the gradient for the northern region, without competition (canopy height $ \s = 0 $ m). The azimuths can be found in Tab. \ref{tab::azimuth_0} \label{fig::grad_north_0}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\input{graphs/azimuth_south_0}
+	\caption{Species-specific averaged direction of the gradient for the southern region, without competition (canopy height $ \s = 0 $ m). The azimuths can be found in Tab. \ref{tab::azimuth_0} \label{fig::grad_south_0}}
+\end{figure}
+
+%%%% Abies balsamea
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (abibal) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/18032-ABI-BAL_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Abies balsamea}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::abibal_0}}
+\end{figure}
+
+%%%% Acer rubrum
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (acerub) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/28728-ACE-RUB_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Acer rubrum}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::acerub_0}}
+\end{figure}
+
+%%%% Acer saccharum
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (acerub) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/28731-ACE-SAC_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Acer saccharum}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::acesac_0}}
+\end{figure}
+
+%%%% Betula alleghaniensis
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (betal) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/19481-BET-ALL_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Betula alleghaniensis}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::betal_0}}
+\end{figure}
+
+%%%% Betula papyrifera
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (betap) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/19489-BET-PAP_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Betula papyrifera}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::betap_0}}
+\end{figure}
+
+%%%% Fagus grandifolia
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (faggran) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/19462-FAG-GRA_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Fagus grandifolia}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::faggran_0}}
+\end{figure}
+
+%%%% Picea glauca
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (picgla) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183295-PIC-GLA_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Picea glauca}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::picgla_0}}
+\end{figure}
+
+%%%% Picea mariana
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (picmar) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183302-PIC-MAR_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Picea mariana}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::picmar_0}}
+\end{figure}
+
+%%%% Picea rubens
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (picrub) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/18034-PIC-RUB_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Picea rubens}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::picrub_0}}
+\end{figure}
+
+%%%% Pinus banksiana
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (pinban) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183319-PIN-BAN_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Pinus banksiana}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::pinban_0}}
+\end{figure}
+
+%%%% Pinus strobus
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (pinstr) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183385-PIN-STR_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Pinus strobus}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::pinstr_0}}
+\end{figure}
+
+%%%% Populus tremuloides
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (poptre) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/195773-POP-TRE_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Populus tremuloides}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::poptre_0}}
+\end{figure}
+
+%%%% Thuja occidentalis
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (thuocc) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/505490-THU-OCC_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Thuja occidentalis}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::thuocc_0}}
+\end{figure}
+
+%%%% Tsuga canadensis
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		\node[inner sep=0pt] (tsucan) at (0,0)
+		    {\includegraphics[scale=0.3]{graphs/183397-TSU-CAN_R0_h=0m_scaled}};
+		\node [colorbar arrow=RmapShading] at (6,0) {};
+		\node at (6.5,-3.9) {$ 0 $};
+		\node at (6.5,3.9) {$ 1 $};
+		\node at (6,4.5) {$ \tilde \rho_0 $};
+	\end{tikzpicture}
+	\caption{Map of \textit{Tsuga canadensis}'s performance ($ \tilde \rho_0 $) without competition (canopy height = $ 0 $ m), and climate data averaged from $ 2006 $ to $ 2010 $. The distribution area is from \citet{Little1971} in eastern Canada and USA (Fig. \ref{fig::mapDatabase} for the bounding box of the data on the Northern American continent). Red colours indicate $ \tilde \rho_0 $ values close to 1, and decrease up to 0 through blue and dark colours. The green square represents the centroid of the (cropped) distribution, and the red arrows are the average direction of increase of $ \tilde \rho_0 $ for the northern and southern region to the centroid. The white arrows are local changes of $ \tilde \rho_0 $. Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) can be found in Tab. \ref{tab::R0_min_max} with the proportion of unsuitable patches ($ \rho_0 < 1$). \label{fig::tsucan_0}}
+\end{figure}
+
+
+\begin{figure}[htb]
+    \centering
+	%% First row
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_ABI-BAL_0}
+		\caption{\textit{Abies balsamea}}
+		\label{fig::abibal_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_ACE-RUB_0}
+		\caption{\textit{Acer rubrum}}
+		\label{fig::acerub_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_ACE-SAC_0}
+		\caption{\textit{Acer saccharum}}
+		\label{fig::acesac_az_0}
+	\end{subfigure}
+	\medskip
+	%% Second row
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_BET-ALL_0}
+		\caption{\textit{Betula alleghaniensis}}
+		\label{fig::betall_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_BET-PAP_0}
+		\caption{\textit{Betula papyrifera}}
+		\label{fig::betpap_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_FAG-GRA_0}
+		\caption{\textit{Fagus grandifolia}}
+		\label{fig::faggran_az_0}
+	\end{subfigure}
+	\medskip
+	%% Third row
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_PIC-GLA_0}
+		\caption{\textit{Picea glauca}}
+		\label{fig::picgla_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_PIC-MAR_0}
+		\caption{\textit{Picea mariana}}
+		\label{fig::picmar_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_PIC-RUB_0}
+		\caption{\textit{Picea rubens}}
+		\label{fig::picrub_az_0}
+	\end{subfigure}
+	\medskip
+	%% Forth row
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_PIN-BAN_0}
+		\caption{\textit{Pinus banksiana}}
+		\label{fig::pinban_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_PIN-STR_0}
+		\caption{\textit{Pinus strobus}}
+		\label{fig::pinstr_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_POP-TRE_0}
+		\caption{\textit{Populus tremuloides}}
+		\label{fig::poptre_az_0}
+	\end{subfigure}
+	\medskip
+	%% Fifth row
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_THU-OCC_0}
+		\caption{\textit{Thuja occidentalis}}
+		\label{fig::thuocc_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/azimuth_TSU-CAN_0}
+		\caption{\textit{Tsuga canadensis}}
+		\label{fig::tsucan_az_0}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.25\textwidth}
+		\input{graphs/legend_cols}
+	\end{subfigure}
+	\caption{Species-specific averaged direction of the gradients for the northern region (blue arrows) and southern region (orange arrows), without competition. The azimuths can be found in Tab. \ref{tab::azimuth_0}. \label{fig::grad_cols_0}}
+\end{figure}
+
+\subsection{Table of $ \rho_0 $ (\ie non-scaled)}
+\begin{table}[ht]
+\centering
+\caption{Extreme values of $ \rho_0 $ (\ie the non-scaled equivalent of $ \tilde \rho_0 $) with and without competition. Proportion columns are the percentage of unsuitable patches within $ \Omega $. A location $ x $ is unsuitable if $ \rho_0(x, \s) < 1 $, where 1 is the threshold for a species to maintain itself. \label{tab::R0_min_max}}
+\begin{tabular}{lcccccc}
+	\toprule
+		~ & \multicolumn{3}{c}{\textbf{With competition ($ \bm {\s = 10} $ m)}} & \multicolumn{3}{c}{\textbf{Without competition ($ \bm {\s = 0} $ m)}} \\
+	\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		\textbf{Species} & $ \bm{\max(\rho_0)} $ & $ \bm{\min(\rho_0)} $ & \textbf{Proportion} & $ \bm{\max(\rho_0)} $ & $ \bm{\min(\rho_0)} $ & \textbf{Proportion} \\
+	\midrule
+		ABI-BAL & 7.64 & 0.00 & 55.57 & 36.30 & 5.60 & 0.00 \\
+		ACE-RUB & 12.19 & 0.00 & 23.83 & 47.52 & 0.58 & 0.20 \\
+		ACE-SAC & 160.86 & 13.60 & 0.00 & 426.13 & 20.70 & 0.00 \\
+		BET-ALL & 324.95 & 17.29 & 0.00 & 643.71 & 50.71 & 0.00 \\
+		BET-PAP & 10.79 & 0.00 & 51.97 & 46.45 & 0.21 & 0.35 \\
+		FAG-GRA & 131.75 & 4.79 & 0.00 & 282.56 & 26.38 & 0.00 \\
+		PIC-GLA & 49.53 & 0.00 & 11.12 & 136.54 & 7.31 & 0.00 \\
+		PIC-MAR & 1.29 & 0.00 & 96.12 & 19.94 & 3.20 & 0.00 \\
+		PIC-RUB & 53.69 & 2.06 & 0.00 & 94.42 & 12.25 & 0.00 \\
+		PIN-BAN & 2.59 & 0.00 & 99.16 & 19.19 & 1.85 & 0.00 \\
+		PIN-STR & 97.72 & 0.26 & 0.41 & 252.96 & 2.46 & 0.00 \\
+		POP-TRE & 9.39 & 0.00 & 66.21 & 47.63 & 1.34 & 0.00 \\
+		THU-OCC & 51.16 & 0.02 & 0.01 & 122.97 & 6.48 & 0.00 \\
+		TSU-CAN & 221.87 & 0.00 & 0.05 & 366.56 & 19.49 & 0.00 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+\printbibliography[heading=subbibliography]
+\end{refsection}
