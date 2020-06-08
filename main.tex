@@ -4,21 +4,16 @@
 %% Package version
 \listfiles % Then check the .log file
 
-%% font
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-
-% \usepackage[normalem]{ulem} % Barrer text, command = \sout{text}
-% In Latex, ulem normally replaces italics with underlining in text emphasized by \emph , and to some extent by \em.  A declaration of \normalem or the \usepackage option [normalem] disables this feature.
-
+%% Font
+\usepackage{fontspec}
+	
 \usepackage{marvosym}
 
-%% languages
-\usepackage[british]{babel}
-% Notice that I used the babel package with three modules: ngerman, french, and english (since english is the last declared language, this is the main language for the document) and then used \selectlanguage to change to the corresponding option for each abstract.
+%% Languages
+\usepackage{polyglossia}
+	\setdefaultlanguage[variant=british]{english}
 
-%% marges, space...
+%% Marges, space...
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{setspace} % [nodisplayskipstretch] pour option space in equation
 
@@ -28,7 +23,7 @@
 \usepackage{footnote}
 
 % https://tex.stackexchange.com/questions/279/how-do-i-ensure-that-figures-appear-in-the-section-theyre-associated-with
-% \usepackage[section]{placeins} % To place figures in the section it is declared
+\usepackage[section]{placeins} % To place figures in the section it is declared
 
 \usepackage[nolists,tablesfirst,nomarkers]{endfloat} % To place fig & tables at the end
 
@@ -37,7 +32,7 @@
 \counterwithin{figure}{section}
 
 %% Graphics
-\usepackage[pdftex]{graphicx}
+\usepackage[luatex]{graphicx}
 	\graphicspath{{graphs/}}
 
 \usepackage{caption}
@@ -130,41 +125,12 @@
 
 %% Links
 \usepackage{url}
-\usepackage[pdftex, colorlinks=true, linkcolor=NavyBlue, urlcolor=MidnightBlue, citecolor=PineGreen]{hyperref}
+\usepackage[luatex, colorlinks=true, linkcolor=NavyBlue, urlcolor=MidnightBlue, citecolor=PineGreen]{hyperref}
 
 %% bibliography
 \usepackage{csquotes}
 \usepackage[style=apa, natbib=true, sorting=ynt]{biblatex}
 \addbibresource{article.bib}
-
-%% Algorithms, R language
-\usepackage{listings}
-\lstset{ %
-	language=R,                     % the language of the code
-	basicstyle=\footnotesize,       % the size of the fonts that are used for the code
-	numbers=left,                   % where to put the line-numbers
-	numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
-	stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
-	                                % will be numbered
-	numbersep=5pt,                  % how far the line-numbers are from the code
-	backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
-	showspaces=false,               % show spaces adding particular underscores
-	showstringspaces=false,         % underline spaces within strings
-	showtabs=false,                 % show tabs within strings adding particular underscores
-	frame=single,                   % adds a frame around the code
-	rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-	tabsize=2,                      % sets default tabsize to 2 spaces
-	captionpos=b,                   % sets the caption-position to bottom
-	breaklines=true,                % sets automatic line breaking
-	breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
-	title=\lstname,                 % show the filename of files included with \lstinputlisting;
-	                                % also try caption instead of title
-	keywordstyle=\color{blue},      % keyword style
-	commentstyle=\color{dkgreen},   % comment style
-	stringstyle=\color{mauve},      % string literal style
-	escapeinside={\%*}{*)},         % if you want to add a comment within your code
-	morekeywords={*,...}            % if you want to add more keywords to the set
-}
 
 %% mathematics
 \usepackage{amsthm}
@@ -258,14 +224,6 @@
 
 \DeclareMathOperator{\logit}{logit}
 
-%% Plus or minus sign
-%\makeatletter
-%\newcommand{\mypm}{\mathbin{\mathpalette\@mypm\relax}}
-%\newcommand{\@mypm}[2]{\ooalign{%
-%  \raisebox{.1\height}{$#1+$}\cr
-%  \smash{\raisebox{-.6\height}{$#1-$}}\cr}}
-%\makeatother
-
 %%%%%%%%%%%%%%%%%%   HYPHENATION    %%%%%%%%%%%%%%%%%%
 % \hyphenation{cal-cu-lus}
 
@@ -283,7 +241,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Niche theory and tree distribution mismatch when accounting for stand structure, climate, and competition}
+\title{Climate-induced variation in the demography of 14 tree species is not enough to explain their distribution in eastern North America}
 \author{}
 
 \begin{document}
@@ -295,8 +253,7 @@
 \input{introduction}
 \input{methods}
 \input{results}
-% \input{discussion}
-% \input{conclusions}
+\input{discussion}
 % \input{acknowledgement}
 
 \end{onehalfspace}
@@ -323,9 +280,9 @@
 \input{appendices/app_calc_R0}
 \input{appendices/app_purves2009}
 \input{appendices/app_database}
-% \input{appendices/app_glmm}
-% \input{appendices/app_maps}
-% \input{appendices/app_randomForest}
-% \input{appendices/app_confInt}
+\input{appendices/app_glmm}
+\input{appendices/app_confInt}
+\input{appendices/app_maps}
+\input{appendices/app_randomForest}
 
 \end{document}
