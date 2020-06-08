@@ -1,0 +1,16 @@
+.DS_Store
+.vscode
+*.log
+*.aux
+*.pdf
+!illustrations/chara.pdf
+*.out
+*.bcf
+*.toc
+*.cfg
+*.run.xml
+code/
+illustrations/
+cpp/
+coverLetter/
+corrections
