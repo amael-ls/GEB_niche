@@ -6,7 +6,6 @@
 
 %% Font
 \usepackage{fontspec}
-	
 \usepackage{marvosym}
 
 %% Languages
@@ -125,7 +124,9 @@
 
 %% Links
 \usepackage{url}
+\usepackage{xr}
 \usepackage[luatex, colorlinks=true, linkcolor=NavyBlue, urlcolor=MidnightBlue, citecolor=PineGreen]{hyperref}
+	\externaldocument[app::]{main_app}
 
 %% bibliography
 \usepackage{csquotes}
@@ -264,25 +265,25 @@
 
 \input{dataStatement}
 
-\newpage
+% \newpage
 
-\clearpage % ensure all floats are processed
-\counterwithout{figure}{section}
-\processdelayedfloats
-\clearpage
+% \clearpage % ensure all floats are processed
+% \counterwithout{figure}{section}
+% \processdelayedfloats
+% \clearpage
 
-\counterwithin{figure}{section}
-\counterwithin{table}{section}
-\appendix
-\addtocontents{toc}{\setcounter{tocdepth}{3}}
-\tableofcontents
+% \counterwithin{figure}{section}
+% \counterwithin{table}{section}
+% \appendix
+% \addtocontents{toc}{\setcounter{tocdepth}{3}}
+% \tableofcontents
 
-\input{appendices/app_calc_R0}
-\input{appendices/app_purves2009}
-\input{appendices/app_database}
-\input{appendices/app_glmm}
-\input{appendices/app_confInt}
-\input{appendices/app_maps}
-\input{appendices/app_randomForest}
+% \input{appendices/app_calc_R0}
+% \input{appendices/app_purves2009}
+% \input{appendices/app_database}
+% \input{appendices/app_glmm}
+% \input{appendices/app_confInt}
+% \input{appendices/app_maps}
+% \input{appendices/app_randomForest}
 
 \end{document}
