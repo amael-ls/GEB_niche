@@ -3,100 +3,21 @@
 
 \section{Introduction}
 
-A common, although rarely tested, assumption in ecology is that a species is
-more likely to be found where it performs the best. In other words, species
-probability of occurrence across its range should be positively correlated to
-the per capita intrinsic growth rate \citep{McGill2012}. This hypothesis stems
-from the interpretation of Hutchinsonian niche theory \citep{Hutchinson1957, Maguire1973}, which poses that species are limited
-to locations where the environmental conditions (\ie any property outside of
-the considered organisms) allow a population to persist. At the core of
-species distribution models, this hypothesis is used to identify the climatic
-variables that are constraining species ranges, and their projection in the
-future allows to forecast potential range shifts. \\
+A common, although rarely tested, assumption in ecology is that a species is more likely to be found where it performs the best. In other words, species probability of occurrence across its range should be positively correlated to the per capita intrinsic growth rate \citep{McGill2012}. This hypothesis stems from the interpretation of Hutchinsonian niche theory \citep{Hutchinson1957, Maguire1973}, which poses that species are limited to locations where the environmental conditions (\ie any property outside of the considered organisms) allow a population to persist. At the core of species distribution models, this hypothesis is used to identify the climatic variables that are constraining species ranges, and their projection in the future allows to forecast potential range shifts. \\
 
-This theory, in its more concise formulation, relates the population growth
-rate $ r $ to the species' niche: the hypervolume in the environmental factors
-space is the set such that $ r \geqslant 0 $ \citep{Holt2009, Godsoe2017}.
-Formally, let $ r_i(\bm{E}, \bm{R}) $ be the growth rate of a focal species $
-i $ when rare, namely the intrinsic growth rate for a given environment $
-\bm{E} $ and amount of resources $ \bm{R} $. The equation
-
+This niche theory, in its more concise formulation, relates the population growth rate $ r $ to the species' niche: the hypervolume in the environmental factors space is the set such that $ r \geqslant 0 $ \citep{Holt2009, Godsoe2017}. Formally, let $ r_i(\bm{E}, \bm{R}) $ be the growth rate of a focal species $ i $ when rare, namely the intrinsic growth rate for a given environment $ \bm{E} $ and amount of resources $ \bm{R} $. The equation
 \[
 	r_i(\bm{E}, \bm{R}) \geqslant 0,
 \]
+specifies that the fundamental niche corresponds to the locations where $ \bm{E} $ and $ \bm{R} $ allow positive growth. An equivalent representation is the lifetime number of recruits per individual, traditionally denoted by $ R_{0, i} $ \citep[where $ i $ is still the species index]{Pulliam2000, DeRoos1997}. A sustainable population requires $ R_{0, i} (\bm{E}, \bm{R}) \geqslant 1 $, that is to say, in average an individual needs, at least, to replace itself over its lifespan. This definition of the niche allows the species $ i $ to exert influence on the rates of other species of the community and get feedbacks on its own demographic rates. Hereafter, we drop the $ i $ index, but it is important to keep in mind that $ R_{0, i} $ is a species-specific rate related to a species $ i $. \\
 
-\noindent specifies that the fundamental niche corresponds to the locations
-where $ \bm{E} $ and $ \bm{R} $ allow positive growth. An equivalent
-representation is the lifetime number of recruits per individual,
-traditionally denoted by $ R_{0, i} $ \citep[where $ i $ is still the species index]{Pulliam2000, DeRoos1997}. A sustainable population requires $ R_{0, i}
-(\bm{E}, \bm{R}) \geqslant 1 $, that is to say, in average an individual needs, at
-least, to replace itself over its lifespan. This definition of the niche
-allows the species $ i $ to exert influence on the rates of other species of
-the community and get feedbacks on its own demographic rates. Hereafter, we drop the $ i
-$ index, but it is important to keep in mind that $ R_{0, i} $ is a species-specific rate related to a species $ i $. \\
+Difficulties in testing the niche theory partially root in the challenge of measuring population growth rates \citep{McGill2012}. This is especially true for physiologically structured populations; for instance, the age or the size of an individual influence its reproduction success, feeding behaviour, or death probabilities. These age and size structures, combined with density-dependences and environmental influences, might blur the relationship between species' occurrence and $ R_0 $ variations along an environmental gradient. This is where individual-based structured-population models bring insight to addressing the complexity of population dynamics. Such models are however demanding to parameterise, and difficult to analyse. Good examples are forest trees, which can be modelled by spatially explicit simulators, accounting for single tree development and light availability to an individual. These forest simulators focus on the individual level, which is the relevant scale for studying competition and climate response, but usually questions of biogeographical interests (such as tree species distributions) lie at the population level, that is to say $ R_0 $. \\
 
-Although the niche theory is widely used to investigate species distributions,
-the relationship between $ R_0 $ and the occurrence of a species along an
-environmental gradient is rarely tested \citep{McGill2012}. Some of the
-difficulties in testing the niche theory can be attributed to the challenge of
-measuring population growth rate, especially for physiologically structured
-populations. For instance, most organisms have stage-dependent demographic
-rates: these can be the age, size, body mass, level of energy or satiation of
-individuals that influences their reproduction, feeding behaviour, or death
-processes \citep[and references therein]{DeRoos1997}. Thus, what an individual experiences during
-a time-unit influences the demographic rates of the next time step. Many
-species show complex dynamics, with density-dependence, large temporal and
-spatial scales, or demographic rates that are influenced by multiple
-environmental variables \citep{DeRoos1997}. Moreover, individual variation in
-micro-environments and ontogeny may complicate the evaluation of species-level
-rates \citep{Clark2011}. This is where individual-based structured-population
-models bring insight to addressing the complexity of population dynamics.
-Such models are however demanding to be parameterised, and difficult to
-analyse. Good examples are forest trees, which can be modelled by spatially
-explicit simulators, accounting for single tree development and light
-availability to an individual. Such models are challenging to parameterise \citep{Pacala1996},
-although they benefit from extensive and high quality forest inventories.
-These forest simulators focus on the individual level, which is the relevant
-scale for studying competition and climate response, but usually questions of
-biogeographical interests (such as tree species distributions) lie at the
-population level, that is to say $ R_0 $. The relationship between tree
-species range and population growth has recently been under scrutiny, both in
-Europe \citep{Thuiller2014} and north-eastern North America
-\citep{McGill2012}. Little correspondence was found between $ r $ and
-tree species distributions due to uncertainty on the demographic parameters \citep{Thuiller2014}. Negative
-correlations were even found, which at first glance, challenges the common
-assumption that a species is more abundant at its optimal environment
-\citep{McGill2012}. An alternative explanation to these negative correlations
-could be the inclusive niche \citep{McGill2012}. This niche states that weak
-competitors have their fundamental niche reduced to a smaller realised space,
-in a trade-off between competitive ability and environmental tolerance
-\citep{Serrano2015}. Therefore, weak competitors can be more abundant in
-suboptimal environments.  To get closer to individual demographic rates,
-while up-scaling to the population level, Dynamic Range Models (DRMs) were
-recently developed. DRMs link species distribution data to environmental
-conditions via three key processes \citep{Pagel2012}: (\textit{i})
-environmental conditions influence local demographic rates, (\textit{ii})
-probability distributions of spatio-temporal abundance are determined through local
-population dynamics, and (\textit{iii}) these probability distributions of abundance are
-sampled to obtain different types of distributional data. DRMs are promising
-models to develop, given that they include processes regarding both biological
-concerns, and experimental concerns. More specifically, it is possible to track uncertainties raising from the demographic level, the biogeographic level (spatio-temporal abundance), and the observer level (distributional data). \\
+The relationship between tree species range and population growth has recently been under scrutiny, both in Europe \citep{Thuiller2014} and north-eastern North America \citep{McGill2012}. Little correspondence was found between $ r $ and tree species distributions due to uncertainty on the demographic parameters \citep{Thuiller2014}. Negative correlations were even found, which at first glance, challenges the common assumption that a species is more abundant at its optimal environment. The inclusive niche was proposed as an alternative explanation to these negative correlations \citep{McGill2012}. This niche states that weak competitors have their fundamental niche reduced to a smaller realised space, in a trade-off between competitive ability and environmental tolerance \citep{Serrano2015}. Therefore, weak competitors can be more abundant in suboptimal environments. \\
+
+Dynamic Range Models (DRMs) were recently developed to get closer to individual demographic rates, while up-scaling to the population level. DRMs are hierarchical statistical models that relate species' abundance to environmental data using two latent variables: the population growth rate $ r $ and dispersal. These models account for uncertainties in the data as well \citep{Pagel2012}. Therefore, DRMs allowed to track uncertainties raising from the demographic level, the biogeographic level, and the observer level. \\
 
 There is currently no standard method to derive a single performance index from demographic rates \citep{Purves2009}. Therefore, all the studies linking species distributions to individuals' performance are in the midst of an `uncharted territory'. The aforementioned studies of \citeauthor{McGill2012}, \citeauthor{Thuiller2014}, or \citeauthor{Pagel2012} all explored different ways of linking distribution to population performance. They all agreed that combining the three vital rates, namely individual growth, mortality, and fecundity into $ r $ is difficult, and that $ r $ itself is not easily derived from census. Building on these manuscripts, we will derive $ r $ from a forest dynamics model that uses the three vital rates. In this article, we focus exclusively on radial growth and mortality, and make them life-stage dependent, which is of primary importance to propagate uncertainties up to $ r $ \citep[$ \lambda $ in his article]{Clark2003b}. \\
 
-Our main objective in this study is to investigate if the distribution of North American tree species is driven by the effect of climate on individual demography. Theory postulates that demographic performance should decline toward range margins. We therefore investigate two predictions that (\textit{i}) per capita growth rate should vary with climate and as a result, (\textit{ii}) per capita growth rate should decline at range margins where occurrence probabilities tend to zero. We represent forest stand dynamics with a cohort-based model relying on the McKendrick-von Foerster equations \citep{Strigul2008}. This model relates individual tree demography to cohort dynamics, accounting for ontogenic variation in demography. We derive a formula from the McKendrick-von Foerster equations to combine individual tree growth, mortality and fecundity rates into $ R_0 $, the per capita growth rate. We then evaluate how components of tree demography (individual growth and mortality) respond to climate, individual size, and competition. We expect an optimal climate for each species in the middle of the range, and better performance under light than shade conditions. Then after, we test if $ R_0 $ is positively correlated to the probability of occurrence and if it declines towards range limits. The analysis is performed for the 14 most abundant tree species in eastern North America.
+Our main objective in this study is to investigate if the distribution of North American tree species is driven by the effect of climate and light competition on individual demography. The abundant centre hypothesis postulates that demographic performance should decline toward range margins. We therefore investigate two predictions that (\textit{i}) per capita growth rate should vary with climate and as a result, (\textit{ii}) per capita growth rate should decline at range margins where occurrence probabilities tend to zero. We represent forest stand dynamics with a cohort-based model relying on the McKendrick-von Foerster equations \citep{Strigul2008}. This model relates individual tree demography to cohort dynamics, accounting for neighbourhood competition and ontogenic variation in demography. We derive a formula from the McKendrick-von Foerster equations to combine individual tree growth, mortality and fecundity rates into $ R_0 $, the per capita growth rate. We then evaluate how components of tree demography (individual growth and mortality) respond to climate, individual size, and competition. We expect an optimal climate for each species in the middle of the range, and better performance under light than shade conditions. Then after, we test if $ R_0 $ is positively correlated to the probability of occurrence and if it declines towards range limits. The analysis is performed for the 14 most abundant tree species in eastern North America.
 
-% ALS: Enlevée car ne colle plus avec les résultats
-% , with a particular attention to the dominant species \textit{Acer saccharum} (sugar maple), which covers a large spatial and climatic gradient
-
-
-% We represent forest stand dynamics with a cohort-based model relying on the McKendrick-von Foerster equations \citep{Strigul2008}. This model requires
-% individual growth and mortality functions to be parametrised.
-
-% We represent forest stand dynamics with a
-% cohort-based model relying on the McKendrick-von Foerster equations \citep{Strigul2008}. This model requires
-% individual growth and mortality functions to be parametrised using forest inventories; we
-% test whether these rates vary with temperature and precipitation, accounting
-% for size and competition. We use these results to calculate $ R_0 $ for a set
-% of climate conditions, and compare it to occurrence probabilities derived from
-% a standard species distribution model.
