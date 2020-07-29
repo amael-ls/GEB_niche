@@ -1,9 +1,9 @@
 \section{Proofs of the relations between \citet{Purves2009} and our study} \label{app::purves2009}
 \begin{refsection}
-In this section, we first provide the assumptions concerning the demography in \citet{Purves2009}, and match our notations with \citeauthor{Purves2009}'s article in the table \ref{tab::notations_purves2009}. Finally, we derive \citet{Purves2009}'s formul\ae{} from our $ R_0 $ equation \eqref{eq::R0sol}.
+In this section, we first provide the assumptions concerning the demography in \citet{Purves2009}, and match our notations with his article in the table \ref{tab::notations_purves2009}. Finally, we derive Purves's formul\ae{} from our $ R_0 $ equation \eqref{eq::R0sol}. Except when specified, Purves refers to \citet{Purves2009} in the following sections.
 \begin{table}
 	\centering
-	\caption{Link between our notations and \citet{Purves2009}'s notations. Note that \citeauthor{Purves2009} uses the flat-top version of the perfect-plasticity approximation, which implies the fecundity function to be proportional to the trunk area.}
+	\caption{Link between our notations and \citet{Purves2009}'s notations. Note that he uses the flat-top version of the perfect-plasticity approximation, which implies the fecundity function to be proportional to the trunk area.}
 	\label{tab::notations_purves2009}
 	\begin{tabular}{@{}rll@{}}
 	\toprule
@@ -23,7 +23,7 @@ In this section, we first provide the assumptions concerning the demography in \
 \end{table}
 
 \subsection{Additional assumptions to our model from \citet{Purves2009}}
-We sum-up here some useful assumptions from \citet{Purves2009}. The assumptions are better described in \citet[and yes, it is in the paper of 2008]{Purves2008}
+We sum-up here some useful assumptions from Purves. The assumptions are better described in \citet[not to confound with 2009's paper]{Purves2008}.
 \begin{assum}[Flat-top crown] \label{assum::flat-top}
 	The crown is a flat-top disc expressed at the top of the tree, which implies that the area of the crown $ \A(s, \s) $ is independent of its second argument.
 \end{assum}
@@ -67,7 +67,7 @@ We sum-up here some useful assumptions from \citet{Purves2009}. The assumptions 
 	\end{align}
 \end{assum}
 
-Note that in his supporting information, \citet{Purves2009} integrates with respect to time rather than size. In the case trees are always in the overstorey, it is strictly equivalent:
+Note that in his supporting information, Purves integrates with respect to time rather than size. In the case trees are always in the overstorey, it is strictly equivalent:
 \[
 	\begin{cases}
 		\frac{ds}{d \tau} = G_{L, j, R} \\
@@ -93,7 +93,7 @@ Equation \eqref{eq::R0sol} is equivalent to equation S10.2 \citep[also p. 1479 i
 \end{proof}
 
 \subsection{Proportion of the trees that make up to the canopy}
-Let $ P^{\text{canop}} $ be the proportion of individuals that survive up to the canopy. The quantity $ P^{\text{canop}} $ is derived in \citet{Purves2009}'s supporting information, a little before equation S11; we can obtain the same result with the first part of equation \eqref{eq::R0sol}.
+Let $ P^{\text{canop}} $ be the proportion of individuals that survive up to the canopy. The quantity $ P^{\text{canop}} $ is derived in Purves' supporting information, a little before equation S11; we can obtain the same result with the first part of equation \eqref{eq::R0sol}.
 \begin{proof}
 	\begin{align*}
 		P^{\text{canop}} &= e^{-\int_{0}^{D^{*}} \frac{\mu}{G} \, ds} \\
@@ -103,7 +103,7 @@ Let $ P^{\text{canop}} $ be the proportion of individuals that survive up to the
 \end{proof}
 
 \subsection{$ D^{*} $ at equilibrium \citep[equation S13.2]{Purves2009}}
-Let $ \hat D^{*} $ be the threshold diameter when the (monospecific) population is at equilibrium. We derive equation S13.2 \citep{Purves2009} from our equation \eqref{eq::R0sol} using \citeauthor{Purves2009}'s notations:
+Let $ \hat D^{*} $ be the threshold diameter when the (monospecific) population is at equilibrium. We derive equation S13.2 \citep{Purves2009} from our equation \eqref{eq::R0sol} using Purves' notations:
 \begin{align*}
 	R^{\text{canop}} &= e^{-\int_{0}^{D^{*}} \frac{\mu_{D, j, R}}{G_{D, j, R}} \, ds} \int_{D^{*}}^{\infty} \frac{1}{10^4} \frac{F_{j, R}^{\text{capita}} \pi (\sfrac{s}{2})^2}{G_{L, j, R}} e^{-\int_{D^{*}}^{s} \frac{\mu_{L, j, R}}{G_{L, j, R}} \, d\sigma} \, ds \\
 		&= e^{\left(\frac{\mu_{L, j, R}}{G_{L, j, R}} - \frac{\mu_{D, j, R}}{G_{D, j, R}} \right) D^{*}} \frac{1}{10^4} \frac{\pi}{4 G_{L, j, R}} F_{j, R}^{\text{capita}} \int_{D^{*}}^{\infty} s^2 e^{-\frac{\mu_{L, j, R}}{G_{L, j, R}} s} \\
@@ -117,16 +117,7 @@ At equilibrium, each individual replace itself once in average. Therefore, $ R^{
 \[
 	\hat D^{*} = G_{D, j, R} \rho_{D, j, R} \ln \left( \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} G_{L, j, R}^2 \rho_{L, j, R}^3 \right) \text{, where } \frac{1}{\mu_{L, j, R}^3} = \rho_{L, j, R}^3,
 \]
-which is equation S13.2 \citep{Purves2009}.
+which is the equation S13.2 of Purves.
 
-% \subsection{Does assumptions \ref{assum::negligible} holds in our case?}
-% In this subsection, we set the species $ j $ to \textit{Acer rubrum} (as in \citet[page 15 supporting information]{Purves2009}), and set arbitrarily the associated demographic rates:
-% \begin{align*}
-% 	G_{D, j, R} &= \int_{0}^{} G(s, \s_c, x) \, ds \\
-% 	G_{L, j, R} &= \int_{}^{\infty} G(s, \s_c, x) \, ds \\
-% 	\mu_{D, j, R} &= \int_{0}^{} \mu(s, \s_c, x) \, ds \\
-% 	\mu_{L, j, R} &= \int_{}^{\infty} \mu(s, \s_c, x) \, ds
-% \end{align*}
-% where $ x = (77.93 \, W, 39.07 \, N) $, the closest point to the centroid of \textit{Acer rubrum}'s data where I have data. The value $ xxx $ is the diameter of a $ 12.5 \, m $ height \textit{Acer rubrum}.
 \printbibliography[heading=subbibliography]
 \end{refsection}
