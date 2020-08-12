@@ -1,11 +1,152 @@
+
+\documentclass[letterpaper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%    PACKAGES    %%%%%%%%%%%%%%%%%%%
+%% Package version
+\listfiles % Then check the .log file
+
+%% Font
+\usepackage{fontspec}
+\usepackage{marvosym}
+
+%% Languages
+\usepackage{polyglossia}
+	\setdefaultlanguage[variant=british]{english}
+
+%% Marges, space...
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{setspace} % [nodisplayskipstretch] pour option space in equation
+
+\usepackage{indentfirst}
+
+\usepackage[bottom]{footmisc}
+\usepackage{footnote}
+
+% https://tex.stackexchange.com/questions/279/how-do-i-ensure-that-figures-appear-in-the-section-theyre-associated-with
+\usepackage[section]{placeins} % To place figures in the section it is declared
+
+%% Graphics
+\usepackage[luatex]{graphicx}
+	\graphicspath{{../graphs/}}
+
+\usepackage{caption}
+\usepackage{subcaption}
+	\captionsetup{subrefformat=parens}
+
+\makeatletter 
+\renewcommand{\thefigure}{S\thesection.\@arabic\c@figure}
+\renewcommand{\thetable}{S\thesection.\@arabic\c@table}
+\makeatother
+
+\usepackage[dvipsnames, svgnames]{xcolor}
+
+\usepackage{tikz}
+	\usetikzlibrary{arrows, plotmarks, decorations.markings}
+	\tikzstyle{arrow} = [->,>=stealth,thick,rounded corners=4pt,line width=1pt]
+	\usetikzlibrary{shadows}
+	\usetikzlibrary{shadings}
+	\usetikzlibrary{positioning} % relative coodinate
+	\usetikzlibrary{tikzmark, calc} % calc, to calculate coordinate
+	\usetikzlibrary{decorations.pathmorphing} % to snake an arrow
+	\usetikzlibrary{shapes.arrows}
+	\usetikzlibrary{patterns}
+	\tikzset{
+		invisible/.style={opacity=0},
+		visible on/.style={alt={#1{}{invisible}}},
+		alt/.code args={<#1>#2#3}{%
+		\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+		},
+	} % end tikzset. Code from http://tex.stackexchange.com/questions/136143/tikz-animated-figure-in-beamer
+
+%% Table of content
+\addto\captionsenglish{ % Replace "english" with the language used in babel
+	\renewcommand{\contentsname}{Supporting Information Appendix S2 contents}
+}
+
+%% Format section
+\usepackage{titlesec}
+\titlelabel{S\thetitle~}
+\usepackage{titletoc}
+\titlecontents{section}[0pt]{}{\bfseries S\thecontentslabel~}{\bfseries}{\hspace{1em plus 1fill}\contentspage}
+
+
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+%% Links
+\usepackage{url}
+\usepackage[luatex, colorlinks=true, linkcolor=NavyBlue, urlcolor=MidnightBlue, citecolor=PineGreen]{hyperref}
+
+%% Table
+\usepackage{booktabs}
+
+%% bibliography
+\usepackage{csquotes}
+\usepackage[style=apa, natbib=true, sorting=ynt]{biblatex}
+\addbibresource{bib_database.bib}
+
+%% mathematics
+\usepackage{amsthm}
+\usepackage{amsmath}
+	\allowdisplaybreaks % Autoriser découpe formules entres pages
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xfrac}
+\usepackage{etoolbox} % For renumbering (cf below, counter for model)
+
+\usepackage{thmbox} % cf after for "theorem" definitions
+
+\usepackage{gensymb}
+
+\usepackage{siunitx}
+
+%%%%%%%%%%%%%%%%%   NEW COMMANDES    %%%%%%%%%%%%%%%%%
+%% Text
+\newcommand {\ie}{\textit{i.e., }}
+\newcommand {\eg}{\textit{e.g., }}
+\newcommand {\cf}{\textit{cf} }
+\newcommand\bsc[1]{\textsc{\MakeLowercase{#1}}} % Only if there is no french babel
+\newcommand {\thup}[1]{{#1}\textsuperscript{th}}
+
+%% Math
+\newcommand {\s}{{s}^{*}}
+\newcommand {\sst}{\tilde{s}^{*}} % s* stable d'où le st
+\newcommand {\N}{\tilde{N}}
+\newcommand {\A}{\mathscr{A}}
+\newcommand {\K}{\mathcal{K}}
+\renewcommand{\S}{\mathscr{S}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\F}{\mathcal{F}}
+
+\DeclareMathOperator{\logit}{logit}
+
+%%%%%%%%%%%%%%%%%   THEOREM STYLE    %%%%%%%%%%%%%%%%%
+\newtheoremstyle{theo}{\topsep}{\topsep}{\itshape}{}{\bfseries}{.}{\newline}{\thmname{#1} \thmnumber{#2} \thmnote{~: \textit{#3}}}
+\theoremstyle{theo}
+\newtheorem{rem}{Remark}[section]
+\newtheorem{defi}{Definition}[section]
+\newtheorem{assum}{Assumption}[section]
+\newtheorem{nota}{Notation}[section]
+
+%%%%%%%%%%%%%%%%%   SET COUNTER		%%%%%%%%%%%%%%%%%
+\setcounter{section}{1}
+
+\begin{document}
+\tableofcontents
+
+\begin{refsection}
+\begin{onehalfspace}
+
 \section{Database} \label{app::database}
 \subsection{Description of the data}
-\begin{refsection}
-We used an abbreviation for each species, that we list in Tab. \ref{tab::species}. For each species, we list their spatial range in Tab. \ref{tab::spaceRange}, and we plot the ranges of temperature and precipitation used in the individual growth and mortality functions (Fig. \ref{fig::speciesClimRange}).  We also join the 19 bioclimatic variables used in the random forest and the demography models selection (Tab. \ref{tab::bioclim}). Finally, we mapped all the data we used, from 1963 to 2010 (Fig \ref{fig::mapDatabase}).
+We used an abbreviation for each species, that we list in Tab. \ref{tab::species}. For each species, we list their spatial range in Tab. \ref{tab::spaceRange}, and we plot the ranges of temperature and precipitation that are used in the individual growth and mortality functions (Fig. \ref{fig::speciesClimRange}).  We also join the 19 bioclimatic variables used in the random forest and the demography models selection (Tab. \ref{tab::bioclim}). Finally, we mapped all the data we used, from 1963 to 2010 (Fig \ref{fig::mapDatabase}).
 
 \begin{table}[h!]
 \centering
-\caption{Species list, and the abbreviation used in the other tables \label{tab::species}. The last three columns are the maximal dbh, the maximal age, and the page of \citet{Burns1990, Burns1990a} at which we found the informations.}
+\caption{Species list, and the abbreviation used in the other tables\label{tab::species}. The last three columns are the maximal dbh, the maximal age, and the page of \citet{Burns1990, Burns1990a} at which we found the informations.}
 \label{tab::database}
 \begin{tabular}{rlllll}
 	\toprule
@@ -61,24 +202,24 @@ We used an abbreviation for each species, that we list in Tab. \ref{tab::species
     \centering
 	%% First row
 	\begin{subfigure}{0.98\textwidth}
-		\input{graphs/annual_mean_temperature-min_temperature_of_coldest_month_sp_range}
+		\input{../graphs/annual_mean_temperature-min_temperature_of_coldest_month_sp_range}
 		\caption{Annual mean temperature $ T_a $ (left), and minimal temperature $ T_m $(right) range for each species. The vertical line is the average among species, and the dark circles are the species-specific mean.}
 		\label{fig::annual_mean_temperature}
 	\end{subfigure}
 	\medskip
 	%% Second row
 	\begin{subfigure}{0.98\textwidth}
-		\input{graphs/annual_precipitation-precipitation_of_driest_quarter_sp_range}
+		\input{../graphs/annual_precipitation-precipitation_of_driest_quarter_sp_range}
 		\caption{Annual precipitation $ P_a $ (left), and minimal precipitation $ P_m $(right) range for each species. The vertical line is the average among species, and the dark circles are the species-specific mean.}
 		\label{fig::annual_precipitation}
 	\end{subfigure}
-\caption{Species-specific (\subref{fig::annual_mean_temperature}) temperature ranges and (\subref{fig::annual_precipitation}) precipitation ranges. The definitions of $ T_a, \, T_m, \, P_a, \, P_m $ are in table \ref{tab::bioclim}.}
+\caption{Species-specific \subref{fig::annual_mean_temperature} temperature ranges and \subref{fig::annual_precipitation} precipitation ranges. The definitions of $ T_a, \, T_m, \, P_a, \, P_m $ are in table \ref{tab::bioclim}.}
 \label{fig::speciesClimRange}
 \end{figure}
 
 \begin{table}[h!]
 \centering
-\caption{Bioclimatic variables list \citep{McKenney2011}. The symbols used in the Supporting information \ref{app::glmm} to describe the formulae are defined here. \label{tab::bioclim}}
+\caption{Bioclimatic variables list \citep{McKenney2011}. \label{tab::bioclim}}
 \begin{tabular}{p{6.75cm}p{9cm}}
 	\toprule
 	\textbf{Name} & \textbf{Description} \\
@@ -108,80 +249,85 @@ We used an abbreviation for each species, that we list in Tab. \ref{tab::species
 
 \begin{figure}[htb]
     \centering
-	\includegraphics[scale=0.5]{graphs/mapDatabase}
-	\caption{Map of the data we used, ranging from 1963 to 2010. Each point represents a location where there is at least one record. The orange rectangle is the bounding box of the data. We used it to crop all the maps concerning $ R_0 $. For aesthetic reasons and familiarity, the projection for this map is EPSG:4269. For all the other maps, the projection is EPSG:2163}
+	\includegraphics[scale=0.5]{../graphs/mapDatabase}
+	\caption{Map of the data we used, ranging from 1963 to 2010. Each point represents a location where there is at least one record. The orange rectangle is the bounding box of the data. We used it to crop all the maps concerning $ R_0 $. For aesthetic reasons and familiarity, the projection for this map is EPSG:4269. For all the maps in Supporting Information S5, the projection is EPSG:2163}
 \label{fig::mapDatabase}
 \end{figure}
 
+\clearpage
 \subsection{Variability in radial growth and mortality}
-For each species, we separated the latitudes within three regions (Fig. \ref{fig::defineRegion}). The radial growth is described by three box plots per species with the following quantiles: $ 2.5 \% $, $ 25 \% $, the median (, $ 50 \% $), $ 75 \% $, and $ 97.5 \% $ (Figs. \ref{fig::growthVar1-3}--\ref{fig::growthVar13-14}). For the mortality, we computed species-specific proportions of death events within each region (Figs. \ref{fig::mortalityVar1-3}--\ref{fig::mortalityVar13-14}).
+For each species, we separated the latitudes within three regions (Fig. \ref{fig::defineRegion}). The radial growth is described by three box plots per species with the following quantiles: $ 2.5 \% $, $ 25 \% $, the median ($ 50 \% $), $ 75 \% $, and $ 97.5 \% $ (Figs. \ref{fig::growthVar1-3}--\ref{fig::growthVar13-14}). For the mortality, we computed species-specific proportions of death events within each region (Figs. \ref{fig::mortalityVar1-3}--\ref{fig::mortalityVar13-14}).
 
 \begin{figure}
 	\centering
-	\input{appendices/selectRegion}
+	\input{selectRegion}
 	\caption{We defined the three regions for the Figs. \ref{fig::growthVar1-3}--\ref{fig::mortalityVar13-14} as follow: for species-specific data, (\textit{i}) compute the centroid of the data, (\textit{ii}) find the middle point between the maximum latitude of the data and the centroid to define the northern region, and (\textit{iii}) same with the minimum latitude of the data to define the southern region. Everything else is the middle region. \label{fig::defineRegion}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/growthVar1-3}
+	\input{growthVar1-3}
 	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar1-3}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/growthVar4-6}
+	\input{growthVar4-6}
 	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar4-6}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/growthVar7-9}
+	\input{growthVar7-9}
 	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar7-9}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/growthVar10-12}
+	\input{growthVar10-12}
 	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar10-12}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/growthVar13-14}
+	\input{growthVar13-14}
 	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar13-14}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/mortalityVar1-3}
+	\input{mortalityVar1-3}
 	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar1-3}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/mortalityVar4-6}
+	\input{mortalityVar4-6}
 	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVa4-6}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/mortalityVar7-9}
+	\input{mortalityVar7-9}
 	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVa7-9}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/mortalityVar10-12}
+	\input{mortalityVar10-12}
 	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar10-12}}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\input{appendices/mortalityVar13-14}
+	\input{mortalityVar13-14}
 	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar13-14}}
 \end{figure}
 
+\end{onehalfspace}
 
+\clearpage
 \printbibliography[heading=subbibliography]
 \end{refsection}
+
+\end{document}
