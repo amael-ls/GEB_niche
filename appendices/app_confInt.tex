@@ -1,50 +1,127 @@
+
+\documentclass[letterpaper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%	PACKAGES	%%%%%%%%%%%%%%%%%%%
+%% Font
+\usepackage{fontspec}
+\usepackage{marvosym}
+
+%% Languages
+\usepackage{polyglossia}
+	\setdefaultlanguage[variant=british]{english}
+
+%% Table of content
+\addto\captionsenglish{ % Replace "english" with the language used in babel
+	\renewcommand{\contentsname}{Supporting Information Appendix S5 contents}
+}
+
+%% Marges, space...
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+%% Graphics
+\usepackage[luatex]{graphicx}
+
+\usepackage{tikz}
+	\usetikzlibrary{arrows, plotmarks, decorations.markings}
+	\tikzstyle{arrow} = [->,>=stealth,thick,rounded corners=4pt,line width=1pt]
+	\usetikzlibrary{shadows}
+	\usetikzlibrary{shadings}
+	\usetikzlibrary{positioning} % relative coodinate
+	\usetikzlibrary{tikzmark, calc} % calc, to calculate coordinate
+	\usetikzlibrary{decorations.pathmorphing} % to snake an arrow
+	\usetikzlibrary{shapes.arrows}
+	\usetikzlibrary{patterns}
+	\tikzset{
+		invisible/.style={opacity=0},
+		visible on/.style={alt={#1{}{invisible}}},
+		alt/.code args={<#1>#2#3}{%
+		\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+		},
+	} % end tikzset. Code from http://tex.stackexchange.com/questions/136143/tikz-animated-figure-in-beamer
+
+\makeatletter
+\renewcommand{\thefigure}{S\thesection.\@arabic\c@figure}
+\renewcommand{\thetable}{S\thesection.\@arabic\c@table}
+\makeatother
+
+%% mathematics
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xfrac}
+
+\usepackage{thmbox} % cf after for "theorem" definitions
+
+\usepackage{gensymb}
+\newcommand {\s}{{s}^{*}}
+
+%%%%%%%%%%%%%%%%%   SET COUNTER		%%%%%%%%%%%%%%%%%
+\setcounter{section}{3}
+
+\begin{document}
+\tableofcontents
+
 \section{Confindence intervals} \label{app::confInt}
 \subsection{Growth}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
-	\input{appendices/confIntPlot/page_1_growth}
+	\input{confIntPlot/page_1_growth}
 	\caption{Confidence intervals for growth, $ \s $ is the growth response to light. \label{fig::confInt_g_1}}
 \end{figure}
+
 \begin{figure}
 	\centering
-	\input{appendices/confIntPlot/page_2_growth}
+	\input{confIntPlot/page_2_growth}
 	\caption{Confidence intervals for growth. \label{fig::confInt_g_2}}
 \end{figure}
+
 \begin{figure}
 	\centering
-	\input{appendices/confIntPlot/page_3_growth}
+	\input{confIntPlot/page_3_growth}
 	\caption{Confidence intervals for growth, $ \s $ is the growth response to light. The colon `$ : $' denotes an interaction between two variables. \label{fig::confInt_g_3}}
 \end{figure}
+
 \begin{figure}
 	\centering
-	\input{appendices/confIntPlot/page_4_growth}
+	\input{confIntPlot/page_4_growth}
 	\caption{Confidence intervals for growth. The colon `$ : $' denotes an interaction between two variables. \label{fig::confInt_g_4}}
 \end{figure}
+
 \begin{figure}
 	\centering
-	\input{appendices/confIntPlot/page_5_growth}
+	\input{confIntPlot/page_5_growth}
 	\caption{Confidence intervals for growth. The colon `$ : $' denotes an interaction between two variables. \label{fig::confInt_g_5}}
 \end{figure}
 
+\clearpage
 \subsection{Mortality}
-\begin{figure}
+\begin{figure}[h]
 	\centering
-	\input{appendices/rhat_distrib}
-	\caption{Distribution of the $ \hat{r} $ for all the parameters (including group effects). The threshold 1.05 is a commonly chosen limit to pinpoints a convergence problem from a chain. At convergence, the $ \hat{r} $ should be 1. The trace plots of the chains and posterior distributions of the parameters are available on github (github link). \label{fig::rhat_conv}}
-\end{figure}
-\begin{figure}
-	\centering
-	\input{appendices/confIntPlot/page_1_mortality}
+	\input{confIntPlot/page_1_mortality}
 	\caption{Confidence intervals for mortality, $ \s $ is the mortality response to light. \label{fig::confInt_m_1}}
 \end{figure}
+
 \begin{figure}
 	\centering
-	\input{appendices/confIntPlot/page_2_mortality}
+	\input{confIntPlot/page_2_mortality}
 	\caption{Confidence intervals for mortality. \label{fig::confInt_m_2}}
 \end{figure}
+
 \begin{figure}
 	\centering
-	\input{appendices/confIntPlot/page_3_mortality}
+	\input{confIntPlot/page_3_mortality}
 	\caption{Confidence intervals for mortality, $ \s $ is the mortality response to light. The colon `$ : $' denotes an interaction between two variables. \label{fig::confInt_m_3}}
 \end{figure}
+
+\begin{figure}[h]
+	\centering
+	\input{rhat_distrib}
+	\caption{Distribution of $ \hat{r} $ for all the parameters (including group effects). The threshold 1.05 is a commonly chosen limit to pinpoints a convergence problem from a chain. At convergence, the $ \hat{r} $ should be 1. The trace plots of the chains and posterior distributions of the parameters are available in Supporting Information Figures S7. \label{fig::rhat_conv}}
+\end{figure}
+
+\end{document}
