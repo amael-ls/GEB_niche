@@ -1,44 +1,156 @@
-\section{Derivation of the net reproduction rate $ R_0 $ and some of its properties} \label{app::calc_R0}
+
+\documentclass[letterpaper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%    PACKAGES    %%%%%%%%%%%%%%%%%%%
+%% Package version
+\listfiles % Then check the .log file
+
+%% Font
+\usepackage{fontspec}
+\usepackage{marvosym}
+
+%% Languages
+\usepackage{polyglossia}
+	\setdefaultlanguage[variant=british]{english}
+
+%% Marges, space...
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{setspace} % [nodisplayskipstretch] pour option space in equation
+
+\usepackage{indentfirst}
+
+\usepackage[bottom]{footmisc}
+\usepackage{footnote}
+
+% https://tex.stackexchange.com/questions/279/how-do-i-ensure-that-figures-appear-in-the-section-theyre-associated-with
+\usepackage[section]{placeins} % To place figures in the section it is declared
+
+%% Graphics
+\usepackage[luatex]{graphicx}
+	\graphicspath{{graphs/}}
+
+\makeatletter 
+\renewcommand{\thefigure}{S\thesection.\@arabic\c@figure}
+\makeatother
+
+\usepackage[dvipsnames, svgnames]{xcolor}
+
+%% Table of content
+\addto\captionsenglish{ % Replace "english" with the language used in babel
+	\renewcommand{\contentsname}{Supporting Information Appendix S1 contents}
+}
+
+\makeatletter 
+\renewcommand{\thefigure}{S\thesection.\@arabic\c@figure}
+\renewcommand{\thetable}{S\thesection.\@arabic\c@table}
+\renewcommand{\theequation}{S\thesection.\arabic{equation}}
+\makeatother
+
+%% Format section
+\usepackage{titlesec}
+\titlelabel{S\thetitle~}
+\usepackage{titletoc}
+\titlecontents{section}[0pt]{}{\bfseries S\thecontentslabel~}{\bfseries}{\hspace{1em plus 1fill}\contentspage}
+
+
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+%% Links
+\usepackage{url}
+\usepackage[luatex, colorlinks=true, linkcolor=NavyBlue, urlcolor=MidnightBlue, citecolor=PineGreen]{hyperref}
+
+%% Table
+\usepackage{booktabs}
+
+%% bibliography
+\usepackage{csquotes}
+\usepackage[style=apa, natbib=true, sorting=ynt]{biblatex}
+\addbibresource{bib_calc_R0.bib}
+
+%% mathematics
+\usepackage{amsthm}
+\usepackage{amsmath}
+	\allowdisplaybreaks % Autoriser découpe formules entres pages
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xfrac}
+\usepackage{etoolbox} % For renumbering (cf below, counter for model)
+
+\usepackage{thmbox} % cf after for "theorem" definitions
+
+\usepackage{gensymb}
+
+%%%%%%%%%%%%%%%%%   NEW COMMANDES    %%%%%%%%%%%%%%%%%
+%% Text
+\newcommand {\ie}{\textit{i.e., }}
+\newcommand {\eg}{\textit{e.g., }}
+\newcommand {\cf}{\textit{cf} }
+\newcommand\bsc[1]{\textsc{\MakeLowercase{#1}}} % Only if there is no french babel
+\newcommand {\thup}[1]{{#1}\textsuperscript{th}}
+
+%% Math
+\newcommand {\s}{{s}^{*}}
+\newcommand {\sst}{\tilde{s}^{*}} % s* stable d'où le st
+\newcommand {\N}{\tilde{N}}
+\newcommand {\A}{\mathscr{A}}
+\newcommand {\K}{\mathcal{K}}
+\renewcommand{\S}{\mathscr{S}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\F}{\mathcal{F}}
+
+\DeclareMathOperator{\logit}{logit}
+
+%%%%%%%%%%%%%%%%%   THEOREM STYLE    %%%%%%%%%%%%%%%%%
+\newtheoremstyle{theo}{\topsep}{\topsep}{\itshape}{}{\bfseries}{.}{\newline}{\thmname{#1} \thmnumber{#2} \thmnote{~: \textit{#3}}}
+\theoremstyle{theo}
+\newtheorem{rem}{Remark}[section]
+\newtheorem{defi}{Definition}[section]
+\newtheorem{assum}{Assumption}[section]
+\newtheorem{nota}{Notation}[section]
+
+\begin{document}
+\tableofcontents
+
 \begin{refsection}
-In this appendix, we derive the net reproduction rate $ R_0(x, \s) $ for a given location $ x $ and a canopy height $ \s $. Finally, we prove that $ R_0(x, \s) $ is a decreasing function of $ \s $ which allows us to make our interpretation in the results section. We suppose that the dispersal kernel $ \K $ is a Dirac, in other words, seeds emitted from $ x $ remain in their source patch $ x $.
+\begin{onehalfspace}
 
-\subsection{Derivation of $ R_0 $ \label{calc_R0::sec::R0}}
-We use the method of characteristics in equation \eqref{eq::dynamics_x}. This method is commonly used in transport equations, like \eqref{eq::dynamics_x} describing the advection of trees at a non-constant speed  $ G $ along the size axis. Characteristics allow us to follow individuals through their life, \ie they represent the trajectories of individuals in the time-size plan (fig. \ref{fig::chara} for an example). Our transport equation requires an initial population at time $ t = 0 $ that we denote by $ \phi(s) $. It is the density of trees of size $ s $ at the beginning.
+\section{Derivation of the net reproduction rate $ R_0 $ and some of its properties} \label{app::calc_R0}
+In this appendix, we derive the net reproduction rate $ R_0(x, \s) $ for a given location $ x $ and a canopy height $ \s $. Then, we prove that $ R_0(x, \s) $ is a decreasing function of $ \s $ which allows us to make our interpretation in the results section. We suppose that the dispersal kernel $ \K $ is a Dirac, in other words, seeds emitted from $ x $ remain in their source patch $ x $. Finally, we compare our study to \citet{Purves2009}.
 
+\subsection{Derivation of $ R_0 $}
 \begin{figure}[h!]
-	\includegraphics{illustrations/chara}
+	\centering
+	\includegraphics[scale = 0.75]{../illustrations/chara}
 	\caption{Characteristics for a constant competition $ \s_c = 2 $, a climatic constant $ \xi_{x, i} = 1 $, and for coefficients $ \beta_0 = \ln(3) $, $ \beta_1 = 1 $ and $ \beta_2 = -1 $. These curves are parameterised by $ \theta $ and allow us to follow a cohort with relative time $ \theta $}
 	\label{fig::chara}
 \end{figure}
-
-Let the canopy height $ \s $ be known with a constant value $ \s_c $, and, let $ s $ and $ t $ be functions of a parameter $ \theta $. By applying the chain rule, we get:
+We use the method of characteristics \citep{Olver2014b} which allows us to follow individuals through their life, \ie the characteristics represent the trajectories of individuals in the time-size plane (fig. \ref{fig::chara} for an example). The transport equation (equation 1 in the main text) requires an initial population at time $ t = 0 $, which we denote by $ \phi(s) $. It is the density of trees of size $ s $ at the beginning. Let the canopy height $ \s $ be known with a constant value $ \s_c $, and, let $ s $ and $ t $ be functions of a parameter $ \theta $. By applying the chain rule, we get:
 \[
 	\frac{d N\big(s(\theta), t(\theta) \big)}{d \theta} = \left. \frac{\partial N}{\partial s} \right|_{(s(\theta), t(\theta))} \frac{ds}{d \theta} +
 			\left. \frac{\partial N}{\partial t} \right|_{(s(\theta), t(\theta))} \frac{dt}{d \theta}
 \]
 We therefore set the characteristic equations to:
-% \begin{align}
-% 	\frac{ds}{d \theta} &= G(s, \s_c) \label{eq::chara_s} \\
-% 		&= \xi_{x, i}(s, \s_c) \exp\left[ -\frac{1}{2} \left( \frac{\ln(s/\phi_{opt})}{\sigma} \right)^2 \right] \nonumber \\
-% 	\frac{dt}{d \theta} &= 1 \label{eq::chara_t}
-% \end{align}
 \begin{align}
 	\frac{ds}{d \theta} &= G(s, \s_c) \label{eq::chara_s} \\
 		&= \xi_{x, i} e^{\beta_0 \mathbb{1}_{[\s_c, \infty[}(s) + \beta_1 s + \beta_2 s^2} \nonumber \\
 	\frac{dt}{d \theta} &= 1 \label{eq::chara_t}
 \end{align}
-where $ \xi_{x, i} $ is a species-specific ($ i $ index) constant depending of the climate at the location $ x $, and $ \mathbb{1}_A $ is the indicator function (\ie $ \mathbb{1}_A (s) $ equals 1 if $ s \in A $ and 0 otherwise). Hence, equation \eqref{eq::dynamics_x} is along the characteristics:
+where $ \xi_{x, i} $ is a species-specific (due to the $ i $ index) constant depending of the climate at the location $ x $, and $ \mathbb{1}_A $ is the indicator function (\ie $ \mathbb{1}_A (s) $ equals 1 if $ s \in A $ and 0 otherwise). Hence, equation 1 (in the paper) is along the characteristics:
 \begin{equation}
 	\frac{dN}{d\theta} = - \left\{ \frac{\partial G}{\partial s}(s, \s, x) + \mu(s, \s, x) \right\} N(\theta) \label{eq::ODE_N}
 \end{equation}
 \begin{nota}[Abusing notations]
-	I am abusing the notations $ N(\theta) $ and $ N\big( s(\theta), t(\theta) \big) $ to make equations easier to read. It would have been more correct to write
+	We are abusing the notations $ N(\theta) $ and $ N\big( s(\theta), t(\theta) \big) $ to make equations easier to read. It would have been more correct to write
 	\[
 		\widetilde{N}(\theta) = N \big(s(\theta), t(\theta) \big)
 	\]
 \end{nota}
 
-For the sake of readability, I drop the $ x $ in $ G $ and $ \mu $, and write $ \exp $ for the exponential function instead of $ e^x $. The solution of \eqref{eq::ODE_N} is:
+For the sake of readability, we drop the $ x $ in $ G $ and $ \mu $, and write $ \exp $ for the exponential function instead of $ e^x $. The solution of equation \eqref{eq::ODE_N} is:
 \begin{equation} \label{eq::sol_ODE_N}
 	N(\theta_1) = N(\theta = 0) \exp \left[-\int_0^{\theta_1} \mu(s, \s_c) + \frac{\partial G}{\partial s}(s, \s_c) \, d\theta \right]
 \end{equation}
@@ -58,7 +170,7 @@ Let us assume that $ S $ admits an inverse, in other words, there exists a funct
 	\tau \big( S(\theta_1, s_{\theta = 0}, \s_c), s_{\theta = 0}, \s_c \big) &= \theta_1 \\
 	S \big(\tau(s_1, s_{\theta = 0}, \s_c), s_{\theta = 0}, \s_c \big) &= s_1
 \end{align*}
-In other words, $ \tau(s_1, s_0, \s_c) $ is the time it requires to grow from $ s_0 $ to $ s_1 $ under competition $ \s_c $. Although, equation \eqref{eq::dynamics_x} cannot be solved analytically (we would need an explicit solution of $ S $ and $ \tau $), the net reproduction rate is still tractable. Indeed, equation \eqref{eq::sol_ODE_N} can be rewritten:
+Then, by definition, $ \tau(s_1, s_0, \s_c) $ is the time it requires to grow from $ s_0 $ to $ s_1 $ under competition $ \s_c $. Although, equation 1 (in the paper) cannot be solved analytically (we would need an explicit solution of $ S $ and $ \tau $), the net reproduction rate is still tractable. Indeed, equation \eqref{eq::sol_ODE_N} can be rewritten:
 \begin{align*}
 	N \big( s(\theta_1), t(\theta_1) \big) &= N( s_{\theta = 0}, t_{\theta = 0}) \exp \left[-\int_0^{\theta_1} \mu(s, \s_c) + \frac{\partial G}{\partial s}(s, \s_c) \, d\theta \right] \\
 	&= N( s_{\theta = 0}, t_{\theta = 0}) \exp \left[-\int_{s_{\theta = 0}}^{s(\theta_1)} \left( \mu(s, \s_c) + \frac{\partial G}{\partial s}(s, \s_c) \right) \frac{d \theta}{ds} \, ds \right] \\
@@ -77,7 +189,7 @@ For characteristics that emerged after time 0 (fourth and fifth curves on fig \r
 	N(s, t) = N \big( 0, t - \tau(s, 0, \s_c) \big) \frac{G(0, \s_c)}{G(s, \s_c)} \exp \left[ -\int_{0}^{s} \frac{\mu(\sigma, \s_c)}{G(\sigma, \s_c)} \, d\sigma \right]
 \end{equation}
 
-The initial population (equation \eqref{eq::sol_init}) goes extinct as $ t $ goes by. Therefore, only equation \eqref{eq::sol_later} is of interest \citep{DeRoos1997}. We now use the boundary condition \eqref{eq::recruitment_x} (once again, we drop the spatial variable $ x $ since the dispersal kernel $ \K $ is a Dirac):
+The initial population (equation \eqref{eq::sol_init}) goes extinct as $ t $ goes by. Therefore, only equation \eqref{eq::sol_later} is of interest \citep{DeRoos1997}. We now use the boundary condition equation 2 (in the paper, once again, we drop the spatial variable $ x $ since the dispersal kernel $ \K $ is a Dirac):
 \begin{align*}
 	N(0, t) G(0, \s_c) &= \int_{0}^{\infty} F(s, \s_c) N(s, t) \, ds \\
 		&= \int_{0}^{\infty} F(s, \s_c) N \big( 0, t - \tau(s, 0, \s_c) \big) \frac{G(0, \s_c)}{G(s, \s_c)} \exp \left[ -\int_{0}^{s} \frac{\mu(\sigma, \s_c)}{G(\sigma, \s_c)} \, d\sigma \right] \, ds
@@ -94,7 +206,7 @@ If $ \tau $ were a known function (which is not the case here), equation \eqref{
 \[
 	\frac{1}{G(s, \s_c)} B \big(t - \tau(s, 0, \s_c), \s_c \big) \exp \left[ -\int_{0}^{s} \frac{\mu(\sigma, \s_c)}{G(\sigma, \s_c)} \, d\sigma \right]
 \]
-is just the density of individuals born $ t - \tau $ times unit ago that survived up to a size in $ [s, s + ds] $ at time $ t $, and $ B $ is the `input flow' per unit time.
+is just the density of individuals born $ t - \tau $ times unit ago and that survived up to a size in $ [s, s + ds] $ at time $ t $, and $ B $ is the inflow per unit time.
 
 Equation \eqref{eq::popBirth} admits an equilibrium only for particular combinations of parameters $ G $, $ \mu $ and $ F $ and since there is no density dependence here ($ \s $ is set to a known value $ \s_c $), then $ B $ ultimately grows or decline exponentially \citep{DeRoos1997}. We therefore substitute the trial solution
 \begin{equation} \label{eq::B_trial}
@@ -109,11 +221,11 @@ Thus, we get:
 \begin{equation} \label{eq::eigen}
 	1 = \int_{0}^{\infty} e^{- \lambda \tau(s, 0, \s_c)} \frac{F(s, \s_c)}{G(s, \s_c)} \exp \left[ -\int_{0}^{s} \frac{\mu(\sigma, \s_c)}{G(\sigma, \s_c)} \, d\sigma \right] \, ds
 \end{equation}
-When $ \lambda $ is setted to 0, the right hand side of \eqref{eq::eigen} becomes:
+When $ \lambda $ is set to 0, the right hand side of \eqref{eq::eigen} becomes:
 \begin{equation} \label{eq::R0_app}
 	\int_{0}^{\infty} \frac{F(s, \s_c)}{G(s, \s_c)} \exp \left[ -\int_{0}^{s} \frac{\mu(\sigma, \s_c)}{G(\sigma, \s_c)} \, d\sigma \right] \, ds
 \end{equation}
-It represents the expected number of seedlings produced by an individual through its lifespan, which is by definition the net reproduction rate $ R_0(\s_c) $ we were looking for (equation \eqref{eq::R0sol}). Given only canopy individuals can reproduce, $ \forall s < \s_c $, $ F(s, \s_c) = 0 $ and $ \forall s \geqslant \s_c $, $ F(s, \s_c) > 0 $ and therefore the lower limit of the integrals can be changed to $ \s_c $ in equation \eqref{eq::R0_app}:
+It represents the expected number of seedlings produced by an individual through its lifespan, which is by definition the net reproduction rate $ R_0(\s_c) $ we were looking for (equation 4 in the paper). Given only canopy individuals can reproduce, $ \forall s < \s_c $, $ F(s, \s_c) = 0 $ and $ \forall s \geqslant \s_c $, $ F(s, \s_c) > 0 $, the lower limit of the integrals can be changed to $ \s_c $ in equation \eqref{eq::R0_app}:
 \[
 	R_0 = \exp \left[- \int_{0}^{\s_c} \frac{\mu(\sigma, \s_c)}{G(\sigma, \s_c)} \, d\sigma \right] \times \int_{\s_c}^{\infty} \frac{F(s, \s_c)}{G(s, \s_c)} \exp \left[ - \int_{\s_c}^{s} \frac{\mu(\sigma, \s_c)}{G(\sigma, \s_c)} \, d\sigma \right] \, ds
 \]
@@ -182,7 +294,7 @@ Define
 		k_1 = \frac{\max(\mu)}{\min(G_1 G_2)} & &
 			\mathscr{D}_1 = \{ s | G_1(s) < G_2(s) \} \\
 		k_2 = \frac{\min(\mu)}{\max(G_1 G_2)} & &
-		 	\mathscr{D}_2 = \{ s | G_1(s) \geqslant G_2(s) \}\\
+				\mathscr{D}_2 = \{ s | G_1(s) \geqslant G_2(s) \}\\
 	\end{matrix}
 \]
 equation \eqref{eq::minor} is:
@@ -214,5 +326,129 @@ where $ f $ is the new recruits per unit time per crown area.
 \end{align*}
 Thus, increasing fecundity augments $ R_0 $, which proves the third assertion.
 
+\subsection{Proofs of the relations between \citet{Purves2009} and our study}
+In this section, we first provide the assumptions concerning the demography in \citet{Purves2009}, and match our notations with his article in the table \ref{tab::notations_purves2009}. Finally, we derive Purves's formul\ae{} from our $ R_0 $ equation 4 (in the paper). Except when specified, Purves refers to \citet{Purves2009} in the following sections.
+\begin{table}[!h]
+	\centering
+	\caption{Link between our notations and \citet{Purves2009}'s notations. Note that he uses the flat-top version of the perfect-plasticity approximation, which implies the fecundity function to be proportional to the trunk area.}
+	\label{tab::notations_purves2009}
+	\begin{tabular}{@{}rll@{}}
+	\toprule
+	\textbf{Meaning} & \textbf{Our notation} & \textbf{\citet{Purves2009}} \\
+	Species index & $ j $, but mostly dropped & $ j $ \\
+	Space & $ x $ & $ R $ (not to be confound with $ R_0 $) \\
+	Time & $ t $ & $ \tau $ \\
+	Threshold diameter & $ \s, \, \s_c $ & $ D^{*} $ \\
+	Net reprod. rate & $ R_0 (x, \s_c) $ & $ R_{0, j, R} $ \\
+	Indiv. growth rate overstorey & $ G(s, \s, x), \, s \geqslant \s $ & $ G_{L, j, R} $ \\
+	Indiv. growth rate understorey & $ G(s, \s, x), \, s < \s $ & $ G_{D, j, R} $ \\
+	Mortality rate overstorey & $ \mu(s, \s, x), \, s \geqslant \s $ & $ \mu_{L, j, R} = \sfrac{1}{\rho_{L, j, R}} $ \\
+	Mortality rate understorey & $ \mu(s, \s, x), \, s < \s $ & $ \mu_{D, j, R} = \sfrac{1}{\rho_{D, j, R}} $ \\
+	Fecundity function & $ \F \A(s, \s) $ & $ F_{j, R}^{\text{capita}} \pi \sfrac{s^2}{4} $ \\
+   \bottomrule
+	\end{tabular}
+\end{table}
+
+\subsubsection{Additional assumptions to our model from \citet{Purves2009}}
+We sum-up here some useful assumptions from Purves. The assumptions are better described in \citet[not to confound with 2009's paper]{Purves2008}.
+\begin{assum}[Flat-top crown] \label{assum::flat-top}
+	The crown is a flat-top disc expressed at the top of the tree, which implies that the area of the crown $ \A(s, \s) $ is independent of its second argument.
+\end{assum}
+
+\begin{assum}[Demographic rates]
+	The individual growth and mortality rates are step functions with the discontinuity at $ \s $:
+	\[
+		G_{j, R}(s, \s) =
+		\begin{cases}
+			G_{L, j, R} & \text{if } s \geqslant \s \\
+			G_{D, j, R} & \text{otherwise}
+		\end{cases}
+	\]
+	\[
+	\mu_{j, R}(s, \s) =
+		\begin{cases}
+			\mu_{L, j, R} & \text{if } s \geqslant \s \\
+			\mu_{D, j, R} & \text{otherwise}
+		\end{cases}
+	\]
+	where $ G_{L, j, R}, \, G_{D, j, R}, \, \mu_{L, j, R}, \, \mu_{D, j, R} $ are estimated constants.
+\end{assum}
+
+\begin{assum}[Fecundity function]
+	Due to the flat-top assumption \ref{assum::flat-top}, the fecundity is simply proportional to the cross-section of the trunk area at breast height:
+	\[
+		F_{j, R} (s, \s) =
+		\begin{cases}
+			\frac{1}{10^4} F_{j, R}^{\text{capita}} \pi s^2 & \text{if } s \geqslant \s \\
+			0 & \text{otherwise}
+		\end{cases}
+	\]
+	The factor $ \frac{1}{10^4} $ corrects for the units of $ F_{j, R}^{\text{capita}} $ (basal area per year, dividing by $ 10^4 $ makes the basal area dimensionless).
+\end{assum}
+
+\begin{assum}[Mortality versus individual growth] \label{assum::negligible}
+	The mortality rate is negligible compare to both 1 and the individual growth rate:
+	\begin{align}
+		\mu_{L, j, R} &\ll 1 \\
+		\mu_{L, j, R} &\ll G_{L, j, R}
+	\end{align}
+\end{assum}
+
+Note that in his supporting information, Purves integrates with respect to time rather than size. In the case trees are always in the overstorey, it is strictly equivalent:
+\[
+	\begin{cases}
+		\frac{ds}{d \tau} = G_{L, j, R} \\
+		s(0) = D^{*}
+	\end{cases}
+\]
+which has the solution:
+\[
+	s(\tau) = \tau G_{L, j, R} + D^{*}
+\]
+This solution is for instance found in equation S11 \citep{Purves2009}.
+
+\subsubsection{$ R_0 $ equation \citep[p. 1479]{Purves2009}}
+Equation 4 (in the paper) is equivalent to equation S10.2 \citep[also p. 1479 in his article]{Purves2009} when $ \s_c = 0 $.
+\begin{proof}
+	Let $ \s_c = 0 $.
+	\begin{align*}
+		R_0 (x, 0) &= \overbrace{e^{-\int_0^{0}\frac{\mu(s, \s_c, x)}{G(s, \s_c, x)} \, ds}}^{= 1} \int_{0}^{\infty} \frac{1}{10^4} \frac{F_{j, R}^{\text{capita}} \pi (\sfrac{s}{2})^2}{G_{L, j, R}} e^{-\int_{0}^{s} \frac{\mu_{L, j, R}}{G_{L, j, R}} \, d\sigma} \, ds \\
+			&= \frac{1}{10^4} \frac{\pi}{4} \frac{F_{j, R}^{\text{capita}}}{G_{L, j, R}} \int_{0}^{\infty} s^2 e^{-\frac{\mu_{L, j, R}}{G_{L, j, R}} s} \, ds \\
+			&= \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} \frac{G_{L, j, R}^2}{\mu_{L, j, R}^3} \\
+			&= \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} G_{L, j, R}^2 \rho_{L, j, R}^3
+	\end{align*}
+\end{proof}
+
+\subsubsection{Proportion of the trees that make up to the canopy}
+Let $ P^{\text{canop}} $ be the proportion of individuals that survive up to the canopy. The quantity $ P^{\text{canop}} $ is derived in Purves' supporting information, a little before equation S11; we can obtain the same result with the first part of equation 4 (in the paper).
+\begin{proof}
+	\begin{align*}
+		P^{\text{canop}} &= e^{-\int_{0}^{D^{*}} \frac{\mu}{G} \, ds} \\
+			&= e^{-\frac{\mu_{D, j, R}}{G_{D, j, R}} D^{*}} \\
+			&= e^{-\frac{D^{*}}{G_{D, j, R}\rho_{D, j, R}}}
+	\end{align*}
+\end{proof}
+
+\subsubsection{$ D^{*} $ at equilibrium \citep[equation S13.2]{Purves2009}}
+Let $ \hat D^{*} $ be the threshold diameter when the (monospecific) population is at equilibrium. We derive equation S13.2 \citep{Purves2009} from our equation 4 (in the paper) using Purves' notations:
+\begin{align*}
+	R^{\text{canop}} &= e^{-\int_{0}^{D^{*}} \frac{\mu_{D, j, R}}{G_{D, j, R}} \, ds} \int_{D^{*}}^{\infty} \frac{1}{10^4} \frac{F_{j, R}^{\text{capita}} \pi (\sfrac{s}{2})^2}{G_{L, j, R}} e^{-\int_{D^{*}}^{s} \frac{\mu_{L, j, R}}{G_{L, j, R}} \, d\sigma} \, ds \\
+		&= e^{\left(\frac{\mu_{L, j, R}}{G_{L, j, R}} - \frac{\mu_{D, j, R}}{G_{D, j, R}} \right) D^{*}} \frac{1}{10^4} \frac{\pi}{4 G_{L, j, R}} F_{j, R}^{\text{capita}} \int_{D^{*}}^{\infty} s^2 e^{-\frac{\mu_{L, j, R}}{G_{L, j, R}} s} \\
+		&= \frac{1}{10^4} \frac{\pi}{4} F_{j, R}^{\text{capita}} e^{- \frac{\mu_{D, j, R}}{G_{D, j, R}} D^{*}} \frac{1}{\mu_{L, j, R}^3} (2 G_{L, j, R}^2 + 2 G_{L, j, R} \mu_{L, j, R} D^{*} + \mu_{L, j, R}^2 {D^{*}}^2)
+\end{align*}
+Using assumption \ref{assum::negligible}, we get a simplified version of $ R^{\text{canop}} $:
+\begin{equation} \label{eq::RcanopApprox}
+	R^{\text{canop}} \approx \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} e^{- \frac{\mu_{D, j, R}}{G_{D, j, R}} D^{*}} \frac{1}{\mu_{D, j, R}^3} G_{L, j, R}^2
+\end{equation}
+At equilibrium, each individual replace itself once in average. Therefore, $ R^{\text{canop}} = 1 $. Solving equation \eqref{eq::RcanopApprox} at equilibrium for $ \hat D^{*} $, we get:
+\[
+	\hat D^{*} = G_{D, j, R} \rho_{D, j, R} \ln \left( \frac{1}{10^4} \frac{\pi}{2} F_{j, R}^{\text{capita}} G_{L, j, R}^2 \rho_{L, j, R}^3 \right) \text{, where } \frac{1}{\mu_{L, j, R}^3} = \rho_{L, j, R}^3,
+\]
+which is the equation S13.2 of Purves.
+\end{onehalfspace}
+
 \printbibliography[heading=subbibliography]
 \end{refsection}
+
+\end{document}
+
