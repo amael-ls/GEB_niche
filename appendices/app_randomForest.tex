@@ -36,6 +36,7 @@
 \makeatletter 
 \renewcommand{\thefigure}{S\thesection.\@arabic\c@figure}
 \renewcommand{\thetable}{S\thesection.\@arabic\c@table}
+\renewcommand{\theequation}{S\thesection.\arabic{equation}}
 \makeatother
 
 \usepackage[dvipsnames, svgnames]{xcolor}
@@ -253,7 +254,7 @@ Where the $ T $s denote temperatures, and the $ P $s the precipitations (all def
 \begin{figure}
 	\centering
 	\input{./demog_Pocc5-8}
-	\caption[$ P_{\text{occ}} $ vs vital rates, species 5-8]{Species-specific correlations between probabilities of occurrence and the vital rates (growth: \CircSteel, and mortality: $ \times $). We added the data of Fig. \ref{fig::3correls} (\MoveUp) which represent the correlation between $ P_{\text{occ}} $ and $ \tilde \rho_0 $. For both demographic rates, we set the dbh at either $ 15 $ cm or $ 60 $ cm (to represent saplings and adults, we expect the saplings to have stronger correlations \citep{Kunstler2019}), while $ \tilde \rho_0 $ integrates all the possible sizes. We used an averaged climate from 2006 to 2010 at the permanent plots (which were the training dataset of the random forest). Dark blue colour is for the rates with competition, and light blue for those without competition). \label{fig::demog_Pocc5-8}}
+	\caption[$ P_{\text{occ}} $ vs vital rates, species 5-8]{Species-specific correlations between probabilities of occurrence and the vital rates (growth: \CircSteel, and mortality: $ \times $). We added the data of Fig. 5 in the paper (\MoveUp) which represent the correlation between $ P_{\text{occ}} $ and $ \tilde \rho_0 $. For both demographic rates, we set the dbh at either $ 15 $ cm or $ 60 $ cm (to represent saplings and adults, we expect the saplings to have stronger correlations \citep{Kunstler2019}), while $ \tilde \rho_0 $ integrates all the possible sizes. We used an averaged climate from 2006 to 2010 at the permanent plots (which were the training dataset of the random forest). Dark blue colour is for the rates with competition, and light blue for those without competition). \label{fig::demog_Pocc5-8}}
 \end{figure}
 
 \begin{figure}
