@@ -1,5 +1,186 @@
-\section{Supplementary information of growth ($ G $), and mortality ($ \mu $) parameterisation} \label{app::glmm}
+
+\documentclass[letterpaper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%	PACKAGES	%%%%%%%%%%%%%%%%%%%
+%% Package version
+\listfiles % Then check the .log file
+
+%% Font
+\usepackage{fontspec}
+\usepackage{marvosym}
+
+%% Languages
+\usepackage{polyglossia}
+	\setdefaultlanguage[variant=british]{english}
+
+%% Marges, space...
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{setspace} % [nodisplayskipstretch] pour option space in equation
+
+\usepackage{indentfirst}
+
+\usepackage[bottom]{footmisc}
+\usepackage{footnote}
+
+% https://tex.stackexchange.com/questions/279/how-do-i-ensure-that-figures-appear-in-the-section-theyre-associated-with
+\usepackage[section]{placeins} % To place figures in the section it is declared
+
+%% Graphics
+\usepackage[luatex]{graphicx}
+	\graphicspath{{../graphs/}}
+
+\usepackage{caption}
+\usepackage{subcaption}
+	\captionsetup{subrefformat=parens}
+
+\makeatletter 
+\renewcommand{\thefigure}{S\thesection.\@arabic\c@figure}
+\renewcommand{\thetable}{S\thesection.\@arabic\c@table}
+\renewcommand{\theequation}{S\thesection.\arabic{equation}}
+\makeatother
+
+\usepackage[dvipsnames, svgnames]{xcolor}
+
+\usepackage{tikz}
+	\usetikzlibrary{arrows, plotmarks, decorations.markings}
+	\tikzstyle{arrow} = [->,>=stealth,thick,rounded corners=4pt,line width=1pt]
+	\usetikzlibrary{shadows}
+	\usetikzlibrary{shadings}
+	\usetikzlibrary{positioning} % relative coodinate
+	\usetikzlibrary{tikzmark, calc} % calc, to calculate coordinate
+	\usetikzlibrary{decorations.pathmorphing} % to snake an arrow
+	\usetikzlibrary{shapes.arrows}
+	\usetikzlibrary{patterns}
+
+%% Table of content
+\addto\captionsenglish{ % Replace "english" with the language used in babel
+	\renewcommand{\contentsname}{Supporting Information Appendix S3 contents}
+}
+
+%% Format section
+\usepackage{titlesec}
+\titlelabel{S\thetitle~}
+\usepackage{titletoc}
+\titlecontents{section}[0pt]{}{\bfseries S\thecontentslabel~}{\bfseries}{\hspace{1em plus 1fill}\contentspage}
+
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+%% Links
+\usepackage{url}
+\usepackage[luatex, colorlinks=true, linkcolor=NavyBlue, urlcolor=MidnightBlue, citecolor=PineGreen]{hyperref}
+
+%% Table
+\usepackage{booktabs}
+
+%% bibliography
+\usepackage{csquotes}
+\usepackage[style=apa, natbib=true, sorting=ynt]{biblatex}
+\addbibresource{bib_glmm.bib}
+
+%% mathematics
+\usepackage{amsthm}
+\usepackage{amsmath}
+	\allowdisplaybreaks % Autoriser découpe formules entres pages
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xfrac}
+\usepackage{etoolbox} % For renumbering (cf below, counter for model)
+
+\usepackage{thmbox} % cf after for "theorem" definitions
+
+\usepackage{gensymb}
+
+% Creation of a new counter for the models, from:
+% https://tex.stackexchange.com/questions/84254/how-to-create-new-counter-of-equation
+\newcounter{growthCounter}
+\renewcommand*{\thegrowthCounter}{G\arabic{growthCounter}}
+
+\makeatletter
+\def\@equationname{equation}
+\newenvironment{g}[1]{%
+	\def\mymathenvironmenttouse{#1}%
+	\ifx\mymathenvironmenttouse\@equationname%
+		\refstepcounter{growthCounter}%
+	\else
+		\patchcmd{\@arrayparboxrestore}{equation}{growthCounter}{}{}%		doesn't change output?
+		\patchcmd{\print@eqnum}{equation}{growthCounter}{}{}%
+		\patchcmd{\incr@eqnum}{equation}{growthCounter}{}{}%
+	\fi
+	\csname\mymathenvironmenttouse\endcsname%
+}{%
+	\ifx\mymathenvironmenttouse\@equationname%
+		\tag{\thegrowthCounter}%
+	\fi
+	\csname end\mymathenvironmenttouse\endcsname%
+}
+\makeatother
+
+
+\newcounter{mortalityCounter}
+\renewcommand*{\themortalityCounter}{M\arabic{mortalityCounter}}
+
+\makeatletter
+\def\@equationname{equation}
+\newenvironment{m}[1]{%
+	\def\mymathenvironmenttouse{#1}%
+	\ifx\mymathenvironmenttouse\@equationname%
+		\refstepcounter{mortalityCounter}%
+	\else
+		\patchcmd{\@arrayparboxrestore}{equation}{mortalityCounter}{}{}%		  doesn't change output?
+		\patchcmd{\print@eqnum}{equation}{mortalityCounter}{}{}%
+		\patchcmd{\incr@eqnum}{equation}{mortalityCounter}{}{}%
+	\fi
+	\csname\mymathenvironmenttouse\endcsname%
+}{%
+	\ifx\mymathenvironmenttouse\@equationname%
+		\tag{\themortalityCounter}%
+	\fi
+	\csname end\mymathenvironmenttouse\endcsname%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%   NEW COMMANDES	%%%%%%%%%%%%%%%%%
+%% Text
+\newcommand {\ie}{\textit{i.e., }}
+\newcommand {\eg}{\textit{e.g., }}
+\newcommand {\cf}{\textit{cf} }
+\newcommand\bsc[1]{\textsc{\MakeLowercase{#1}}} % Only if there is no french babel
+\newcommand {\thup}[1]{{#1}\textsuperscript{th}}
+
+%% Math
+\newcommand {\s}{{s}^{*}}
+\newcommand {\sst}{\tilde{s}^{*}} % s* stable d'où le st
+\newcommand {\N}{\tilde{N}}
+\newcommand {\A}{\mathscr{A}}
+\newcommand {\K}{\mathcal{K}}
+\renewcommand{\S}{\mathscr{S}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\F}{\mathcal{F}}
+
+\DeclareMathOperator{\logit}{logit}
+
+%%%%%%%%%%%%%%%%%   THEOREM STYLE	%%%%%%%%%%%%%%%%%
+\newtheoremstyle{theo}{\topsep}{\topsep}{\itshape}{}{\bfseries}{.}{\newline}{\thmname{#1} \thmnumber{#2} \thmnote{~: \textit{#3}}}
+\theoremstyle{theo}
+\newtheorem{rem}{Remark}[section]
+\newtheorem{defi}{Definition}[section]
+\newtheorem{assum}{Assumption}[section]
+\newtheorem{nota}{Notation}[section]
+
+%%%%%%%%%%%%%%%%%   SET COUNTER		%%%%%%%%%%%%%%%%%
+\setcounter{section}{2}
+
+\begin{document}
+\tableofcontents
+
 \begin{refsection}
+\begin{onehalfspace}
+
+\section{Supplementary information of growth ($ G $), and mortality ($ \mu $) parameterisation} \label{app::glmm}
 \subsection{Selection of the individual tree growth model}
 For the growth model selection, we applied a top-down four-step strategy \citep[Chapter 5]{Zuur2009}:
 \begin{enumerate}
@@ -9,7 +190,7 @@ For the growth model selection, we applied a top-down four-step strategy \citep[
 	\item The final model is then run with ReML
 \end{enumerate}
 
-We created four models, all containing the same fixed-structure (equation \eqref{eq::fixedStructureBeyond_OM} written in a `R-style', temp stands for temperature, and precip for precipitation), and differ only on the random structure. Each model corresponds to a hypothesis on the correlation structure within individuals (Tab. \ref{tab::randomStructure}). The model 1 assumes individuals from the same plot to be correlated (whatever the year of measurement), while model 2 add a temporal correlation within the plot. In model 3, we hypothesised trees to be spatially correlated (the plot), temporally correlated at large spatial scale (the year of measurement), and lastly, time-related at local spatial scale (the year within the plot). Eventually, model 4 tests whether or not the correlation structure is temporal, locally spatial dependent.
+We created four models, all containing the same fixed-structure (equation \eqref{eq::fixedStructureBeyond_OM} written in a `R-style', temp stands for temperature, and precip for precipitation), and differ only on the random structure. Each model corresponds to a hypothesis on the correlation structure within individuals (Tab. \ref{tab::randomStructure}). The model 1 assumes individuals from the same plot to be correlated (whatever the year of measurement), while model 2 add a temporal correlation within the plot. In model 3, we hypothesised trees to be spatially correlated (the plot), temporally correlated at large spatial scale (the year of measurement), and lastly, time-related at local spatial scale (the year within the plot). Eventually, model 4 tests whether or not the correlation structure is temporal and locally spatial dependent.
 
 \begin{equation} \label{eq::fixedStructureBeyond_OM}
 \begin{split}
@@ -85,7 +266,7 @@ We found that in average, the annual mean temperature and annual precipitations,
 
 \begin{table}
 	\centering
-	\caption{Summary of the different growth models for \textit{Acer saccharum} to select the fixed effect structure of growth. We used Maximum Likelihood (ML) method to be able to compare the AICc \citep{AICcmodavg}; the selected model was then fit using Restricted Maximum Likelihood (ReML). $ T_a $, $ P_a $, and $ cs $ denote the annual temperature and precipitation, and the canopy status respectively (more details in table \ref{tab::bioclim}). \dag climatic and dbh variables have quadratic terms. $ \flat $ canopy status and climate interact. $ \sharp $ climate and dbh interact. The ratio $ \varphi $ is defined by equation \eqref{eq::ratio}. \label{tab::acsa_fixeff}}
+	\caption{Summary of the different growth models for \textit{Acer saccharum} to select the fixed effect structure of growth. We used Maximum Likelihood (ML) method to be able to compare the AICc \citep{AICcmodavg}; the selected model was then fit using Restricted Maximum Likelihood (ReML). $ T_a $, $ P_a $, and $ cs $ denote the annual temperature and precipitation, and the canopy status respectively (more details in table S2.3, Supporting Information S2). \dag climatic and dbh variables have quadratic terms. $ \flat $ canopy status and climate interact. $ \sharp $ climate and dbh interact. The ratio $ \varphi $ is defined by equation 6 in the paper. \label{tab::acsa_fixeff}}
 	\begin{tabular}{@{}rclll@{}}
 	\toprule
 	\multicolumn{1}{c}{\textbf{Model}} & \multicolumn{1}{c}{\textbf{Equation}} & \multicolumn{1}{c}{$ \bm{\varphi} $} & \multicolumn{1}{c}{$ \bm{R^2_m} $} & \multicolumn{1}{c}{$ \bm{R^2_c} $} \\
@@ -104,8 +285,8 @@ We found that in average, the annual mean temperature and annual precipitations,
 	\end{tabular}
 \end{table}
 
-We provide here the 16 models used to select the best climatic explanatory variables. They are written in a `R-style', and can be ran from the file glmm\_ReML=FALSE.R:
-
+\clearpage
+We provide here the 16 models used to select the best climatic explanatory variables. They are written in a `R-style', and can be run from the file glmm\_ReML=FALSE.R (see data statement for the github link):
 \begin{g}{align}
 	\begin{split} \label{eq::model1}
 		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
@@ -189,9 +370,9 @@ We provide here the 16 models used to select the best climatic explanatory varia
 			& (cs + dbh + dbh^2) * (T_w + T_w^2 + P_w + P_w^2)
 	\end{split}
 \end{g}
-where $ cs $ is the canopy status (boolean, true if the individual is in the understorey, false otherwise), and $ dbh $ the diameter at breast height.
+where $ cs $ is the canopy status (boolean, true if the individual is in the overstorey, false if otherwise), and $ dbh $ the diameter at breast height.
 
-The following list of equations is to evaluate the impact of climate and size on growth (which is our second objective).
+The following list of equations is to evaluate the impact of climate and size on growth.
 \begin{g}{align}
 	\begin{split} \label{eq::model17}
 		\text{growth} \sim 1 +{} &(1 | x) + (1 | t) + (1 | x:t) +{} \\
@@ -281,7 +462,7 @@ For the mortality model, we first select the climatic variables, and then compar
 	\end{tabular}
 \end{table}
 
-We provide here the 7 models used to select the best climatic explanatory variables. They are written in a `R-style', and can be ran from the file rstanarm.R (use the file selectClimaticVariables.R):
+We provide here the 7 models used to select the best climatic explanatory variables. They are written in a `R-style', and can be ran from the file rstanarm.R (use the file selectClimaticVariables.R, se data statement for the github link):
 \begin{m}{align}
 	\begin{split} \label{eq::model_mu1}
 		\text{deltaState} \sim 1 +{} & \text{offset}\big( \log(\Delta t) \big) +{} \\
@@ -359,7 +540,7 @@ The following list of equations is to evaluate the impact of climate and size on
 
 \subsection{Complementary log-log function}
 \subsubsection{How to account for $ \Delta t $?}
-Here we show that the complementary log-log function $ g $ can take into account the time interval between to surveys. Let $ \mu $ be a probability, and $ \eta $ a linear predictor:
+Here we show that the complementary log-log function $ g $ can take into account the time interval between two surveys. Let $ \mu $ be a probability, and $ \eta $ a linear predictor:
 \begin{align*}
 	g(\mu) &= \eta \\
 		&= \beta_0 + \sum_{i = 1}^{n} \beta_i x_i
@@ -413,11 +594,11 @@ It is easy to see from equation \eqref{eq::sign_eta} that for $ \beta_2 > 0 $, w
 which is what we want (incidentally, the optimal condition is reached for $ x = -\sfrac{\beta_1}{2\beta_2}$).
 
 \subsection{Shade tolerance information}
-The 14 parameterised species are listed in table \ref{tab::species}, with their vernacular name, scientific name and species code. We report the estimated canopy status effect from growth and mortality estimations (Tab. \ref{tab::cs}), and the shade tolerance informations \citet{Burns1990, Burns1990a} used to make Fig. \ref{fig::groups} and \ref{fig::groups_mu}.
+The 14 parameterised species are listed in table S2.1 (Supporting Information Appendix S2), with their vernacular name, scientific name and species code. We report the estimated canopy status effect from growth and mortality estimations (Tab. \ref{tab::cs}), and the shade tolerance informations \citet{Burns1990, Burns1990a} used to make Fig. 2 (c \& d) in the paper.
 
 \begin{table}[h!]
 \centering
-\caption{Estimated values of canopy status (cs) effect for growth ($ G $), and mortality ($ \mu $). These values are used in the Figs \ref{fig::groups} and \ref{fig::groups_mu}. A shade tolerance level---High(H), Medium (M) or Low (L)---is associated to each species according to \citet{Burns1990, Burns1990a}, and the page column specifies where the information has been found. \label{tab::cs}}
+\caption{Estimated values of canopy status (cs) effect for growth ($ G $), and mortality ($ \mu $). These values are used in the Fig. 2 (c \& d). A shade tolerance level---High(H), Medium (M) or Low (L)---is associated to each species according to \citet{Burns1990, Burns1990a}, and the page column specifies where the information has been found. \label{tab::cs}}
 \begin{tabular}{@{}rcccc@{}}
 	\toprule
 	\bfseries{species} & \bfseries{cs} ($ G $) & \bfseries{cs} ($ \mu $) & \bfseries{Tolerance level} & \bfseries{Page} \\
@@ -440,32 +621,33 @@ The 14 parameterised species are listed in table \ref{tab::species}, with their 
 \end{tabular}
 \end{table}
 
-\subsection{Growth function and uncertainties}
-We plot here the growth of the 14 species in function of dbh.
+\subsection{Extrapolations and uncertainties of individual growth and mortality functions}
+We plot here the individual growth and mortality of the 14 species in function of dbh. For mortality, note that not all the species have the expected u-shape, that is commonly seen in mortality functions \citep{Lines2010}. The u-shape can only be obtained with a positive dbh coefficient, while the hump shape is associated to a negative coefficient (see equation \eqref{eq::sign_eta}).
+
 \begin{figure}[htb] %% -- first part
 	\centering
 	%% First row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/18032-ABI-BAL_G_dbh}
+		\input{../graphs/18032-ABI-BAL_G_dbh}
 		\caption{\textit{Abies balsamea}}
 		\label{fig::abibal_G_dbh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/28731-ACE-SAC_G_dbh}
+		\input{../graphs/28731-ACE-SAC_G_dbh}
 		\caption{\textit{Acer saccharum}}
 		\label{fig::acesac_G_dbh}
 	\end{subfigure}
 	\medskip
 	%% Second row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/28728-ACE-RUB_G_dbh}
+		\input{../graphs/28728-ACE-RUB_G_dbh}
 		\caption{\textit{Acer rubrum}}
 		\label{fig::acerub_G_dbh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/19481-BET-ALL_G_dbh}
+		\input{../graphs/19481-BET-ALL_G_dbh}
 		\caption{\textit{Betula alleghaniensis}}
 		\label{fig::betal_G_dbh}
 	\end{subfigure}
@@ -475,26 +657,26 @@ We plot here the growth of the 14 species in function of dbh.
 	\centering
 	%% First row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/19489-BET-PAP_G_dbh}
+		\input{../graphs/19489-BET-PAP_G_dbh}
 		\caption{\textit{Betula papyrifera}}
 		\label{fig::betap_G_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/19462-FAG-GRA_G_dbh}
+		\input{../graphs/19462-FAG-GRA_G_dbh}
 		\caption{\textit{Fagus grandifolia}}
 		\label{fig::faggran_G_dbh}
 	\end{subfigure}
 	\medskip
 	%% Second row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183295-PIC-GLA_G_dbh}
+		\input{../graphs/183295-PIC-GLA_G_dbh}
 		\caption{\textit{Picea glauca}}
 		\label{fig::picgla_G_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183302-PIC-MAR_G_dbh}
+		\input{../graphs/183302-PIC-MAR_G_dbh}
 		\caption{\textit{Picea mariana}}
 		\label{fig::picmar_G_dbh}
 	\end{subfigure}
@@ -504,26 +686,26 @@ We plot here the growth of the 14 species in function of dbh.
 	\centering
 	%% First row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/18034-PIC-RUB_G_dbh}
+		\input{../graphs/18034-PIC-RUB_G_dbh}
 		\caption{\textit{Picea rubens}}
 		\label{fig::picrub_G_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183319-PIN-BAN_G_dbh}
+		\input{../graphs/183319-PIN-BAN_G_dbh}
 		\caption{\textit{Pinus banksiana}}
 		\label{fig::pinban_G_dbh}
 	\end{subfigure}
 	\medskip
 	%% Second row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183385-PIN-STR_G_dbh}
+		\input{../graphs/183385-PIN-STR_G_dbh}
 		\caption{\textit{Pinus strobus}}
 		\label{fig::pinstr_G_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/195773-POP-TRE_G_dbh}
+		\input{../graphs/195773-POP-TRE_G_dbh}
 		\caption{\textit{Populus tremuloides}}
 		\label{fig::poptre_G_dbh}
 	\end{subfigure}
@@ -533,13 +715,13 @@ We plot here the growth of the 14 species in function of dbh.
 	\centering
 	%% First row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/505490-THU-OCC_G_dbh}
+		\input{../graphs/505490-THU-OCC_G_dbh}
 		\caption{\textit{Thuja occidentalis}}
 		\label{fig::thuocc_G_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183397-TSU-CAN_G_dbh}
+		\input{../graphs/183397-TSU-CAN_G_dbh}
 		\caption{\textit{Tsuga canadensis}}
 		\label{fig::tsucan_G_dbh}
 	\end{subfigure}
@@ -547,33 +729,30 @@ We plot here the growth of the 14 species in function of dbh.
 	\label{fig::12speciesG_dbh}
 \end{figure}
 
-\subsection{Extrapolations of mortality function}
-We plot here the mortality of the 13 remaining species in function of dbh. Note that not all the species have the expected u-shape, that is commonly seen in mortality functions \citep{Lines2010}. The u-shape can only be obtained with a negative dbh coefficient, while the hump shape is associated to a positive coefficient.
-
 \begin{figure}[htb] %% -- first part
 	\centering
 	%% First row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/18032-ABI-BAL_M_dbh}
+		\input{../graphs/18032-ABI-BAL_M_dbh}
 		\caption{\textit{Abies balsamea}}
 		\label{fig::abibal_M_dbh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/28731-ACE-SAC_M_dbh}
+		\input{../graphs/28731-ACE-SAC_M_dbh}
 		\caption{\textit{Acer saccharum}}
 		\label{fig::acesac_M_dbh}
 	\end{subfigure}
 	\medskip
 	%% Second row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/28728-ACE-RUB_M_dbh}
+		\input{../graphs/28728-ACE-RUB_M_dbh}
 		\caption{\textit{Acer rubrum}}
 		\label{fig::acerub_M_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/19481-BET-ALL_M_dbh}
+		\input{../graphs/19481-BET-ALL_M_dbh}
 		\caption{\textit{Betula alleghaniensis}}
 		\label{fig::betal_M_dbh}
 	\end{subfigure}
@@ -583,26 +762,26 @@ We plot here the mortality of the 13 remaining species in function of dbh. Note 
 	\centering
 	%% First row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/19489-BET-PAP_M_dbh}
+		\input{../graphs/19489-BET-PAP_M_dbh}
 		\caption{\textit{Betula papyrifera}}
 		\label{fig::betap_M_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/19462-FAG-GRA_M_dbh}
+		\input{../graphs/19462-FAG-GRA_M_dbh}
 		\caption{\textit{Fagus grandifolia}}
 		\label{fig::faggran_M_dbh}
 	\end{subfigure}
 	\medskip
 	%% Second row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183295-PIC-GLA_M_dbh}
+		\input{../graphs/183295-PIC-GLA_M_dbh}
 		\caption{\textit{Picea glauca}}
 		\label{fig::picgla_M_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183302-PIC-MAR_M_dbh}
+		\input{../graphs/183302-PIC-MAR_M_dbh}
 		\caption{\textit{Picea mariana}}
 		\label{fig::picmar_M_dbh}
 	\end{subfigure}
@@ -612,26 +791,26 @@ We plot here the mortality of the 13 remaining species in function of dbh. Note 
 	\centering
 	%% First row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/18034-PIC-RUB_M_dbh}
+		\input{../graphs/18034-PIC-RUB_M_dbh}
 		\caption{\textit{Picea rubens}}
 		\label{fig::picrub_M_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183319-PIN-BAN_M_dbh}
+		\input{../graphs/183319-PIN-BAN_M_dbh}
 		\caption{\textit{Pinus banksiana}}
 		\label{fig::pinban_M_dbh}
 	\end{subfigure}
 	\medskip
 	%% Second row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183385-PIN-STR_M_dbh}
+		\input{../graphs/183385-PIN-STR_M_dbh}
 		\caption{\textit{Pinus strobus}}
 		\label{fig::pinstr_M_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/195773-POP-TRE_M_dbh}
+		\input{../graphs/195773-POP-TRE_M_dbh}
 		\caption{\textit{Populus tremuloides}}
 		\label{fig::poptre_M_dbh}
 	\end{subfigure}
@@ -641,13 +820,13 @@ We plot here the mortality of the 13 remaining species in function of dbh. Note 
 	\centering
 	%% First row
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/505490-THU-OCC_M_dbh}
+		\input{../graphs/505490-THU-OCC_M_dbh}
 		\caption{\textit{Thuja occidentalis}}
 		\label{fig::thuocc_M_dbh}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.48\textwidth}
-		\input{graphs/183397-TSU-CAN_M_dbh}
+		\input{../graphs/183397-TSU-CAN_M_dbh}
 		\caption{\textit{Tsuga canadensis}}
 		\label{fig::tsucan_M_dbh}
 	\end{subfigure}
@@ -655,5 +834,10 @@ We plot here the mortality of the 13 remaining species in function of dbh. Note 
 	\label{fig::12speciesM_dbh}
 \end{figure}
 
+\end{onehalfspace}
+
+\clearpage
 \printbibliography[heading=subbibliography]
 \end{refsection}
+
+\end{document}
