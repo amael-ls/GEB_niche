@@ -137,6 +137,8 @@
 
 \begin{document}
 \tableofcontents
+\listoftables
+\listoffigures
 
 \begin{refsection}
 \begin{onehalfspace}
@@ -147,7 +149,7 @@ We used an abbreviation for each species, that we list in Tab. \ref{tab::species
 
 \begin{table}[h!]
 \centering
-\caption{Species list, and the abbreviation used in the other tables\label{tab::species}. The last three columns are the maximal dbh, the maximal age, and the page of \citet{Burns1990, Burns1990a} at which we found the informations.}
+\caption[Scientific and vernacular name of the 14 species]{Species list, and the abbreviation used in the other tables\label{tab::species}. The last three columns are the maximal dbh, the maximal age, and the page of \citet{Burns1990, Burns1990a} at which we found the informations.}
 \label{tab::database}
 \begin{tabular}{rlllll}
 	\toprule
@@ -173,7 +175,7 @@ We used an abbreviation for each species, that we list in Tab. \ref{tab::species
 
 \begin{table}[ht]
 \centering
-\caption{Number of individual measurements in the database, and geographical extent for each species (before cropping, see Fig. \ref{fig::mapDatabase} for the crop extent). There are \num{3816854} individual measurements in total. We used the projection system WGS 84 (EPSG:4326) for this table.}
+\caption[Species-specific satial extent and number of measurements]{Number of individual measurements in the database, and geographical extent for each species (before cropping, see Fig. \ref{fig::mapDatabase} for the crop extent). There are \num{3816854} individual measurements in total. We used the projection system WGS 84 (EPSG:4326) for this table.}
 \label{tab::spaceRange}
 \begin{tabular}{lrrrrr}
 	\toprule
@@ -214,13 +216,13 @@ We used an abbreviation for each species, that we list in Tab. \ref{tab::species
 		\caption{Annual precipitation $ P_a $ (left), and minimal precipitation $ P_m $(right) range for each species. The vertical line is the average among species, and the dark circles are the species-specific mean.}
 		\label{fig::annual_precipitation}
 	\end{subfigure}
-\caption{Species-specific \subref{fig::annual_mean_temperature} temperature ranges and \subref{fig::annual_precipitation} precipitation ranges. The definitions of $ T_a, \, T_m, \, P_a, \, P_m $ are in table \ref{tab::bioclim}.}
+\caption[Species climatic range]{Species-specific \subref{fig::annual_mean_temperature} temperature ranges and \subref{fig::annual_precipitation} precipitation ranges. The definitions of $ T_a, \, T_m, \, P_a, \, P_m $ are in table \ref{tab::bioclim}.}
 \label{fig::speciesClimRange}
 \end{figure}
 
 \begin{table}[h!]
 \centering
-\caption{Bioclimatic variables list \citep{McKenney2011}. \label{tab::bioclim}}
+\caption[Bioclimatic variables list]{Bioclimatic variables list \citep{McKenney2011}. \label{tab::bioclim}}
 \begin{tabular}{p{6.75cm}p{9cm}}
 	\toprule
 	\textbf{Name} & \textbf{Description} \\
@@ -251,7 +253,7 @@ We used an abbreviation for each species, that we list in Tab. \ref{tab::species
 \begin{figure}[htb]
     \centering
 	\includegraphics[scale=0.5]{../graphs/mapDatabase}
-	\caption{Map of the data we used, ranging from 1963 to 2010. Each point represents a location where there is at least one record. The orange rectangle is the bounding box of the data. We used it to crop all the maps concerning $ R_0 $. For aesthetic reasons and familiarity, the projection for this map is EPSG:4269. For all the maps in Supporting Information S5, the projection is EPSG:2163}
+	\caption[Map database and cropping box]{Map of the data we used, ranging from 1963 to 2010. Each point represents a location where there is at least one record. The orange rectangle is the bounding box of the data. We used it to crop all the maps concerning $ R_0 $. For aesthetic reasons and familiarity, the projection for this map is EPSG:4269. For all the maps in Supporting Information S5, the projection is EPSG:2163}
 \label{fig::mapDatabase}
 \end{figure}
 
@@ -262,67 +264,67 @@ For each species, we separated the latitudes within three regions (Fig. \ref{fig
 \begin{figure}
 	\centering
 	\input{selectRegion}
-	\caption{We defined the three regions for the Figs. \ref{fig::growthVar1-3}--\ref{fig::mortalityVar13-14} as follow: for species-specific data, (\textit{i}) compute the centroid of the data, (\textit{ii}) find the middle point between the maximum latitude of the data and the centroid to define the northern region, and (\textit{iii}) same with the minimum latitude of the data to define the southern region. Everything else is the middle region. \label{fig::defineRegion}}
+	\caption[Definition 3 regions]{We defined the three regions for the Figs. \ref{fig::growthVar1-3}--\ref{fig::mortalityVar13-14} as follow: for species-specific data, (\textit{i}) compute the centroid of the data, (\textit{ii}) find the middle point between the maximum latitude of the data and the centroid to define the northern region, and (\textit{iii}) same with the minimum latitude of the data to define the southern region. Everything else is the middle region. \label{fig::defineRegion}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{growthVar1-3}
-	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar1-3}}
+	\caption[Growth variation, species 1--3]{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar1-3}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{growthVar4-6}
-	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar4-6}}
+	\caption[Growth variation, species 4--6]{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar4-6}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{growthVar7-9}
-	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar7-9}}
+	\caption[Growth variation, species 7--9]{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar7-9}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{growthVar10-12}
-	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar10-12}}
+	\caption[Growth variation, species 10--12]{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar10-12}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{growthVar13-14}
-	\caption{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar13-14}}
+	\caption[Growth variation, species 13--14]{Variance of the growth data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. The box plots represent the $ 2.5 \%$ quantile, the $ 25 \% $, the median ($ 50 \% $), the $ 75 \% $ quantile, and the $ 97.5 \% $ quantile. The dots are outliers. \label{fig::growthVar13-14}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{mortalityVar1-3}
-	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar1-3}}
+	\caption[Mortality variation, species 1--3]{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar1-3}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{mortalityVar4-6}
-	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVa4-6}}
+	\caption[Mortality variation, species 4--6]{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVa4-6}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{mortalityVar7-9}
-	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVa7-9}}
+	\caption[Mortality variation, species 7--9]{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVa7-9}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{mortalityVar10-12}
-	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar10-12}}
+	\caption[Mortality variation, species 10--12]{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar10-12}}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\input{mortalityVar13-14}
-	\caption{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar13-14}}
+	\caption[Mortality variation, species 13--14]{Variance of the mortality data. The three regions were determined following the method describe by the figure \ref{fig::defineRegion}. \label{fig::mortalityVar13-14}}
 \end{figure}
 
 \end{onehalfspace}
