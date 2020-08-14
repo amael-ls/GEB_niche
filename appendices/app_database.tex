@@ -8,6 +8,7 @@
 %% Font
 \usepackage{fontspec}
 \usepackage{marvosym}
+\usepackage{fontawesome5}
 
 %% Languages
 \usepackage{polyglossia}
@@ -70,8 +71,10 @@
 \usepackage{titletoc}
 \titlecontents{section}[0pt]{}{\bfseries S\thecontentslabel~}{\bfseries}{\hspace{1em plus 1fill}\contentspage}
 
-
 \usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+%% Pseudo-code typing
+\usepackage[algoruled,vlined]{algorithm2e}
 
 %% Links
 \usepackage{url}
@@ -257,7 +260,43 @@ We used an abbreviation for each species, that we list in Tab. \ref{tab::species
 \label{fig::mapDatabase}
 \end{figure}
 
-\clearpage
+\subsection{Algorithm to compute $ \s $}
+We describe here in pseudo-code the algorithm to compute $ \s $ (see the Data Statement for the R code). Basically, we look for $ \s $ using a dichotomy.
+\begin{algorithm}[!h]
+	% Set keywords input/output
+	\SetKwInOut{Input}{input}
+	\SetKwInOut{Output}{output}
+
+	% Set keywords variables' type
+	% \SetKwData{Int}{int}
+	\SetKwData{Double}{double}
+	\SetKwData{Vec}{vector}
+
+	% Set keywords functions' name
+	\SetKwFunction{Fec}{SeedProduction}
+	\SetKwFunction{Disp}{SeedDispersion}
+	\SetKwFunction{Growth}{Growth}
+	\SetKwFunction{Mortality}{Mortality}
+	
+	% Algorithm
+	\Input{Vector of trees' height, double plot area, double tolerance}
+	\Output{$ \s $}
+	\BlankLine
+	\Double upperBound = max(height) \;
+	\Double lowerBound = 0 \;
+	\While{upperBound - lowerBound > tolerance}{
+		$ \s = \sfrac{(\text{lowerBound} + \text{upperBound})}{2} $ \;
+		$ \text{sumArea} = \sum_{s > \s} \text{crownArea}(s) $ \;
+		\If{sumArea < plotArea}{
+			upperBound = $ \s $ \;
+		}
+		\Else{
+			lowerBound = $ \s $ \;
+		}
+	}
+	\caption{Algorithm (dichotomy) to compute $ \s $. \href{https://github.com/amael-ls/code_R0niche}{\faGithub}}
+\end{algorithm}
+
 \subsection{Variability in radial growth and mortality}
 For each species, we separated the latitudes within three regions (Fig. \ref{fig::defineRegion}). The radial growth is described by three box plots per species with the following quantiles: $ 2.5 \% $, $ 25 \% $, the median ($ 50 \% $), $ 75 \% $, and $ 97.5 \% $ (Figs. \ref{fig::growthVar1-3}--\ref{fig::growthVar13-14}). For the mortality, we computed species-specific proportions of death events within each region (Figs. \ref{fig::mortalityVar1-3}--\ref{fig::mortalityVar13-14}).
 
