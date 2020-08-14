@@ -114,6 +114,8 @@
 
 \begin{document}
 \tableofcontents
+\listoftables
+\listoffigures
 
 \begin{refsection}
 \begin{onehalfspace}
@@ -125,7 +127,7 @@ In this appendix, we derive the net reproduction rate $ R_0(x, \s) $ for a given
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale = 0.75]{../illustrations/chara}
-	\caption{Characteristics for a constant competition $ \s_c = 2 $, a climatic constant $ \xi_{x, i} = 1 $, and for coefficients $ \beta_0 = \ln(3) $, $ \beta_1 = 1 $ and $ \beta_2 = -1 $. These curves are parameterised by $ \theta $ and allow us to follow a cohort with relative time $ \theta $}
+	\caption[Example of characteristics]{Characteristics for a constant competition $ \s_c = 2 $, a climatic constant $ \xi_{x, i} = 1 $, and for coefficients $ \beta_0 = \ln(3) $, $ \beta_1 = 1 $ and $ \beta_2 = -1 $. These curves are parameterised by $ \theta $ and allow us to follow a cohort with relative time $ \theta $}
 	\label{fig::chara}
 \end{figure}
 We use the method of characteristics \citep{Olver2014b} which allows us to follow individuals through their life, \ie the characteristics represent the trajectories of individuals in the time-size plane (fig. \ref{fig::chara} for an example). The transport equation (equation 1 in the main text) requires an initial population at time $ t = 0 $, which we denote by $ \phi(s) $. It is the density of trees of size $ s $ at the beginning. Let the canopy height $ \s $ be known with a constant value $ \s_c $, and, let $ s $ and $ t $ be functions of a parameter $ \theta $. By applying the chain rule, we get:
@@ -330,7 +332,7 @@ Thus, increasing fecundity augments $ R_0 $, which proves the third assertion.
 In this section, we first provide the assumptions concerning the demography in \citet{Purves2009}, and match our notations with his article in the table \ref{tab::notations_purves2009}. Finally, we derive Purves's formul\ae{} from our $ R_0 $ equation 4 (in the paper). Except when specified, Purves refers to \citet{Purves2009} in the following sections.
 \begin{table}[!h]
 	\centering
-	\caption{Link between our notations and \citet{Purves2009}'s notations. Note that he uses the flat-top version of the perfect-plasticity approximation, which implies the fecundity function to be proportional to the trunk area.}
+	\caption[Link between our notations and Purves's notations]{Link between our notations and \citet{Purves2009}'s notations. Note that he uses the flat-top version of the perfect-plasticity approximation, which implies the fecundity function to be proportional to the trunk area.}
 	\label{tab::notations_purves2009}
 	\begin{tabular}{@{}rll@{}}
 	\toprule
@@ -374,6 +376,14 @@ We sum-up here some useful assumptions from Purves. The assumptions are better d
 	where $ G_{L, j, R}, \, G_{D, j, R}, \, \mu_{L, j, R}, \, \mu_{D, j, R} $ are estimated constants.
 \end{assum}
 
+\begin{assum}[Mortality versus individual growth] \label{assum::negligible}
+	The mortality rate is negligible compare to both 1 and the individual growth rate:
+	\begin{align}
+		\mu_{L, j, R} &\ll 1 \\
+		\mu_{L, j, R} &\ll G_{L, j, R}
+	\end{align}
+\end{assum}
+
 \begin{assum}[Fecundity function]
 	Due to the flat-top assumption \ref{assum::flat-top}, the fecundity is simply proportional to the cross-section of the trunk area at breast height:
 	\[
@@ -384,14 +394,6 @@ We sum-up here some useful assumptions from Purves. The assumptions are better d
 		\end{cases}
 	\]
 	The factor $ \frac{1}{10^4} $ corrects for the units of $ F_{j, R}^{\text{capita}} $ (basal area per year, dividing by $ 10^4 $ makes the basal area dimensionless).
-\end{assum}
-
-\begin{assum}[Mortality versus individual growth] \label{assum::negligible}
-	The mortality rate is negligible compare to both 1 and the individual growth rate:
-	\begin{align}
-		\mu_{L, j, R} &\ll 1 \\
-		\mu_{L, j, R} &\ll G_{L, j, R}
-	\end{align}
 \end{assum}
 
 Note that in his supporting information, Purves integrates with respect to time rather than size. In the case trees are always in the overstorey, it is strictly equivalent:
