@@ -1,165 +1,223 @@
 \section{Results}
 
-\subsection{Competition and climate effect on individual growth and mortality}
+\subsection{Competition and climate effects on individual growth and mortality}
 
-We found that individual growth and mortality are weakly related to climate, and that individual tree size and competition are predominant drivers of their variation (Fig. \ref{fig::delta_aic} and Fig. \ref{fig::delta_waic}). The best model for tree growth takes into account the plot random effect, and the year within plot, regardless of species. The conditional $ R_c^2 $ was much higher than the marginal $ R_m^2 $ (estimated with the package MuMIn \citep{MuMIn}), indicating that the random structure, and more specifically that local conditions, dominates explanatory variables. The best explanatory climatic variables were the annual mean temperature and the annual precipitation. However, according to the calculated ratio $ \varphi $ (equation \ref{eq::ratio}) and $ R^2 $, climate explains little variation of individual tree growth compared to tree dbh (Fig. \ref{fig::delta_aic} and Tab. \ref{tab::acsa_fixeff}).
+We found that individual growth and mortality are weakly related to climate, and that individual tree size and competition are predominant drivers of their variation (Fig. \ref{fig::aic_waic}).
 
-\begin{figure}
-	\centering
-	\input{graphs/figure_deltaAICc}
-	\caption{Performance $ \varphi $ (equation \ref{eq::ratio}) of four radial growth models (the closer to zero, the better). The black dots represent the 14 species, and the orange dots are the average for each model. The model "climate" is the 2\textsuperscript{nd} order polynomial containing $ T_a $ and $ P_a $, the model "competition" has only the canopy status explanatory variable, and the model "dbh" is the 2\textsuperscript{nd} order polynomial containing dbh (Supporting Information \ref{app::glmm}, equations \eqref{eq::model7}, \eqref{eq::model18}, \eqref{eq::model19}, and \eqref{eq::model22} respectively). The selected model corresponds to the best model under the constraint $ \text{VIF} < 20 $. The size variable (dbh) alone explains in average $ 3.84 $ times more than the climate variables alone. All species have the same selected model (\ie best model under the constraint $ \text{VIF} < 20 $), thus the black dots are hidden behind the orange dot for the last column. \label{fig::delta_aic}}
-\end{figure}
+Individual tree growth is, regardless of species, best explained by annual mean temperature and annual precipitation, together with the plot random effect, and year within plot. The conditional $ R_c^2 $ was much higher than the marginal $ R_m^2 $ (estimated with the package \textit{MuMIn}; \citet{MuMIn}), indicating that the random structure and more specifically, that local conditions, dominates explanatory variables. According to the calculated ratio $ \varphi $ (equation \ref{eq::ratio}) and $ R^2 $, climate explains little variation in individual tree growth compared to tree \textit{dbh} (Fig. \ref{fig::aic_waic}; Supporting Information Appendix S3).
 
-Our analysis revealed that growth is higher in the overstorey for all species (Fig. \ref{fig::over_under}). Moreover, we found that the response to overstorey competition corresponds to the shade tolerance: individual growth of shade tolerant species is less responsive from being in the overstorey (Fig. \ref{fig::groups}, and Tab. \ref{tab::cs} in Supporting Information \ref{app::glmm}).
+Our analysis revealed that growth is higher in the overstorey for all species (Fig. \ref{fig::over_under}). Moreover, we found that the response to overstorey competition corresponds to the shade tolerance: individual growth of shade-tolerant species is less responsive to canopy gaps than shade-intolerant species (Fig. \ref{fig::groups}; Table S3.6 in Supporting Information S3).
 \begin{figure}
 \begin{subfigure}[t]{.48\textwidth}
 	\centering
 	\input{graphs/G_over-under-storey_averaged}
-	\caption{Overstorey versus understorey growth (in mm) of the 14 parameterised species for an averaged individual (\ie all the explanatory variables of equation \eqref{eq::glmm_growth} are set to the average). The line is the identity function.}
+	\caption{Overstorey versus understorey growth}
 	\label{fig::over_under}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{.48\textwidth}
 	\centering
 	\input{graphs/groups}
-	\caption{Response of species-specific radial growth $ G $ to light, grouped by three levels of shade tolerance: Low (L), Medium (M), and High (H). Growth of species reaching the canopy increases much more for shade-intolerant species than tolerant. See Tab. \ref{tab::cs} for the parameters in Supporting Information \ref{app::glmm}.}
+	\caption{Response of radial growth to light}
 	\label{fig::groups}
 \end{subfigure}
-\caption{Effect of competition on individual tree growth.}
-\label{fig::growthResults}
-\end{figure}
-
-For mortality, the best model for all the species accounted for the lowest annual temperature ($ T_m $) and the three contiguous driest months ($ P_d $). Diameter at breast height, competition, and climate best explain tree mortality when combined, but are equivalent when taken separately, which differ from growth (Fig. \ref{fig::delta_waic}). All the chains converged, regardless of parameters and species (R-hat histogram in Fig. \ref{fig::rhat_conv}. 
-\begin{figure}
-	\centering
-	\input{graphs/figure_deltaWAIC}
-	\caption{Performance $ \psi = \log_{10}(\Delta \text{WAIC} + 1) $ (equation \ref{eq::psi}) of four mortality models (the closer to zero, the better). The black dots represent the 14 species, and the orange dots are the average for each model. The model "climate" is the 2\textsuperscript{nd} order polynomial containing $ T_m $ and $ P_d $, the model "competition" has only the canopy status explanatory variable, and the model "dbh" is the 2\textsuperscript{nd} order polynomial containing dbh (Supporting Information \ref{app::glmm}, equations \eqref{eq::model_mu9}, \eqref{eq::model_mu10}, and \eqref{eq::model_mu13} respectively). The selected model corresponds to the best model (equation \eqref{eq::model_mu7}, Supporting Information \ref{app::glmm}). All species have the same best model, thus the black dots are hidden by the orange dot for the last column. \label{fig::delta_waic}}
-\end{figure}
-Mortality is larger in the understorey for all species except for \textit{Tsuga canadensis} and \textit{Fagus grandifolia}. Low shade tolerant species responded more negatively to competition than highly tolerant species (Fig. \ref{fig::over_under_mu} and \ref{fig::groups_mu}).
-\begin{figure}
+\medskip
+%% Second row
 \begin{subfigure}[t]{.48\textwidth}
 	\centering
 	\input{graphs/M_over-under-storey_averaged}
-	\caption{Overstorey versus understorey mortality of the 14 parameterised species for an averaged individual (\ie all the explanatory variables of equation \eqref{eq::glmm_mortality} are set to the average). The line is the identity function.}
+	\caption{Overstorey versus understorey mortality}
 	\label{fig::over_under_mu}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{.48\textwidth}
 	\centering
 	\input{graphs/groups_mortality}
-	\caption{Response of species-specific mortality to light, grouped by three levels of shade tolerance: Low (L), Medium (M), and High (H). Mortality of species reaching the canopy decreases much more for shade-intolerant species than tolerant. See Tab. \ref{tab::cs} in Supporting Information \ref{app::glmm}.}
+	\caption{Response of mortality to light}
 	\label{fig::groups_mu}
 \end{subfigure}
-\caption{Effect of climate and competition on individual tree mortality.}
-\label{fig::mortalityResults}
+\caption{\subref{fig::over_under} \& \subref{fig::over_under_mu} Overstorey versus understorey growth and mortality of the 14 parameterised species for an averaged individual (\ie all the explanatory variables of equations \eqref{eq::glmm_growth} and \eqref{eq::glmm_mortality} are set to their average values). The line is the identity function. \subref{fig::groups} \& \subref{fig::groups_mu} Response of species-specific radial growth $ G $ and mortality $ \mu $ to light, grouped by three levels of shade tolerance: Low (L), Medium (M), and High (H). Growth of species reaching the canopy increases much more rapidly for shade-intolerant species than tolerant ones, and the mortality decreases much more strongly for shade-intolerant species than tolerant. See Supporting Information S3 for the parameters.}
+\label{fig::growthMortalityResults}
 \end{figure}
 
-There is considerable uncertainty in parameters' estimate for both rates (Figs. \ref{fig::12speciesG_dbh} and \ref{fig::12speciesM_dbh} for individual growth and mortality respectively). More specifically, the mortality functions of \textit{Abies balsamea, Betula papyrifera, Fagus grandifolia, Picea rubens, Pinus strobus} and \textit{Populus tremuloides} are bell-shaped or flat curves, but could be U-shaped curves (which is more expected \citep{Lines2010}) according to the posterior distribution of their regression coefficients. \textit{Abies balsamea} and \textit{Populus tremuloides} are the two exceptions as they compensate for their negative response of mortality to dbh\textsuperscript{2} by high slopes related to dbh. The effect of competition is significant for almost all species and interacts with temperature, while the interactions of competition and precipitation are mostly non-significant for both vital rates (Supporting Information \ref{app::confInt} and XYZxyz---csv file). Thus, the advantage of having access to more water resources by large trees might be compensated by their higher demand of water.
+For mortality, the best model for all the species included the lowest annual temperature ($ T_m $) and the three contiguous driest months ($ P_d $). Diameter at breast height, competition, and climate best explained tree mortality when combined, but are equivalent when taken separately, which differs from growth (Fig. \ref{fig::aic_waic}). All the Markov chains converged, regardless of parameters and species (R-hat histogram in Supporting Information Appendix S4). 
+\begin{figure}
+	\centering
+	\input{graphs/aic_waic}
+	\caption{Performance $ \varphi $ (growth, \CircSteel, equation \ref{eq::ratio}) and $ \psi $ (mortality, \MoveUp, equation \ref{eq::psi}) for four models (the closer to zero, the better). The black symbols represent the 14 species, and the coloured symbols are the average for each model. The model `climate' is the 2\textsuperscript{nd}-order polynomial containing $ T_a $ and $ P_a $ (growth), or $ T_m $ and $ P_d $ (mortality). The model `competition' includes only canopy status as a predictor, and the model `dbh' is the 2\textsuperscript{nd}-order polynomial containing \textit{dbh}. The selected model corresponds to the best model (Supporting Information S3 for all the equations). All species have the same best model; thus, the black dots are hidden by the coloured dot for the last column. \label{fig::aic_waic}}
+\end{figure}
+Mortality is greater in the understorey for all species, except for \textit{Tsuga canadensis} and \textit{Fagus grandifolia}. Low shade-tolerant species responded more negatively to competition than did highly tolerant species (Fig. \ref{fig::over_under_mu} and \ref{fig::groups_mu}).
 
-\subsection{Relation of demography and competition to tree distribution} % tab::corr_R0_presAbsData
-The $ \tilde \rho_0 $ equation \eqref{eq::rho0} relates population performance to the individual demography estimated in the previous section. Demographic performance $ \tilde \rho_0 $ varies significantly (Fig. \ref{fig::grad_cols} and maps in Supporting Information \ref{app::maps}) but there is no systematic relationship across ranges. On the one hand, $ \tilde \rho_0 $ of six species \textit{Acer saccharum, Acer rubrum, Picea glauca, Pinus strobus, Thuja occidentalis} and \textit{Tsuga canadensis} increases from south- east to north-west (almost south-north for \textit{Acer rubrum}). On the other hand, it increases towards the south for five species \textit{Abies balsamea, Betula papyrifera, Picea mariana, Picea rubens} and \textit{Populus tremuloides}. Note that except \textit{Picea mariana}, the four other species have a negative slope associated to the quadratic dbh term of the mortality model (parameter $ \beta_j^{(7)} $ in equation \eqref{eq::glmm_mortality}). The three remaining species (\textit{Betula alleghaniensis, Fagus grandifolia} and \textit{Picea banksiana}) do no have any clear direction within their respective distribution $ \Omega $. The correlations between $ \tilde \rho_0 $ and the orthodromic distance to the closest edge of $ \Omega $ are negative for most of the species (Fig. \ref{fig::3correls_dist} and Tab. \ref{tab::R0correl_dist}), which corroborates that $ \tilde \rho_0 $ is not higher in the centre of species distributions.
+There is considerable uncertainty in parameter estimates for both rates (Supporting Information Appendix S3). More specifically, the mortality functions of \textit{Abies balsamea, Betula papyrifera, Fagus grandifolia, Picea rubens, Pinus strobus} and \textit{Populus tremuloides} are bell-shaped or flat curves, but they could be U-shaped responses (which is more likely to be expected; \citet{Lines2010}) according to the posterior distributions of their regression coefficients. \textit{Abies balsamea} and \textit{Populus tremuloides} are the two exceptions, given that they compensate for their negative mortality response to \textit{dbh}\textsuperscript{2}, with steep slopes related to \textit{dbh}. The effect of competition is significant for most species and interacts with temperature, whilst interactions between competition and precipitation are mostly non-significant for both vital rates (Supporting Information Figures S4 and XYZxyz---csv file). Thus, the advantage of having greater access to water resources for large trees might be compensated by their higher moisture demands.
 
-The lifetime number of recruits per individual $ \tilde \rho_0 $ aggregates the three vital rates into a species-specific performance measure. We computed correlations between occurrence probabilities $ P_{\text{occ}} $ and individual growth and mortality to disentangle their effects upon $ \tilde \rho_0 $. Overall, we found no rule relating occurrence probabilities with demography. When $ P_{\text{occ}} $ is positively correlated with individual growth, and negatively correlated with mortality, then the correlation of $ P_{\text{occ}} $ with $ \tilde \rho_0 $ is also positive (\eg \textit{Betula papyrifera}, Fig. \ref{fig::demog_Pocc5-8}). In this case, $ P_{\text{occ}} $ correlations with $ \tilde \rho_0 $ are consistently higher than $ P_{\text{occ}} $ correlations with demography (Supporting Information \ref{app::randomForest}, Figs. \ref{fig::demog_Pocc1-4}--\ref{fig::demog_Pocc13-14}). However, when $ P_{\text{occ}} $ is (counter-intuitively) positively correlated to mortality rates, then the correlation of $ P_{\text{occ}} $ with $ \tilde \rho_0 $ drops or even becomes negative (\eg \textit{Fagus grandigolia}, Fig. \ref{fig::demog_Pocc5-8}). These results demonstrate there might be compensatory strategies (such as a higher recruitment than our constant fecundity function) which could explain why $ P_{\text{occ}} $ is positively correlated to mortality.
+\subsection{Relationship of demography and competition to tree distribution} % tab::corr_R0_presAbsData
+The $ \tilde \rho_0 $ equation \eqref{eq::rho0} relates species-specific demographic functions that were estimated in the previous section to population performance. Demographic performance $ \tilde \rho_0 $ varies significantly (Figs. \ref{fig::grad_cols} and \ref{fig::mainResults}, and maps in Supporting Information Appendix S5), but there is no systematic relationship across ranges. If the Abundant-Centre Hypothesis is to be confirmed, then vector fields $ \nabla \tilde \rho_0 $ (white and red arrows on the maps and Fig. \ref{fig::mainResults}) should point towards species' centroids. On one hand, $ \tilde \rho_0 $ of six species (\textit{Acer saccharum, Acer rubrum, Picea glauca, Pinus strobus, Thuja occidentalis}, and \textit{Tsuga canadensis}) increases from south-east to north-west. On the other hand, it increases towards the south for five species (\textit{Abies balsamea, Betula papyrifera, Picea mariana, Picea rubens}, and \textit{Populus tremuloides}). Except for \textit{Picea mariana}, note that the four other species have a negative slope associated with the quadratic \textit{dbh} term in the mortality model (parameter $ \beta_j^{(7)} $ in equation \eqref{eq::glmm_mortality}). The three remaining species (\textit{Betula alleghaniensis, Fagus grandifolia}, and \textit{Picea banksiana}) do no exhibit a clear direction within their respective distribution $ \Omega $. Correlations between $ \tilde \rho_0 $ and the orthodromic distance to the closest edge of $ \Omega $ are negative for most species (Supporting Information Appendix S6), which corroborates that $ \tilde \rho_0 $ is not highest in the centre of species distributions, thereby challenging the Abundant-Centre Hypothesis.
+
+The lifetime number of recruits per individual $ \tilde \rho_0 $ aggregates the three vital rates into a species-specific performance measure. We computed correlations between occurrence probabilities $ P_{\text{occ}} $ and individual growth and mortality to disentangle their effects upon $ \tilde \rho_0 $. Overall, we found no rule relating occurrence probabilities with demography. When $ P_{\text{occ}} $ is positively correlated with individual growth, and negatively correlated with mortality, then the correlation of $ P_{\text{occ}} $ with $ \tilde \rho_0 $ is also positive (\eg \textit{Betula papyrifera}, Supporting Information Appendix S6). In this case, $ P_{\text{occ}} $ correlations with $ \tilde \rho_0 $ are consistently higher than $ P_{\text{occ}} $ correlations with demography (Supporting Information Appendix S8). However, when $ P_{\text{occ}} $ is (counter-intuitively) positively correlated with mortality rates, then the correlation of $ P_{\text{occ}} $ with $ \tilde \rho_0 $ drops or even becomes negative (\eg \textit{Fagus grandifolia}, Supporting Information S6). These results demonstrate that there may be compensatory strategies (such as a higher recruitment rather than our constant fecundity function), which could explain why $ P_{\text{occ}} $ is positively correlated with mortality.
 \begin{figure}[htb]
     \centering
 	%% First row
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_ABI-BAL}
-		\caption{\textit{Abies balsamea}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_ABI-BAL_10}
+		\caption{\textit{Abies balsamea} (0.48)}
 		\label{fig::abibal_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_ACE-RUB}
-		\caption{\textit{Acer rubrum}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_ACE-RUB_10}
+		\caption{\textit{Acer rubrum} (-0.5)}
 		\label{fig::acerub_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_ACE-SAC}
-		\caption{\textit{Acer saccharum}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_ACE-SAC_10}
+		\caption{\textit{Acer saccharum} (-0.18)}
 		\label{fig::acesac_az}
 	\end{subfigure}
 	\medskip
 	%% Second row
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_BET-ALL}
-		\caption{\textit{Betula alleghaniensis}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_BET-ALL_10}
+		\caption{\textit{Betula alleghaniensis} (0.25)}
 		\label{fig::betall_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_BET-PAP}
-		\caption{\textit{Betula papyrifera}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_BET-PAP_10}
+		\caption{\textit{Betula papyrifera} (0.48)}
 		\label{fig::betpap_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_FAG-GRA}
-		\caption{\textit{Fagus grandifolia}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_FAG-GRA_10}
+		\caption{\textit{Fagus grandifolia} (-0.37)}
 		\label{fig::faggran_az}
 	\end{subfigure}
 	\medskip
 	%% Third row
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_PIC-GLA}
-		\caption{\textit{Picea glauca}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_PIC-GLA_10}
+		\caption{\textit{Picea glauca} (0.08)}
 		\label{fig::picgla_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_PIC-MAR}
-		\caption{\textit{Picea mariana}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_PIC-MAR_10}
+		\caption{\textit{Picea mariana} (0.27)}
 		\label{fig::picmar_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_PIC-RUB}
-		\caption{\textit{Picea rubens}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_PIC-RUB_10}
+		\caption{\textit{Picea rubens} (-0.26)}
 		\label{fig::picrub_az}
 	\end{subfigure}
 	\medskip
 	%% Forth row
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_PIN-BAN}
-		\caption{\textit{Pinus banksiana}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_PIN-BAN_10}
+		\caption{\textit{Pinus banksiana} (-0.1)}
 		\label{fig::pinban_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_PIN-STR}
-		\caption{\textit{Pinus strobus}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_PIN-STR_10}
+		\caption{\textit{Pinus strobus} (0.02)}
 		\label{fig::pinstr_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_POP-TRE}
-		\caption{\textit{Populus tremuloides}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_POP-TRE_10}
+		\caption{\textit{Populus tremuloides} (0.45)}
 		\label{fig::poptre_az}
 	\end{subfigure}
 	\medskip
 	%% Fifth row
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_THU-OCC}
-		\caption{\textit{Thuja occidentalis}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_THU-OCC_10}
+		\caption{\textit{Thuja occidentalis} (0.24)}
 		\label{fig::thuocc_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
-		\input{graphs/azimuth_TSU-CAN}
-		\caption{\textit{Tsuga canadensis}}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{graphs/azimuth_TSU-CAN_10}
+		\caption{\textit{Tsuga canadensis} (0.17)}
 		\label{fig::tsucan_az}
 	\end{subfigure}
 	\hfil
-	\begin{subfigure}{0.25\textwidth}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
 		\input{graphs/legend_cols}
 	\end{subfigure}
-	\caption{Species-specific averaged direction of increase of $ \tilde \rho_0 $ for the northern region (blue arrows) and southern region (orange arrows). The black square represents the species-specific centroid of the distribution $ \Omega $, and is the reference point to define the northern region (everything north to the centroid) and the southern region. If population performances were higher in the center of the distribution, then the arrows would point towards the centroid. The azimuths of the averaged directions are in Tab. \ref{tab::azimuth} and are mapped with the centroids in their corresponding geographical space (Supporting Information \ref{app::maps}) \label{fig::grad_cols}}
+	\caption{Species-specific averaged direction of increase in $ \tilde \rho_0 $ for the northern region (blue arrows) and southern region (orange arrows). The black square represents the species-specific centroid of the distribution $ \Omega $, and is the reference point that defines the northern region (everything north of the centroid) and the southern region. If population performances were higher in the centre of the distribution, then the arrows would point towards the centroid. The number within parentheses is the correlation between $ \tilde \rho_0(\s = 10 \text{m}) $ and the random forest. See Supplementary Information Appendix S6 for the correlations and Figures S5 for the azimuths. \label{fig::grad_cols}}
 \end{figure}
 
-The correlation between $ \tilde \rho_0 $ and the probability of occurrence $ P_{\text{occ}} $ did not show any trend in absence of competition (varies from $ - 0.49 $ to $ 0.60 $), neither it did with a canopy height of $ 10 $ meters (ranges within $ - 0.51 $ to $ 0.47 $). The correlation decreases with competition for most boreal species (\textit{Betula papyrifera, Picea glauca, Picea mariana, Picea rubens, Pinus banksiana} and \textit{Thuja occidentalis}, but not \textit{Abies balsamea}). For the non-boreal shade-intolerant species (\textit{Populus tremuloides}), accounting for competition increased the correlation between $ \tilde \rho_0 $ and $ P_{\text{occ}} $, while the correlations for the non-boreal shade-tolerant species (\textit{Acer rubrum, Acer saccharum, Betula alleghaniensis, Fagus grandifolia, Pinus strobus} and \textit{Tsuga canadensis}) are similar with and without competition (Fig. \ref{fig::3correls}). The SDMs based on random forests described accurately occurrence probabilities for all species ($ R_{\text{Tjur}}^2 $ ranging from $ 0.74 $ to $ 0.85 $). We controlled that using the SDMs rather than the presence and absence data did not change any trend in the correlation results (Fig. \ref{fig::correl_rf_vs_presAbs}).
+The correlation between $ \tilde \rho_0 $ and the probability of occurrence $ P_{\text{occ}} $ did not show any trend in the absence of competition (varies from $ - 0.49 $ to $ 0.60 $), nor was there a trend with a canopy height of $ 10 $ metres (ranges within $ - 0.51 $ to $ 0.47 $). The correlation decreases with competition for most boreal species (\textit{Betula papyrifera, Picea glauca, Picea mariana, Picea rubens, Pinus banksiana} and \textit{Thuja occidentalis}, but not \textit{Abies balsamea}). For the shade-intolerant \textit{Populus tremuloides}, accounting for competition increased the correlation between $ \tilde \rho_0 $ and $ P_{\text{occ}} $, while the correlations for the non-boreal shade-tolerant species (\textit{Acer rubrum, Acer saccharum, Betula alleghaniensis, Fagus grandifolia, Pinus strobus} and \textit{Tsuga canadensis}) are similar with and without competition (Fig. \ref{fig::3correls}). SDMs that were based on random forests accurately described occurrence probabilities for all species ($ R_{\text{Tjur}}^2 $ ranging from $ 0.74 $ to $ 0.85 $). We compared the effects of using SDMs rather than presence/absence data, but found no difference in the trends (Supporting Information Appendix S6).
 \begin{figure}
 	\centering
 	\input{graphs/3correlations}
-	\caption{Species-specific correlations of $ \tilde \rho_0 $ and the SDM without competition (\MoveUp), or with competition (canopy height $ \s = 10 $ m, \CircSteel). The three colours correspond to the shade tolerance level (the darker, the more shade-tolerant). The values can be found in Tab \ref{tab::R0correlSDM}. On this figure, we sorted the data by increasing order of correlation with competition (\CircSteel) rather than alphabetical order. \label{fig::3correls}}
+	\caption{Species-specific correlations of $ \tilde \rho_0 $ and the SDM without competition (\MoveUp), or with competition (canopy height $ \s = 10 $ m, \CircSteel). The three colours correspond to the shade tolerance level (the darker, the more shade-tolerant). The values can be found in Supporting Information S6. On this figure, we sorted the data by increasing order of correlation with competition (\CircSteel) rather than alphabetical order. \label{fig::3correls}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[colorbar arrow/.style={
+			shape=single arrow,
+			double arrow head extend=0.125cm,
+			shape border rotate=90,
+			minimum height=8cm,
+			shading=#1
+		}]
+		% --- Map R0 (middle figure)
+		\node[inner sep=0pt] (acerub) at (0,0)
+			{\includegraphics[scale=0.25]{graphs/28728-ACE-RUB_R0_h=10m_scaled}};
+		\node[below = 0.01 of acerub] (labelR0)
+			{\textbf{Population growth rate} $ \bm{\tilde \rho_0}$};
+		
+		\draw[white] (6,-3.9) -- (6,3.9) node [midway, above = 0.25cm, sloped, text = black] {Growth, mortality, $ \tilde \rho_0 $};
+		\node[colorbar arrow=RmapShading] at (6,0) {};
+		\node[anchor = west] (low) at (6.5,-3.9) {Low};
+		\node[anchor = west] (high) at (6.5,3.9) {High};
+		% \node [anchor = west] at (6, 0) {$ G, \, \mu, \, \tilde \rho_0 $};
+
+		% --- Maps demography (top figure)
+		% Top left (growth)
+		\node[inner sep=0pt, above = 0.5cm of acerub, anchor = south east] (growth)
+			{\includegraphics[scale=0.25]{graphs/28728-ACE-RUB_averageG_h=10m}};
+		\node[below = 0.01 of growth] {\textbf{Growth} $ \bm G $};
+		
+		% Top right (mortality)
+		\node[inner sep=0pt, above = 0.5cm of acerub, anchor = south west] (mortality)
+			{\includegraphics[scale=0.25]{graphs/28728-ACE-RUB_averageM_h=10m}};
+		\node[below = 0.01 of mortality] {\textbf{Mortality} $ \bm \mu $};
+
+		% --- Gradient in the geographical space
+		\node[left = 0.5cm of labelR0] (labelGrad)
+			{$ \bm{\tilde \rho_0} $ \textbf{increasing directions}};
+		\node[above = 0.01cm of labelGrad, inner sep=0pt, anchor = south] (grad)
+			{\input{graphs/azimuth_ACE-RUB}};
+
+		% Correlation text
+		\node[above = 0.01cm of grad] {$ \text{Cor}(\tilde \rho_0, P_{\text{occ}}) = -0.5 $};
+
+		% --- Arrows
+		\draw[arrow] (growth) -- (acerub);
+		\draw[arrow] (mortality) -- (acerub);
+	\end{tikzpicture}
+	\caption{Results that are presented here are for \textit{Acer rubrum}, with a canopy height $ \s_c = 10 $ m, and with 2006--2010 climate data. Population growth rate $ \tilde \rho_0 $ results from $ G $, $ \mu $ and constante fecundity. For many species, including \textit{Acer rubrum}, $ \tilde \rho_0 $ does not increase towards the centre of the distribution (green square). If the Abundant-Centre Hypothesis were validated, then the red arrows on the map (or equivalently the blue and orange arrows on the left-hand side) would point towards the green square. These two arrows are the respective northern and southern averages of the vector field $ \nabla \tilde \rho_0 $ that is depicted by the white arrows on the map of $ \tilde \rho_0 $. The correlation between $ \tilde \rho_0 $ and the probability of occurrence $ P_{\text{occ}}$ is $ -0.5 $, which is the smallest correlation for all species. Overall, we found no rule relating occurrence
+	probabilities to demography. (see Fig. \ref{fig::3correls}). \label{fig::mainResults}}
 \end{figure}
