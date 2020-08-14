@@ -176,6 +176,8 @@
 
 \begin{document}
 \tableofcontents
+\listoftables
+\listoffigures
 
 \begin{refsection}
 \begin{onehalfspace}
@@ -212,7 +214,7 @@ We created four models, all containing the same fixed-structure (equation \eqref
 
 \begin{table}[h!]
 \centering
-\caption{Notations: $ x $ designates the plot effect, and $ t $ the year grouping effect. The spatial correlation groups individual by plots. The time correlation is divided into two parts: one that is spatially dependent, that is to say only individuals belonging to the same plot are time-related, and one that is spatially independent to represent a temporal correlation at large spatial scale.}
+\caption[Notations random effects]{Notations: $ x $ designates the plot effect, and $ t $ the year grouping effect. The spatial correlation groups individual by plots. The time correlation is divided into two parts: one that is spatially dependent, that is to say only individuals belonging to the same plot are time-related, and one that is spatially independent to represent a temporal correlation at large spatial scale.}
 \label{tab::randomStructure}
 \begin{tabular}{@{}rlp{8cm}@{}}
 	\toprule
@@ -236,7 +238,7 @@ We found that in average, the annual mean temperature and annual precipitations,
 
 \begin{table}[h!]
 \centering
-\caption{Selection of the climate variables. The models are sorted by increasing rank of $ R^2 $, \ie from the best to the worst. Models' equation are written below. \textsuperscript{*} Selected model in bold. \dag models with a maximum VIF below 20. For the VIF, the mean and max are taken among the 14 species for each model.}
+\caption[Selection of the climate variables for growth]{Selection of the climate variables for growth. The models are sorted by increasing rank of $ R^2 $, \ie from the best to the worst. Models' equation are written below. \textsuperscript{*} Selected model in bold. \dag models with a maximum VIF below 20. For the VIF, the mean and max are taken among the 14 species for each model.}
 \label{tab::climSelection}
 \begin{tabular}{@{}rcccc@{}}
 	\toprule
@@ -266,7 +268,7 @@ We found that in average, the annual mean temperature and annual precipitations,
 
 \begin{table}
 	\centering
-	\caption{Summary of the different growth models for \textit{Acer saccharum} to select the fixed effect structure of growth. We used Maximum Likelihood (ML) method to be able to compare the AICc \citep{AICcmodavg}; the selected model was then fit using Restricted Maximum Likelihood (ReML). $ T_a $, $ P_a $, and $ cs $ denote the annual temperature and precipitation, and the canopy status respectively (more details in table S2.3, Supporting Information S2). \dag climatic and dbh variables have quadratic terms. $ \flat $ canopy status and climate interact. $ \sharp $ climate and dbh interact. The ratio $ \varphi $ is defined by equation 6 in the paper. \label{tab::acsa_fixeff}}
+	\caption[Summary for \textit{Acer saccharum} (growth)]{Summary of the different growth models for \textit{Acer saccharum} to select the fixed effect structure of growth. We used Maximum Likelihood (ML) method to be able to compare the AICc \citep{AICcmodavg}; the selected model was then fit using Restricted Maximum Likelihood (ReML). $ T_a $, $ P_a $, and $ cs $ denote the annual temperature and precipitation, and the canopy status respectively (more details in table S2.3, Supporting Information S2). \dag climatic and dbh variables have quadratic terms. $ \flat $ canopy status and climate interact. $ \sharp $ climate and dbh interact. The ratio $ \varphi $ is defined by equation 6 in the paper. \label{tab::acsa_fixeff}}
 	\begin{tabular}{@{}rclll@{}}
 	\toprule
 	\multicolumn{1}{c}{\textbf{Model}} & \multicolumn{1}{c}{\textbf{Equation}} & \multicolumn{1}{c}{$ \bm{\varphi} $} & \multicolumn{1}{c}{$ \bm{R^2_m} $} & \multicolumn{1}{c}{$ \bm{R^2_c} $} \\
@@ -425,7 +427,7 @@ For the mortality model, we first select the climatic variables, and then compar
 
 \begin{table}[h!]
 \centering
-\caption{Selection of the climate variables for mortality. The models are sorted by increasing positions, \ie from the best to the worst. Models' equation are written below. \textsuperscript{*}Selected model in bold.}
+\caption[Selection of the climate variables for mortality]{Selection of the climate variables for mortality. The models are sorted by increasing positions, \ie from the best to the worst. Models' equation are written below. \textsuperscript{*}Selected model in bold.}
 \label{tab::climSelection_mu}
 \begin{tabular}{@{}rc@{}}
 	\toprule
@@ -444,7 +446,7 @@ For the mortality model, we first select the climatic variables, and then compar
 
 \begin{table}
 	\centering
-	\caption{Summary of the different mortality models for \textit{Acer saccharum} to select the fixed effect structure of mortality. \dag climatic and dbh variables have quadratic terms. $ \flat $ canopy status and climate interact}
+	\caption[Summary for \textit{Acer saccharum} (mortality)]{Summary of the different mortality models for \textit{Acer saccharum} to select the fixed effect structure of mortality. \dag climatic and dbh variables have quadratic terms. $ \flat $ canopy status and climate interact}
 	\label{tab::acsa_fixeff_mu}
 	\begin{tabular}{@{}rcl@{}}
 	\toprule
@@ -598,7 +600,7 @@ The 14 parameterised species are listed in table S2.1 (Supporting Information Ap
 
 \begin{table}[h!]
 \centering
-\caption{Estimated values of canopy status (cs) effect for growth ($ G $), and mortality ($ \mu $). These values are used in the Fig. 2 (c \& d). A shade tolerance level---High(H), Medium (M) or Low (L)---is associated to each species according to \citet{Burns1990, Burns1990a}, and the page column specifies where the information has been found. \label{tab::cs}}
+\caption[Canopy status effect]{Estimated values of canopy status (cs) effect for growth ($ G $), and mortality ($ \mu $). These values are used in the Fig. 2 (c \& d). A shade tolerance level---High(H), Medium (M) or Low (L)---is associated to each species according to \citet{Burns1990, Burns1990a}, and the page column specifies where the information has been found. \label{tab::cs}}
 \begin{tabular}{@{}rcccc@{}}
 	\toprule
 	\bfseries{species} & \bfseries{cs} ($ G $) & \bfseries{cs} ($ \mu $) & \bfseries{Tolerance level} & \bfseries{Page} \\
@@ -725,7 +727,7 @@ We plot here the individual growth and mortality of the 14 species in function o
 		\caption{\textit{Tsuga canadensis}}
 		\label{fig::tsucan_G_dbh}
 	\end{subfigure}
-	\caption{Species-specific growth as a function of dbh, with the climate set to the species-specific average. The orange line is for individuals in the overstorey, and the blue lines for individuals in the understorey. The shaded areas delimited by the dotted lines are the $ 95 \% $ confidence intervals. The double sided arrow near the x-axis is the species-specific range of parameterisation of dbh.}
+	\caption[Species-specific growth in function of dbh]{Species-specific growth as a function of dbh, with the climate set to the species-specific average. The orange line is for individuals in the overstorey, and the blue lines for individuals in the understorey. The shaded areas delimited by the dotted lines are the $ 95 \% $ confidence intervals. The double sided arrow near the x-axis is the species-specific range of parameterisation of dbh.}
 	\label{fig::12speciesG_dbh}
 \end{figure}
 
@@ -830,7 +832,7 @@ We plot here the individual growth and mortality of the 14 species in function o
 		\caption{\textit{Tsuga canadensis}}
 		\label{fig::tsucan_M_dbh}
 	\end{subfigure}
-	\caption{Species-specific mortality as a function of dbh, with the climate set to the species-specific average. The orange line is for individuals in the overstorey, and the blue lines for individuals in the understorey. The shaded areas delimited by the dotted lines are the $ 95 \% $ confidence intervals. The double sided arrow near the x-axis is the species-specific range of parameterisation of dbh.}
+	\caption[Species-specific mortality in function of dbh]{Species-specific mortality as a function of dbh, with the climate set to the species-specific average. The orange line is for individuals in the overstorey, and the blue lines for individuals in the understorey. The shaded areas delimited by the dotted lines are the $ 95 \% $ confidence intervals. The double sided arrow near the x-axis is the species-specific range of parameterisation of dbh.}
 	\label{fig::12speciesM_dbh}
 \end{figure}
 
