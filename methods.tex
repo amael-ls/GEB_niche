@@ -1,6 +1,4 @@
 
-% [ALS] Deleted references: Monsi2004, Pacala1994, Breiman2001, \citep[p. 121-122]{Zuur2009}, \citep{Vehtari2019}
-
 \section{The Model}
 \subsection{Model structure}
 We model forest dynamics using a physiologically structured population model (PSPM), which we have made spatially explicit, based on \citet{Strigul2008}. A physiologically structured model distinguishes individuals who are at different stages of development. We first provide general definitions that are related to PSPMs and then describe our own. PSPMs are based upon individual states (hereafter, \textit{i}-states). The \textit{i}-states are collections of variables exhibiting the following two properties \citep[for an overview of PSPMs]{DeRoos1997}:
@@ -206,4 +204,7 @@ Therefore, equation \eqref{eq::rho0} combines the equations \eqref{eq::R0sol}, \
 \begin{equation} \label{eq::rho0}
 	\rho_0(x, \s_c) = \exp \left[-\int_0^{\s_c}\frac{\mu(s, \s_c, x)}{G(s, \s_c, x)} \, ds \right] \times \int_{\s_c}^{s_{\infty}^{x}} \frac{\F \A(s, \s_c)}{G(s, \s_c, x)} \exp \left[-\int_{\s_c}^{s} \frac{\mu(\sigma, \s_c, x)}{G(\sigma, \s_c, x)} \, d\sigma \right] \, ds
 \end{equation}
-from which we can derive $ \tilde \rho_0 $ (using equation \eqref{eq::rho0_scaled}). Equation \eqref{eq::rho0} accounts for spatial differences in the maximum \textit{dbh} that are not included in the radial growth model. Its major difference with \eqref{eq::R0sol} is the upper boundary of the expected production of offsprings, which makes equation \eqref{eq::rho0} specific to this paper, while equation \eqref{eq::R0sol} is a generalisation of \citet{Purves2009}.
+from which we can derive $ \tilde \rho_0 $ (using equation \eqref{eq::rho0_scaled}). Equation \eqref{eq::rho0} accounts for spatial differences in the maximum \textit{dbh} that are not included in the radial growth model. Its major difference with \eqref{eq::R0sol} is the upper boundary of the expected production of offsprings (the second integral), which makes equation \eqref{eq::rho0} specific to this paper, while equation \eqref{eq::R0sol} is a generalisation of \citet{Purves2009}.
+
+\subsection{Roadmap}
+We first parameterised individual growth and mortality as functions of climate and competition for 14 northern North American trees. Competition refers to the canopy status (either in the understorey or overstorey), and was calculated using allometric functions and equation \eqref{eq::ppa_x}. We then computed the population growth rates $ \tilde \rho_0 $ within each species' range $ \Gamma $ to test the Abundant-Centre Hypothesis, together with correlations between $ \tilde \rho_0 $ and species performance.
