@@ -13,7 +13,7 @@
 	\setdefaultlanguage[variant=british]{english}
 
 %% Marges, space...
-\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=1.5cm]{geometry}
 \usepackage{setspace} % [nodisplayskipstretch] pour option space in equation
 
 \usepackage{indentfirst}
@@ -26,16 +26,13 @@
 
 \usepackage[nolists,tablesfirst,nomarkers]{endfloat} % To place fig & tables at the end
 
-%% Numbering figures in sections rather than continuously http://tex.stackexchange.com/questions/28333/continuous-v-per-chapter-section-numbering-of-figures-tables-and-other-docume
-\usepackage{chngcntr}
-\counterwithin{figure}{section}
-
 %% Graphics
 \usepackage[luatex]{graphicx}
 	\graphicspath{{graphs/}}
 
 \usepackage{caption}
 \usepackage{subcaption}
+	\captionsetup{subrefformat=parens}
 
 \usepackage[dvipsnames, svgnames]{xcolor}
 
@@ -49,6 +46,8 @@
 	\usetikzlibrary{decorations.pathmorphing} % to snake an arrow
 	\usetikzlibrary{shapes.arrows}
 	\usetikzlibrary{patterns}
+	\usetikzlibrary{matrix}
+	\usetikzlibrary{fit}
 	\tikzset{
 		invisible/.style={opacity=0},
 		visible on/.style={alt={#1{}{invisible}}},
@@ -151,54 +150,54 @@
 
 \usepackage{siunitx}
 
-% Creation of a new counter for the models, from:
-% https://tex.stackexchange.com/questions/84254/how-to-create-new-counter-of-equation
-\newcounter{growthCounter}
-\renewcommand*{\thegrowthCounter}{G\arabic{growthCounter}}
+% % Creation of a new counter for the models, from:
+% % https://tex.stackexchange.com/questions/84254/how-to-create-new-counter-of-equation
+% \newcounter{growthCounter}
+% \renewcommand*{\thegrowthCounter}{G\arabic{growthCounter}}
 
-\makeatletter
-\def\@equationname{equation}
-\newenvironment{g}[1]{%
-    \def\mymathenvironmenttouse{#1}%
-    \ifx\mymathenvironmenttouse\@equationname%
-        \refstepcounter{growthCounter}%
-    \else
-        \patchcmd{\@arrayparboxrestore}{equation}{growthCounter}{}{}%          doesn't change output?
-        \patchcmd{\print@eqnum}{equation}{growthCounter}{}{}%
-        \patchcmd{\incr@eqnum}{equation}{growthCounter}{}{}%
-    \fi
-    \csname\mymathenvironmenttouse\endcsname%
-}{%
-    \ifx\mymathenvironmenttouse\@equationname%
-        \tag{\thegrowthCounter}%
-    \fi
-    \csname end\mymathenvironmenttouse\endcsname%
-}
-\makeatother
+% \makeatletter
+% \def\@equationname{equation}
+% \newenvironment{g}[1]{%
+%     \def\mymathenvironmenttouse{#1}%
+%     \ifx\mymathenvironmenttouse\@equationname%
+%         \refstepcounter{growthCounter}%
+%     \else
+%         \patchcmd{\@arrayparboxrestore}{equation}{growthCounter}{}{}%          doesn't change output?
+%         \patchcmd{\print@eqnum}{equation}{growthCounter}{}{}%
+%         \patchcmd{\incr@eqnum}{equation}{growthCounter}{}{}%
+%     \fi
+%     \csname\mymathenvironmenttouse\endcsname%
+% }{%
+%     \ifx\mymathenvironmenttouse\@equationname%
+%         \tag{\thegrowthCounter}%
+%     \fi
+%     \csname end\mymathenvironmenttouse\endcsname%
+% }
+% \makeatother
 
 
-\newcounter{mortalityCounter}
-\renewcommand*{\themortalityCounter}{M\arabic{mortalityCounter}}
+% \newcounter{mortalityCounter}
+% \renewcommand*{\themortalityCounter}{M\arabic{mortalityCounter}}
 
-\makeatletter
-\def\@equationname{equation}
-\newenvironment{m}[1]{%
-    \def\mymathenvironmenttouse{#1}%
-    \ifx\mymathenvironmenttouse\@equationname%
-        \refstepcounter{mortalityCounter}%
-    \else
-        \patchcmd{\@arrayparboxrestore}{equation}{mortalityCounter}{}{}%          doesn't change output?
-        \patchcmd{\print@eqnum}{equation}{mortalityCounter}{}{}%
-        \patchcmd{\incr@eqnum}{equation}{mortalityCounter}{}{}%
-    \fi
-    \csname\mymathenvironmenttouse\endcsname%
-}{%
-    \ifx\mymathenvironmenttouse\@equationname%
-        \tag{\themortalityCounter}%
-    \fi
-    \csname end\mymathenvironmenttouse\endcsname%
-}
-\makeatother
+% \makeatletter
+% \def\@equationname{equation}
+% \newenvironment{m}[1]{%
+%     \def\mymathenvironmenttouse{#1}%
+%     \ifx\mymathenvironmenttouse\@equationname%
+%         \refstepcounter{mortalityCounter}%
+%     \else
+%         \patchcmd{\@arrayparboxrestore}{equation}{mortalityCounter}{}{}%          doesn't change output?
+%         \patchcmd{\print@eqnum}{equation}{mortalityCounter}{}{}%
+%         \patchcmd{\incr@eqnum}{equation}{mortalityCounter}{}{}%
+%     \fi
+%     \csname\mymathenvironmenttouse\endcsname%
+% }{%
+%     \ifx\mymathenvironmenttouse\@equationname%
+%         \tag{\themortalityCounter}%
+%     \fi
+%     \csname end\mymathenvironmenttouse\endcsname%
+% }
+% \makeatother
 
 %% Line numbers --conflict with amsthm-- pdf http://texblog.org/2012/02/08/adding-line-numbers-to-documents/
 \usepackage{lineno}
@@ -242,7 +241,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Climate-induced variation in the demography of 14 tree species is not enough to explain their distribution in eastern North America}
+\title{Climate-induced variation in the demography of 14 tree species is not sufficient to explain their distribution in eastern North America}
 \author{}
 
 \begin{document}
@@ -255,7 +254,7 @@
 \input{methods}
 \input{results}
 \input{discussion}
-% \input{acknowledgement}
+\input{acknowledgement}
 
 \end{onehalfspace}
 
