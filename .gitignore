@@ -9,6 +9,10 @@
 *.toc
 *.cfg
 *.run.xml
+*.bbl
+*.blg
+*.fff
+*.ttt
 code/
 illustrations/
 cpp/
@@ -17,3 +21,4 @@ corrections
 graphs/
 appendices/*
 !appendices/app_*.tex
+diff*.tex
