@@ -186,7 +186,7 @@ The correlation between $ \tilde \rho_0 $ and the probability of occurrence $ P_
 		\node[inner sep=0pt] (acerub) at (0,0)
 			{\includegraphics[scale=0.25]{graphs/28728-ACE-RUB_R0_h=10m_scaled}};
 		\node[below = 0.01 of acerub] (labelR0)
-			{\textbf{Population growth rate} $ \bm{\tilde \rho_0}$};
+			{\textbf{Population growth rate} $ \bm{\tilde \rho_0 \in [0, 1]} $};
 		
 		\draw[white] (6,-3.9) -- (6,3.9) node [midway, above = 0.25cm, sloped, text = black] {Growth, mortality, $ \tilde \rho_0 $};
 		\node[colorbar arrow=RmapShading] at (6,0) {};
@@ -218,6 +218,5 @@ The correlation between $ \tilde \rho_0 $ and the probability of occurrence $ P_
 		\draw[arrow] (growth) -- (acerub);
 		\draw[arrow] (mortality) -- (acerub);
 	\end{tikzpicture}
-	\caption{Results that are presented here are for \textit{Acer rubrum}, with a canopy height $ \s_c = 10 $ m, and with 2006--2010 climate data. Population growth rate $ \tilde \rho_0 $ results from $ G $, $ \mu $ and constante fecundity. For many species, including \textit{Acer rubrum}, $ \tilde \rho_0 $ does not increase towards the centre of the distribution (green square). If the Abundant-Centre Hypothesis were validated, then the red arrows on the map (or equivalently the blue and orange arrows on the left-hand side) would point towards the green square. These two arrows are the respective northern and southern averages of the vector field $ \nabla \tilde \rho_0 $ that is depicted by the white arrows on the map of $ \tilde \rho_0 $. The correlation between $ \tilde \rho_0 $ and the probability of occurrence $ P_{\text{occ}}$ is $ -0.5 $, which is the smallest correlation for all species. Overall, we found no rule relating occurrence
-	probabilities to demography. (see Fig. \ref{fig::3correls}). \label{fig::mainResults}}
+	\caption{Results that are presented here are for \textit{Acer rubrum}, with a canopy height $ \s_c = 10 $ m, and with 2006--2010 climate data. Population growth rate $ \tilde \rho_0 $ results from $ G $, $ \mu $ and constant fecundity. For many species, including \textit{Acer rubrum}, $ \tilde \rho_0 $ does not increase towards the centre of the distribution (green square). If the Abundant-Centre Hypothesis were validated, then the red arrows on the map (or equivalently, the blue and orange arrows on the left-hand side) would point towards the green square. These two arrows are the respective northern and southern averages of the vector field $ \nabla \tilde \rho_0 $ that is depicted by the white arrows on the map of $ \tilde \rho_0 $. The correlation between $ \tilde \rho_0 $ and the probability of occurrence $ P_{\text{occ}}$ is $ -0.5 $, which is the smallest correlation for all species. Overall, we found no rule relating occurrence probabilities to demography. (see Fig. \ref{fig::3correls}). \label{fig::mainResults}}
 \end{figure}
