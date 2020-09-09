@@ -244,8 +244,9 @@ Where the $ T $s denote temperatures, and the $ P $s the precipitations (all def
 	\caption[$ \text{Cor}(\tilde \rho_0, \text{distance closest edge}) $, no competition]{Species-specific correlations between $ \tilde \rho_0 $ and the distance to the closest edge of $ \Omega $, without competition (canopy height $ \s = 0 $ m). The correlations are computed over the whole species distribution (\CircSteel), over the points closer to a border within the northern region (\MoveUp) or closer to a border within the southern region (\MoveDown). A negative correlation indicates that $ \rho_0 $ increases toward north (\MoveUp) or south (\MoveDown). The three colours correspond to the shade tolerance level (the darker, the more shade-tolerant). The values can be found in Tab \ref{tab::R0correl_dist}. \label{fig::3correls_dist_0}}
 \end{figure}
 
+\newpage
 \subsection{Correlation between demography and probabilities of occurrence}
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\input{./demog_Pocc1-4}
 	\caption[$ P_{\text{occ}} $ vs vital rates, species 1-4]{Species-specific correlations between probabilities of occurrence and the vital rates (growth: \CircSteel, and mortality: $ \times $). We added the data of Fig. \ref{fig::3correls} (\MoveUp) which represent the correlation between $ P_{\text{occ}} $ and $ \tilde \rho_0 $. For both demographic rates, we set the dbh at either $ 15 $ cm or $ 60 $ cm (to represent saplings and adults, we expect the saplings to have stronger correlations \citep{Kunstler2019}), while $ \tilde \rho_0 $ integrates all the possible sizes. We used an averaged climate from 2006 to 2010 at the permanent plots (which were the training dataset of the random forest). Dark blue colour is for the rates with competition, and light blue for those without competition). \label{fig::demog_Pocc1-4}}
