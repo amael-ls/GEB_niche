@@ -1,9 +1,6 @@
 \documentclass[letterpaper, 12pt]{article}
 
 %%%%%%%%%%%%%%%%%%%    PACKAGES    %%%%%%%%%%%%%%%%%%%
-%% Package version
-\listfiles % Then check the .log file
-
 %% Font
 \usepackage{fontspec}
 \usepackage{marvosym}
@@ -135,7 +132,7 @@
 %% mathematics
 \usepackage{amsthm}
 \usepackage{amsmath}
-	\allowdisplaybreaks % Autoriser découpe formules entres pages
+	\allowdisplaybreaks % Allow pagebreak in maths formulae
 \usepackage{amssymb}
 \usepackage{bbold}
 \usepackage{dsfont}
@@ -211,7 +208,7 @@
 \newcommand\bsc[1]{\textsc{\MakeLowercase{#1}}} % Only if there is no french babel
 \newcommand {\thup}[1]{{#1}\textsuperscript{th}}
 
-%% Math
+%% Maths
 \newcommand {\s}{{s}^{*}}
 \newcommand {\sst}{\tilde{s}^{*}} % s* stable d'où le st
 \newcommand {\N}{\tilde{N}}
@@ -234,10 +231,6 @@
 \newtheorem{defi}{Definition}[section]
 \newtheorem{assum}{Assumption}[section]
 \newtheorem{nota}{Notation}[section]
-
-%%%%%%%%%%%%%%%%%%%%%   OTHERS   %%%%%%%%%%%%%%%%%%%%%
-% http://tex.stackexchange.com/questions/13304/which-package-version-am-i-using
-\listfiles % Add \listfiles to your preamble and then look at the .log file. This will tell you the current version of all the packages loaded
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
