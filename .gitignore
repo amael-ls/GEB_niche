@@ -22,3 +22,4 @@ graphs/
 appendices/*
 !appendices/app_*.tex
 diff*.tex
+finalSubmission/*
